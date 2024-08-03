@@ -1,0 +1,99 @@
+﻿@model IEnumerable<OrangeProjectMVC.Models.voter_user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.national_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.birth_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.religion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ethnicity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.has_locally_voted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.has_party_voted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.first_login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.district.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.national_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.birth_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.religion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ethnicity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_locally_voted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.has_party_voted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.first_login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.district.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
