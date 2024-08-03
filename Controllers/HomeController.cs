@@ -15,14 +15,30 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.irbidFirstVoteCount = findDistrectVotersCount(1);
+            ViewBag.irbidSecondVoteCount = findDistrectVotersCount(2);
+            ViewBag.ajlonVoteCount = findDistrectVotersCount(3);
+
             long local_vote_count = db.election_list.Where(list => list.type == "L").Sum(list => list.vote_count);
             long party_vote_count = db.election_list.Where(list => list.type == "P").Sum(list => list.vote_count);
             long number_of_voters = db.voter_user.Count();
             ViewBag.distrect_voter_count = local_vote_count;
             ViewBag.party_voter_count = party_vote_count;
-            ViewBag.number_of_lists = db.election_list.Count(); 
+            ViewBag.number_of_lists = db.election_list.Count();
             @ViewBag.voting_ratio = Math.Floor((Math.Max(local_vote_count, party_vote_count) / (double)number_of_voters) * 100);
             return View();
+        }
+
+        private long findDistrectVotersCount(int distrectId)
+        {
+            long localVotes = db.voter_user.
+                Where(voter => voter.district_id == distrectId && voter.has_locally_voted).
+                Count();
+
+            long partyVotes = db.voter_user.
+                Where(voter => voter.district_id == 3 && voter.has_party_voted).
+                Count();
+            return Math.Max(localVotes, partyVotes);
         }
 
         public ActionResult About()

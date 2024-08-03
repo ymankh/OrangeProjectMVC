@@ -42,6 +42,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/dashbored")
     @RenderSection("scripts", required: false)
-    @ViewBag.ExtraScript
+    @Html.Raw(@ViewBag.ExtraScript)
 </body>
 </html>
