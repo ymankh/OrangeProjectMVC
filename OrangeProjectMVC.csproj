@@ -2089,8 +2089,8 @@
     <Content Include="Views\voter_user\Delete.cshtml" />
     <Content Include="Views\voter_user\Details.cshtml" />
     <Content Include="Views\voter_user\Edit.cshtml" />
-    <Content Include="Views\voter_user\Index.cshtml" />
     <Content Include="Views\Shared\_TopBar.cshtml" />
+    <Content Include="Views\voter_user\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

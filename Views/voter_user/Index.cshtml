@@ -4,96 +4,106 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Tables</h1>
+<p class="mb-4">
+    DataTables is a third party plugin that is used to generate the demo table below.
+    For more information about DataTables, please visit the <a target="_blank"
+                                                               href="https://datatables.net">official DataTables documentation</a>.
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.national_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.birth_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.religion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ethnicity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.has_locally_voted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.has_party_voted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.first_login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.district.name)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.national_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.birth_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.religion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ethnicity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.has_locally_voted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.has_party_voted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.first_login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.district.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+<!-- DataTales Example -->
+<div class="card shadow mb-4" id="page-top">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Voters Table</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
-</table>
+                <tr>
+                    <th>
+                        National Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    @*<th>
+                            Password
+                        </th>*@
+                    <th>
+                        Birth Date
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Religion
+                    </th>
+                    @*<th>
+                           Ethnicity
+                        </th>*@
+                    <th>
+                        Has locally Voted
+                    </th>
+                    <th>
+                        Has Party Voted
+                    </th>
+                    <th>
+                        District
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.national_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.password)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.birth_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.religion)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ethnicity)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.has_locally_voted)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.has_party_voted)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.first_login)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.district.name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
