@@ -15,8 +15,21 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: voter_user
-        public ActionResult Index(VoterFilterViewModel filter, int? page)
+        public ActionResult Index(int? page)
         {
+            var filter = new VoterFilterViewModel
+            {
+                NationalId = Request.QueryString["nationalId"],
+                Name = Request.QueryString["name"],
+                Email = Request.QueryString["email"],
+                BirthDateStart = string.IsNullOrEmpty(Request.QueryString["birthDateStart"]) ? (DateTime?)null : DateTime.Parse(Request.QueryString["birthDateStart"]),
+                BirthDateEnd = string.IsNullOrEmpty(Request.QueryString["birthDateEnd"]) ? (DateTime?)null : DateTime.Parse(Request.QueryString["birthDateEnd"]),
+                Gender = Request.QueryString["gender"],
+                Religion = Request.QueryString["religion"],
+                District = Request.QueryString["district"],
+                LocallyVoted = Request.QueryString["locallyVoted"] == "on",
+                PartyVoted = Request.QueryString["partyVoted"] == "on"
+            };
             var voters = db.voter_user.Include(v => v.district).AsQueryable(); // Assuming you have a Voters DbSet in your DbContext
 
             if (!string.IsNullOrEmpty(filter.NationalId))
@@ -59,16 +72,20 @@ namespace OrangeProjectMVC.Controllers
                 voters = voters.Where(v => v.district_id == Convert.ToInt32(filter.District));
             }
 
-            if (filter.LocallyVoted.HasValue)
+            if (filter.LocallyVoted != null || filter.LocallyVoted == true)
             {
-                voters = voters.Where(v => v.has_locally_voted == filter.LocallyVoted.Value);
+                voters = voters.Where(v => v.has_locally_voted == filter.LocallyVoted);
             }
 
-            if (filter.PartyVoted.HasValue)
+            if (filter.PartyVoted.HasValue || filter.PartyVoted == true)
             {
-                voters = voters.Where(v => v.has_locally_voted == filter.PartyVoted.Value);
+                voters = voters.Where(v => v.has_party_voted);
             }
+
+            // Change to display more pages in one single page
             int itemPerPage = 20;
+
+            ViewBag.numberOfPages = Math.Ceiling((double)voters.Count() / itemPerPage);
             if (page == null) page = 0;
             return View(voters.OrderBy(u => u.id).Skip((int)(page * itemPerPage)).Take(itemPerPage).ToList());
         }
@@ -194,5 +211,46 @@ namespace OrangeProjectMVC.Controllers
         public string District { get; set; }
         public bool? LocallyVoted { get; set; }
         public bool? PartyVoted { get; set; }
+
+        public string ToQueryString()
+        {
+            var propertyMappings = new Dictionary<string, string>
+        {
+            { nameof(NationalId), "nationalId" },
+            { nameof(Name), "name" },
+            { nameof(Email), "email" },
+            { nameof(BirthDateStart), "birthDateStart" },
+            { nameof(BirthDateEnd), "birthDateEnd" },
+            { nameof(Gender), "gender" },
+            { nameof(Religion), "religion" },
+            { nameof(District), "district" },
+            { nameof(LocallyVoted), "locallyVoted" },
+            { nameof(PartyVoted), "partyVoted" }
+        };
+
+            var queryString = new List<string>();
+
+            foreach (var property in propertyMappings)
+            {
+                var propertyInfo = this.GetType().GetProperty(property.Key);
+                var value = propertyInfo?.GetValue(this);
+                if (value == null)
+                {
+                    queryString.Add($"{property.Value}=");
+                }
+                else if (value is DateTime dateTime)
+                {
+                    queryString.Add($"{property.Value}={HttpUtility.UrlEncode(dateTime.ToString("yyyy-MM-dd"))}");
+                }
+                else
+                {
+                    queryString.Add($"{property.Value}={HttpUtility.UrlEncode(value.ToString())}");
+                }
+            }
+
+            return "?" + string.Join("&", queryString);
+        }
+
     }
+
 }

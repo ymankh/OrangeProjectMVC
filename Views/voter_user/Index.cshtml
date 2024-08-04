@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
+    var page = Request.QueryString["page"];
+    if (String.IsNullOrEmpty(page)) { page = "0"; }
 }
 @{
     var filter = new OrangeProjectMVC.Controllers.VoterFilterViewModel
@@ -14,10 +16,12 @@
         Gender = Request.QueryString["gender"],
         Religion = Request.QueryString["religion"],
         District = Request.QueryString["district"],
-        LocallyVoted = string.IsNullOrEmpty(Request.QueryString["locallyVoted"]) ? (bool?)null : bool.Parse(Request.QueryString["locallyVoted"]),
-        PartyVoted = string.IsNullOrEmpty(Request.QueryString["partyVoted"]) ? (bool?)null : bool.Parse(Request.QueryString["partyVoted"])
+        LocallyVoted = Request.QueryString["locallyVoted"] == "on",
+        PartyVoted = Request.QueryString["partyVoted"] == "on"
     };
 }
+
+
 <!-- Page Heading -->
 <form id="searchForm" class="mb-3" method="get">
     <!-- Personal Information -->
@@ -111,7 +115,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="searchLocallyVoted" name="locallyVoted" value="@filter.LocallyVoted">
+                            <input class="form-check-input" type="checkbox" id="searchLocallyVoted" name="locallyVoted" @(filter.LocallyVoted == true ? "checked" : "")>
                             <label class="form-check-label" for="searchLocallyVoted">
                                 Has locally Voted
                             </label>
@@ -119,7 +123,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <div class="form-check">
-                            <input class="form-check-input" value="@filter.PartyVoted" type="checkbox" id="searchPartyVoted" name="partyVoted">
+                            <input class="form-check-input" type="checkbox" id="searchPartyVoted" name="partyVoted" @(filter.PartyVoted == true ? "checked" : "")>
                             <label class="form-check-label" for="searchPartyVoted">
                                 Has Party Voted
                             </label>
@@ -238,57 +242,27 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=1">1</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=2">2</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=3">3</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=4">4</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=5">5</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=6">6</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=7">7</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=8">8</a></li>
-            <li class="page-item"><a class="page-link rounded-circle" href="?page=9">9</a></li>
-            <li class="page-item">
-                <a class="page-link rounded-circle" href="?page=2" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+            @for (int i = 0; i < (int)ViewBag.numberOfPages; i++)
+            {
+                if (Convert.ToInt32(page) == i)
+                {
+                    <li class="page-item active"><a class="page-link rounded-circle" href="?page=@i&@filter.ToQueryString()">@(i+1)</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link rounded-circle" href="?page=@i&@filter.ToQueryString()">@(i+1)</a></li>
+                }
+            }
+
+            @if (Convert.ToInt32(page) >= ViewBag.numberOfPages)
+            {
+
+                <li class="page-item">
+                    <a class="page-link rounded-circle" href="?page=2" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
         </ul>
     </nav>
 </div>
-
-@section Scripts {
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var paginationLinks = document.querySelectorAll('#pagination .page-link');
-            paginationLinks.forEach(function (link, index) {
-                if (link.getAttribute('href') !== '#') {
-                    var url = new URL(window.location.href);
-                    url.searchParams.set('page', index); // Set the page number
-                    link.setAttribute('href', url.toString());
-                }
-            });
-
-            // Handle the previous and next links
-            var prevLink = document.querySelector('#pagination [aria-label="Previous"]');
-            var nextLink = document.querySelector('#pagination [aria-label="Next"]');
-            var currentPage = parseInt(new URL(window.location.href).searchParams.get('page')) || 1;
-            console.log(currentPage);
-
-            if (prevLink) {
-                var prevPage = currentPage > 1 ? currentPage - 1 : 1;
-                var prevUrl = new URL(window.location.href);
-                prevUrl.searchParams.set('page', prevPage);
-                prevLink.setAttribute('href', prevUrl.toString());
-                prevLink.parentElement.classList.toggle('disabled', currentPage === 1);
-            }
-
-            if (nextLink) {
-                var nextPage = currentPage + 1;
-                var nextUrl = new URL(window.location.href);
-                nextUrl.searchParams.set('page', nextPage);
-                nextLink.setAttribute('href', nextUrl.toString());
-            }
-        });
-    </script>
-
-}
