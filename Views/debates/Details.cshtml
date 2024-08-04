@@ -1,0 +1,83 @@
+﻿@model OrangeProjectMVC.Models.debate
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>debate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.requested_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.requested_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zoom_link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zoom_link)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.debate_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.debate_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.election_list.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.election_list.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.election_list1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.election_list1.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

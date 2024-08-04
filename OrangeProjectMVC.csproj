@@ -127,9 +127,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\debatesController.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\reqistListController.cs" />
     <Compile Include="Controllers\UserCycleController.cs" />
     <Compile Include="Controllers\voter_userController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2173,6 +2175,12 @@
     <Content Include="Views\voter_user\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\UserCycle\Index.cshtml" />
+    <Content Include="Views\debates\Delete.cshtml" />
+    <Content Include="Views\debates\Details.cshtml" />
+    <Content Include="Views\debates\Edit.cshtml" />
+    <Content Include="Views\debates\Create.cshtml" />
+    <Content Include="Views\debates\Index.cshtml" />
+    <Content Include="Views\reqistList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
