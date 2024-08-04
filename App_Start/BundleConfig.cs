@@ -41,6 +41,37 @@ namespace OrangeProjectMVC
                 "~/Scripts/vendor/chart.js/Chart.min.js",
                 "~/Scripts/js/demo/chart-area-demo.js",
                 "~/Scripts/js/demo/chart-pie-demo.js"));
+
+
+
+            bundles.Add(new StyleBundle("~/Content/userCycle").Include(
+            "~/Content/bootstrap.min.css",
+            "~/Content/site.css",
+            "~/assets/css/animate.css",
+            "~/assets/css/leaflet-routing-machine.css",
+            "~/assets/css/leaflet.css",
+            "~/assets/css/magnific-popup.css",
+            "~/assets/css/style.css",
+            "~/assets/css/swiper-bundle.min.css",
+            "~/assets/css/customStyle.css"
+            ));
+
+            bundles.Add(new Bundle("~/bundles/userCycle").Include(
+                "~/assets/js/animate.js",
+                "~/assets/js/bootstrap.bundle.min.js",
+                "~/assets/js/countdown.js",
+                "~/assets/js/jquery-3.7.0.min.js",
+                "~/assets/js/jquery.magnific-popup.min.js",
+                "~/assets/js/jquery.progressScroll.min.js",
+                "~/assets/js/lazy.image.js",
+                "~/assets/js/leaflet-routing-machine.min.js",
+                "~/assets/js/leaflet-scripts.js",
+                "~/assets/js/leaflet.js",
+                "~/assets/js/script.js",
+                "~/assets/js/swiper-bundle.min.js",
+                "~/assets/js/wow.min.js"
+                ));
+
         }
     }
 }

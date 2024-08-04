@@ -15,13 +15,64 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: voter_user
-        public ActionResult Index(int? page)
+        public ActionResult Index(VoterFilterViewModel filter, int? page)
         {
+            var voters = db.voter_user.Include(v => v.district).AsQueryable(); // Assuming you have a Voters DbSet in your DbContext
+
+            if (!string.IsNullOrEmpty(filter.NationalId))
+            {
+                voters = voters.Where(v => v.national_id.Contains(filter.NationalId));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                voters = voters.Where(v => v.name.Contains(filter.Name));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Email))
+            {
+                voters = voters.Where(v => v.email.Contains(filter.Email));
+            }
+
+            if (filter.BirthDateStart.HasValue)
+            {
+                voters = voters.Where(v => v.birth_date >= filter.BirthDateStart.Value);
+            }
+
+            if (filter.BirthDateEnd.HasValue)
+            {
+                voters = voters.Where(v => v.birth_date <= filter.BirthDateEnd.Value);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Gender))
+            {
+                voters = voters.Where(v => v.gender == filter.Gender);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Religion))
+            {
+                voters = voters.Where(v => v.religion == filter.Religion);
+            }
+
+            if (!string.IsNullOrEmpty(filter.District))
+            {
+                voters = voters.Where(v => v.district_id == Convert.ToInt32(filter.District));
+            }
+
+            if (filter.LocallyVoted.HasValue)
+            {
+                voters = voters.Where(v => v.has_locally_voted == filter.LocallyVoted.Value);
+            }
+
+            if (filter.PartyVoted.HasValue)
+            {
+                voters = voters.Where(v => v.has_locally_voted == filter.PartyVoted.Value);
+            }
             int itemPerPage = 20;
             if (page == null) page = 0;
-            var voter_user = db.voter_user.Include(v => v.district);
-            return View(voter_user.OrderBy(u => u.id).Skip((int)(page * itemPerPage)).Take(itemPerPage ).ToList());
+            return View(voters.OrderBy(u => u.id).Skip((int)(page * itemPerPage)).Take(itemPerPage).ToList());
         }
+
 
         // GET: voter_user/Details/5
         public ActionResult Details(int? id)
@@ -130,5 +181,18 @@ namespace OrangeProjectMVC.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+    public class VoterFilterViewModel
+    {
+        public string NationalId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public DateTime? BirthDateStart { get; set; }
+        public DateTime? BirthDateEnd { get; set; }
+        public string Gender { get; set; }
+        public string Religion { get; set; }
+        public string District { get; set; }
+        public bool? LocallyVoted { get; set; }
+        public bool? PartyVoted { get; set; }
     }
 }

@@ -3,20 +3,142 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@{
+    var filter = new OrangeProjectMVC.Controllers.VoterFilterViewModel
+    {
+        NationalId = Request.QueryString["nationalId"],
+        Name = Request.QueryString["name"],
+        Email = Request.QueryString["email"],
+        BirthDateStart = string.IsNullOrEmpty(Request.QueryString["birthDateStart"]) ? (DateTime?)null : DateTime.Parse(Request.QueryString["birthDateStart"]),
+        BirthDateEnd = string.IsNullOrEmpty(Request.QueryString["birthDateEnd"]) ? (DateTime?)null : DateTime.Parse(Request.QueryString["birthDateEnd"]),
+        Gender = Request.QueryString["gender"],
+        Religion = Request.QueryString["religion"],
+        District = Request.QueryString["district"],
+        LocallyVoted = string.IsNullOrEmpty(Request.QueryString["locallyVoted"]) ? (bool?)null : bool.Parse(Request.QueryString["locallyVoted"]),
+        PartyVoted = string.IsNullOrEmpty(Request.QueryString["partyVoted"]) ? (bool?)null : bool.Parse(Request.QueryString["partyVoted"])
+    };
+}
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">
-    DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-                                                               href="https://datatables.net">official DataTables documentation</a>.
-</p>
+<form id="searchForm" class="mb-3" method="get">
+    <!-- Personal Information -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#personalInfo">
+                Personal Information
+            </a>
+        </div>
+        <div id="personalInfo" class="collapse show">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="searchNationalId">National Id</label>
+                        <input type="text" class="form-control" id="searchNationalId" name="nationalId" value="@filter.NationalId" placeholder="National Id">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="searchName">Name</label>
+                        <input type="text" class="form-control" id="searchName" name="name" value="@filter.Name" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="searchEmail">Email</label>
+                        <input type="text" value="@filter.Email" class="form-control" id="searchEmail" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="searchBirthDateStart">Birth Date From</label>
+                        <input type="date" value="@filter.BirthDateStart" class="form-control" id="searchBirthDateStart" name="birthDateStart">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="searchBirthDateEnd">Birth Date To</label>
+                        <input value="@filter.BirthDateEnd" type="date" class="form-control" id="searchBirthDateEnd" name="birthDateEnd">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demographics -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#demographics">
+                Demographics
+            </a>
+        </div>
+        <div id="demographics" class="collapse">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="searchGender">Gender</label>
+                        <select class="form-control" id="searchGender" name="gender" value="@filter.Gender">
+                            <option value="">Select Gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="searchReligion">Religion</label>
+                        <select class="form-control" id="searchReligion" name="religion" value="@filter.Religion">
+                            <option value="">Select Religion</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Christian">Christianity</option>
+                            @*<option value="Other">Other</option>*@
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="searchDistrict">District</label>
+                        <select class="form-control" id="searchDistrict" name="district" value="@filter.District">
+                            <option value="">Select District</option>
+                            <option value="District 1">District 1</option>
+                            <option value="District 2">District 2</option>
+                            <option value="District 3">District 3</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voting Information -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#votingInfo">
+                Voting Information
+            </a>
+        </div>
+        <div id="votingInfo" class="collapse">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="searchLocallyVoted" name="locallyVoted" value="@filter.LocallyVoted">
+                            <label class="form-check-label" for="searchLocallyVoted">
+                                Has locally Voted
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" value="@filter.PartyVoted" type="checkbox" id="searchPartyVoted" name="partyVoted">
+                            <label class="form-check-label" for="searchPartyVoted">
+                                Has Party Voted
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+<h1 class="h3 mb-2 text-gray-800">Boters Table</h1>
 
 <!-- DataTales Example -->
-<div class="card shadow mb-4" id="page-top">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Voters Table</h6>
-    </div>
+<div class="card shadow mb-4">
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -107,3 +229,66 @@
         </div>
     </div>
 </div>
+
+<div class="container mt-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link rounded-circle" href="?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=1">1</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=2">2</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=3">3</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=4">4</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=5">5</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=6">6</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=7">7</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=8">8</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="?page=9">9</a></li>
+            <li class="page-item">
+                <a class="page-link rounded-circle" href="?page=2" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var paginationLinks = document.querySelectorAll('#pagination .page-link');
+            paginationLinks.forEach(function (link, index) {
+                if (link.getAttribute('href') !== '#') {
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('page', index); // Set the page number
+                    link.setAttribute('href', url.toString());
+                }
+            });
+
+            // Handle the previous and next links
+            var prevLink = document.querySelector('#pagination [aria-label="Previous"]');
+            var nextLink = document.querySelector('#pagination [aria-label="Next"]');
+            var currentPage = parseInt(new URL(window.location.href).searchParams.get('page')) || 1;
+            console.log(currentPage);
+
+            if (prevLink) {
+                var prevPage = currentPage > 1 ? currentPage - 1 : 1;
+                var prevUrl = new URL(window.location.href);
+                prevUrl.searchParams.set('page', prevPage);
+                prevLink.setAttribute('href', prevUrl.toString());
+                prevLink.parentElement.classList.toggle('disabled', currentPage === 1);
+            }
+
+            if (nextLink) {
+                var nextPage = currentPage + 1;
+                var nextUrl = new URL(window.location.href);
+                nextUrl.searchParams.set('page', nextPage);
+                nextLink.setAttribute('href', nextUrl.toString());
+            }
+        });
+    </script>
+
+}
