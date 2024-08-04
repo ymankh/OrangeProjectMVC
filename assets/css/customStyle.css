@@ -1,5 +1,5 @@
 ﻿.navbar {
-    background-image: url('~/assets/images/Amman2.jpg');
+    background-image: url('../images/Amman2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     padding: 40px;
