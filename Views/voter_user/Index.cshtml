@@ -237,32 +237,81 @@
 <div class="container mt-5">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link rounded-circle" href="?page=1" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            @for (int i = 0; i < (int)ViewBag.numberOfPages; i++)
+            @if (Convert.ToInt32(page) == 0)
             {
-                if (Convert.ToInt32(page) == i)
+                <li class="page-item disabled">
+                    <a class="page-link " aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link " href="?page=@(Convert.ToInt32(page) - 1)&@filter.ToQueryString()" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+
+            @{
+                int currentPage = Convert.ToInt32(page);
+                int numberOfPages = (int)ViewBag.numberOfPages;
+                int maxPagesToShow = 20;
+                int firstPagesToShow = 10;
+                int lastPagesToShow = 10;
+            }
+
+            @for (int i = 0; i < numberOfPages; i++)
+            {
+                // Show first 10 pages
+                if (i < firstPagesToShow)
                 {
-                    <li class="page-item active"><a class="page-link rounded-circle" href="?page=@i&@filter.ToQueryString()">@(i+1)</a></li>
+                    if (currentPage == i)
+                    {
+                        <li class="page-item active"><a class="page-link" href="?page=@i&@filter.ToQueryString()">@(i + 1)</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="?page=@i&@filter.ToQueryString()">@(i + 1)</a></li>
+                    }
                 }
-                else
+                // Show dots if there are more pages in between
+                else if (i == firstPagesToShow)
                 {
-                    <li class="page-item"><a class="page-link rounded-circle" href="?page=@i&@filter.ToQueryString()">@(i+1)</a></li>
+                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                }
+                // Show last 10 pages
+                else if (i >= numberOfPages - lastPagesToShow)
+                {
+                    if (currentPage == i)
+                    {
+                        <li class="page-item active"><a class="page-link" href="?page=@i&@filter.ToQueryString()">@(i + 1)</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="?page=@i&@filter.ToQueryString()">@(i + 1)</a></li>
+                    }
                 }
             }
 
-            @if (Convert.ToInt32(page) >= ViewBag.numberOfPages)
+            @if (currentPage >= numberOfPages - 1)
             {
-
-                <li class="page-item">
-                    <a class="page-link rounded-circle" href="?page=2" aria-label="Next">
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@(currentPage + 1)&@filter.ToQueryString()" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+
         </ul>
     </nav>
 </div>

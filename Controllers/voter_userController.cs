@@ -72,12 +72,12 @@ namespace OrangeProjectMVC.Controllers
                 voters = voters.Where(v => v.district_id == Convert.ToInt32(filter.District));
             }
 
-            if (filter.LocallyVoted != null || filter.LocallyVoted == true)
+            if (filter.LocallyVoted == true)
             {
-                voters = voters.Where(v => v.has_locally_voted == filter.LocallyVoted);
+                voters = voters.Where(v => v.has_locally_voted);
             }
 
-            if (filter.PartyVoted.HasValue || filter.PartyVoted == true)
+            if (filter.PartyVoted == true)
             {
                 voters = voters.Where(v => v.has_party_voted);
             }
@@ -238,6 +238,14 @@ namespace OrangeProjectMVC.Controllers
                 {
                     queryString.Add($"{property.Value}=");
                 }
+                else if (property.Key == nameof(LocallyVoted) && value is bool locallyVotedValue)
+                {
+                    queryString.Add($"{property.Value}={(locallyVotedValue ? "on" : "off")}");
+                }
+                else if (property.Key == nameof(PartyVoted) && value is bool partyVotedValue)
+                {
+                    queryString.Add($"{property.Value}={(partyVotedValue ? "on" : "off")}");
+                }
                 else if (value is DateTime dateTime)
                 {
                     queryString.Add($"{property.Value}={HttpUtility.UrlEncode(dateTime.ToString("yyyy-MM-dd"))}");
@@ -247,10 +255,7 @@ namespace OrangeProjectMVC.Controllers
                     queryString.Add($"{property.Value}={HttpUtility.UrlEncode(value.ToString())}");
                 }
             }
-
             return "?" + string.Join("&", queryString);
         }
-
     }
-
 }
