@@ -1,0 +1,107 @@
+﻿@model IEnumerable<OrangeProjectMVC.Models.voter_user>
+
+@{
+    ViewBag.Title = "test";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+<div class="container">
+    <h2 class="text-center mt-4">تسجيل قائمة حزبية</h2>
+    @if (ViewBag.candetCount >= ViewBag.numberOfSeates)
+    {
+        <form method="post" action="@Url.Action("SavePartList")">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <label for="lsitPartyName">أسم القائمة</label> <input type="text" placeholder="مثال: قائمة العدالة" class="form-control " name="lsitPartyName" />
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">حفظ الطلب</button>
+                </div>
+            </div>
+
+        </form>
+    }
+    else
+    {
+        <form method="post" action="@Url.Action("SavePartList")">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <label for="lsitPartyName">أسم القائمة</label> <input type="text" disabled placeholder="قائمة الصقور" class="form-control " name="lsitPartyName" />
+                </div>
+                <div>
+                    <button type="submit" disabled class="btn btn-primary">حفظ الطلب</button>
+                </div>
+            </div>
+
+        </form>
+    }
+</div>
+<div class="container ">
+    <div class="row">
+        <div class="col-md-10">
+            @if (ViewBag.candetCount < ViewBag.numberOfSeates)
+            {
+
+                <form method="post" action="@Url.Action("PartyList", "reqistList")">
+
+                    <div class="form-group">
+                        <label for="nationalID">الرقم الوطني</label>
+                        <input type="text" name="nationalID" id="nationalID" class="form-control w-25" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">ابحث</button>
+                </form>
+            }
+            else
+            {
+                <form method="post" action="@Url.Action("PartyList", "reqistList")">
+
+                    <div class="form-group">
+                        <label for="nationalID">الرقم الوطني</label>
+                        <input type="text" disabled name="nationalID" id="nationalID" class="form-control w-25" required />
+                    </div>
+                    <button type="submit" disabled class="btn btn-primary mt-2">ابحث</button>
+                </form>
+            }
+
+
+            <table class="table table-bordered mt-4">
+                <thead class="table-light">
+                    <tr>
+                        <th></th>
+                        <th scope="col">الرقم الوطني</th>
+                        <th scope="col">اسم الناخب</th>
+                        <th scope="col">البريد الالكتروني</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @if (Model.Any())
+                    {
+                        foreach (var voter in Model)
+                        {
+                            { i++; }
+                            <tr>
+                                <td>@i</td>
+                                <td>@voter.national_id</td>
+                                <td>@voter.name</td>
+                                <td>@voter.email</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center">No records found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

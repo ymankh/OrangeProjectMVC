@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-
 <div class="page landing-page">
     <!--About Section ======================-->
     <section class="section-about about-1 py-60 py-lg-100 py-xxl-120">
@@ -12,16 +11,18 @@
             <div class="row align-items-center g-60 gy-lg-0">
                 <div class="col-lg-7 col-xxl-6">
                     <div class="d-flex flex-column gap-3">
-                        <h6 class="subtitle lead text-primary wow fadeInLeft" data-wow-duration="1.3s">About us</h6>
-                        <h2 class="mb-1 wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1.3s">Guiding Principles for Community Betterment</h2>
-                        <p class="mb-3 mb-lg-4 wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="1.3s">To make sure all Citizen rights, you have to work together and make a better country for our child. So we have to take initiative proper way to ensure the all right and make the country better for living</p>
+                        @*<h6 class="subtitle lead text-primary wow fadeInLeft" data-wow-duration="1.3s">*@
+                        <h2 class="mb-1 wow fadeInLeft" style=" font-family :cairo;" data-wow-delay=".2s" data-wow-duration="1.3s">
+                            المبادئ التوجيهية لتحسين المجتمع
+                        </h2>
+                        <p class="mb-3 mb-lg-4 wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="1.3s">لضمان حقوق جميع المواطنين، من الضروري أن نتعاون معاً ونعمل على إنشاء بلد أفضل لأجيالنا القادمة. يجب أن نتخذ المبادرات المناسبة لضمان حماية جميع الحقوق ولجعل البلاد مكاناً أفضل للعيش.</p>
                         <ul class="about-lists list-unstyled mb-4 mb-lg-40 d-flex flex-column gap-3 wow fadeInLeft" data-wow-delay=".4s" data-wow-duration="1.3s">
-                            <li class="d-flex gap-10 align-items-center fw-bold"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>The biggest economic recovery plan in the history of America.</li>
-                            <li class="d-flex gap-10 align-items-center fw-bold"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>Millions of Americans gain the peace of mind of health insurance.</li>
-                            <li class="d-flex gap-10 align-items-center fw-bold"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>The biggest economic recovery plan in the history of America.</li>
+                            <li class="d-flex gap-10 align-items-center fw-bold"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>صوتك هو قوتك، شارك في الانتخابات وصنع التغيير!.</li>
+                            <li class="d-flex gap-10 align-items-center fw-bold"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>مستقبل بلدك بين يديك، شارك في الانتخابات وكن صانع القرار..</li>
+
                         </ul>
                         <div class="wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="1.4s">
-                            <a href="about-us-1.html" class="btn btn-primary">About Us</a>
+
                         </div>
                     </div>
                 </div>
@@ -39,3 +40,444 @@
         </div>
     </section>
 </div>
+
+
+<!--Gallery Section ======================-->
+<section class="section-gallery gallery-1 py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+
+        <div class="gallery-wrapper">
+            <div class="row gy-30 justify-content-between align-items-lg-end mb-40">
+                <div class="col-lg-8 col-xl-9">
+                    <div class="contents-width d-flex flex-column gap-10">
+
+                        <div class="d-flex flex-column gap-3">
+                            <h2 class="mb-0" style="font-family:cairo;">رؤيتنا</h2>
+                            <p class="mb-0">من خلال التمسك بهذه الرؤية والرسالة، نلتزم بإحداث فرق إيجابي في حياة الأشخاص الذين نخدمهم وبناء مستقبل أكثر إشراقاً لمجتمعنا</p>
+                        </div>
+                    </div>
+                    <!-- contents-width -->
+                </div>
+                <!-- col-9 -->
+                <div class="col-lg-3">
+                    <div class="d-flex justify-content-lg-end">
+
+                    </div>
+                </div>
+                <!-- col-2 -->
+            </div>
+            <!-- row -->
+
+            <div class="row g-30">
+                <div class="col-lg-7">
+                    <div class="politixy-image gallery-image-style-1 wow fadeInLeft">
+                        <a href="@Url.Content("~/assets/images/gallery-1.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-1.jpg")" class="img-fluid" alt="gallery-1">
+                        </a>
+                    </div>
+                    <!-- politixy-image -->
+                </div>
+                <!-- col-7 -->
+
+                <div class="col-lg-5">
+                    <div class="politixy-image gallery-image-style-1 wow fadeInRight">
+                        <a href="@Url.Content("~/assets/images/gallery-2.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-2.jpg")" class="img-fluid" alt="gallery-2">
+                        </a>
+                    </div>
+                    <!-- politixy-image -->
+                </div>
+                <!-- col-5 -->
+
+                <div class="col-lg-5">
+                    <div class="politixy-image gallery-image-style-2 wow fadeInLeft">
+                        <a href="@Url.Content("~/assets/images/gallery-3.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-3.jpg")" class="img-fluid" alt="gallery-3">
+                        </a>
+                    </div>
+                    <!-- politixy-image -->
+                </div>
+                <!-- col-5 -->
+
+                <div class="col-lg-7">
+                    <div class="politixy-image gallery-image-style-2 position-relative active wow fadeInRight">
+                        <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-4.jpg")" class="img-fluid" alt="gallery-4">
+                        <a href="https://www.youtube.com/watch?v=lfDZJqSrIuk" class="video-popup video-popup-style-1">
+                            <span class="video-icon">
+                                <svg width="20" height="24"><use xlink:href="#video-icon"></use></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- politixy-image -->
+                </div>
+                <!-- col-7 -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- gallery-wrapper -->
+    </div>
+    <!-- container -->
+</section>
+<!--Gallery Section ======================-->
+<!--News Section ======================-->
+<section class="section-news news-1 py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+        <div class="d-flex flex-column gap-30 gap-lg-40">
+            <h2 class="mb-0 text-lg-center" style="font-family:cairo;">آخر الأخبار</h2>
+            <div class="row gx-30 gy-40 mb-20">
+
+                <div class="col-lg-6">
+                    <div class="card card-style-7 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1.5s">
+                        <div class="card-image-wrapper card-image-overlay">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/campaign-5.jpg")" class="card-img-top" alt="campaign-5">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <div class="d-flex flex-column gap-20">
+                                <div class="d-flex align-items-center gap-3 gap-xxl-20">
+                                    <div class="blog-date-wrapper">
+                                        <div class="date bg-primary">
+                                            <p class="text-white lead mb-0">21</p>
+                                        </div>
+                                        <div class="month bg-secondary ">
+                                            <p class="text-white mb-0 text-uppercase">sep</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title mb-0 fw-semibold"><a href="news-single.html" class="text-decoration-none link-hover-animation-1">توقيع مذكرة تفاهم بين المستقلة للانتخاب والأعلى للأشخاص ذوي الإعاقة والوطني لحقوق الانسان ونقابة المحامين</a></h5>
+
+                                        <ul class="list-unstyled mb-0 d-flex gap-10">
+                                            <li class=" body-color-style-1">
+                                                <span class="clock-icon">
+                                                    <svg width="12" height="14"><use xlink:href="#clock-icon"></use></svg>
+                                                </span>
+                                                <span class="extra-small">3:00 PM - 8:30 PM</span>
+                                            </li>
+                                            <li class=" body-color-style-1">
+                                                <span class="location-icon-sm">
+                                                    <svg width="11" height="14"><use xlink:href="#location-icon-sm"></use></svg>
+                                                </span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- d-flex  -->
+                                <p class="card-text mb-0">وقعت الهيئة المستقلة للانتخاب والمجلس الأعلى للأشخاص ذوي الإعاقة والمركز الوطني لحقوق الانسان ونقابة المحامين الأردنيين، مذكرة تفاهم في مجال تقديم المساعدة القانونية للأشخاص ذوي.</p>
+
+                                <div>
+                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                        Read More
+                                        <span class="arrow-right-icon-sm">
+                                            <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- d-flex -->
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-6 -->
+
+                <div class="col-lg-6">
+                    <div class="card card-style-7 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1.5s">
+                        <div class="card-image-wrapper card-image-overlay">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/campaign-6.jpg")" class="card-img-top" alt="campaign-6">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <div class="d-flex flex-column gap-20">
+                                <div class="d-flex align-items-center gap-3 gap-xxl-20">
+                                    <div class="blog-date-wrapper">
+                                        <div class="date bg-primary">
+                                            <p class="text-white lead mb-0">20</p>
+                                        </div>
+                                        <div class="month bg-secondary ">
+                                            <p class="text-white mb-0 text-uppercase">sep</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title mb-0 fw-semibold">
+                                            <a href="news-single.html" class="text-decoration-none link-hover-animation-1">
+                                                المعايطة يستقبل بعثة الاتحاد الأوروبي لمراقبة الانتخابات النيابية
+                                            </a>
+                                        </h5>
+
+                                        <ul class="list-unstyled mb-0 d-flex gap-10">
+                                            <li class=" body-color-style-1">
+                                                <span class="clock-icon">
+                                                    <svg width="12" height="14"><use xlink:href="#clock-icon"></use></svg>
+                                                </span>
+                                                <span class="extra-small">3:00 PM - 8:30 PM</span>
+                                            </li>
+                                            <li class=" body-color-style-1">
+                                                <span class="location-icon-sm">
+                                                    <svg width="11" height="14"><use xlink:href="#location-icon-sm"></use></svg>
+                                                </span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- d-flex  -->
+                                <p class="card-text mb-0">استقبل المهندس موسى المعايطة رئيس مجلس مفوضي الهيئة المستقلة للانتخاب اليوم بعثة الاتحاد الأوروبي المشاركة في الرقابة على انتخابات مجلس النواب 2024، برئاسة نائب رئيس البعثة ( دلفين..</p>
+
+                                <div>
+                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                        Read More
+                                        <span class="arrow-right-icon-sm">
+                                            <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- d-flex -->
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-6 -->
+
+                <div class="col-lg-6">
+                    <div class="card card-style-7 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1.5s">
+                        <div class="card-image-wrapper card-image-overlay">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/campaign-11.jpg")" class="card-img-top" alt="campaign-11">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <div class="d-flex flex-column gap-20">
+                                <div class="d-flex align-items-center gap-3 gap-xxl-20">
+                                    <div class="blog-date-wrapper">
+                                        <div class="date bg-primary">
+                                            <p class="text-white lead mb-0">20</p>
+                                        </div>
+                                        <div class="month bg-secondary ">
+                                            <p class="text-white mb-0 text-uppercase">sep</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title mb-0 fw-semibold"><a href="news-single.html" class="text-decoration-none link-hover-animation-1">المعايطة : يؤكد على أهمية التوعية الانتخابية </a></h5>
+
+                                        <ul class="list-unstyled mb-0 d-flex gap-10">
+                                            <li class=" body-color-style-1">
+                                                <span class="clock-icon">
+                                                    <svg width="12" height="14"><use xlink:href="#clock-icon"></use></svg>
+                                                </span>
+                                                <span class="extra-small">3:00 PM - 8:30 PM</span>
+                                            </li>
+                                            <li class=" body-color-style-1">
+                                                <span class="location-icon-sm">
+                                                    <svg width="11" height="14"><use xlink:href="#location-icon-sm"></use></svg>
+                                                </span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- d-flex  -->
+                                <p class="card-text mb-0">Iجاء ذلك خلال زيارته  لسوق جارا  في العاصمة عمان، ومشاركته عددا من المتطوعين والمنسقين في برنامج أنا أشارك. .</p>
+
+                                <div>
+                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                        Read More
+                                        <span class="arrow-right-icon-sm">
+                                            <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- d-flex -->
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-6 -->
+
+                <div class="col-lg-6">
+                    <div class="card card-style-7 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1.5s">
+                        <div class="card-image-wrapper card-image-overlay">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/campaign-8.jpg")" class="card-img-top" alt="campaign-8">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <div class="d-flex flex-column gap-20">
+                                <div class="d-flex align-items-center gap-3 gap-xxl-20">
+                                    <div class="blog-date-wrapper">
+                                        <div class="date bg-primary">
+                                            <p class="text-white lead mb-0">20</p>
+                                        </div>
+                                        <div class="month bg-secondary ">
+                                            <p class="text-white mb-0 text-uppercase">sep</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title mb-0 fw-semibold">
+                                            <a href="news-single.html" class="text-decoration-none link-hover-animation-1">
+                                                114 قائمة مترشحة في اليوم الأول من استقبال طلبات الترشح
+                                            </a>
+                                        </h5>
+
+                                        <ul class="list-unstyled mb-0 d-flex gap-10">
+                                            <li class=" body-color-style-1">
+                                                <span class="clock-icon">
+                                                    <svg width="12" height="14"><use xlink:href="#clock-icon"></use></svg>
+                                                </span>
+                                                <span class="extra-small">3:00 PM - 8:30 PM</span>
+                                            </li>
+                                            <li class=" body-color-style-1">
+                                                <span class="location-icon-sm">
+                                                    <svg width="11" height="14"><use xlink:href="#location-icon-sm"></use></svg>
+                                                </span>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- d-flex  -->
+                                <p class="card-text mb-0">وقعت الهيئة المستقلة للانتخاب والمجلس الأعلى للأشخاص ذوي الإعاقة والمركز الوطني لحقوق الانسان ونقابة المحامين الأردنيين، مذكرة تفاهم في مجال تقديم المساعدة القانونية للأشخاص ذوي</p>
+
+                                <div>
+                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                        Read More
+                                        <span class="arrow-right-icon-sm">
+                                            <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- d-flex -->
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-6 -->
+
+                <div class="col-lg-6">
+                    <div class="card card-style-7 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1.5s">
+                        <div class="card-image-wrapper card-image-overlay">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/campaign-6.jpg")" class="card-img-top" alt="campaign-6">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <div class="d-flex flex-column gap-20">
+                                <div class="d-flex align-items-center gap-3 gap-xxl-20">
+                                    <div class="blog-date-wrapper">
+                                        <div class="date bg-primary">
+                                            <p class="text-white lead mb-0">20</p>
+                                        </div>
+                                        <div class="month bg-secondary ">
+                                            <p class="text-white mb-0 text-uppercase">sep</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title mb-0 fw-semibold"><a href="news-single.html" class="text-decoration-none link-hover-animation-1">المستقلة للانتخاب تطلق الإطار المرجعي لتمكين المرأة في الانتخاب والأحزاب</a></h5>
+
+                                        <ul class="list-unstyled mb-0 d-flex gap-10">
+                                            <li class=" body-color-style-1">
+                                                <span class="clock-icon">
+                                                    <svg width="12" height="14"><use xlink:href="#clock-icon"></use></svg>
+                                                </span>
+                                                <span class="extra-small">3:00 PM - 8:30 PM</span>
+                                            </li>
+                                            <li class=" body-color-style-1">
+                                                <span class="location-icon-sm">
+                                                    <svg width="11" height="14"><use xlink:href="#location-icon-sm"></use></svg>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- d-flex  -->
+                                <p class="card-text mb-0">أطلق المهندس موسى المعايطة رئيس مجلس مفوضي الهيئة المستقلة للانتخاب الإطار المرجعي لتمكين المرأة ( استراتيجية تمكين المرأة في الانتخاب والأحزاب 2024 - 2026)، بحضور عدد من المختصين والمهتمين بشؤون المرأة، والجهات ذات العلاقة..</p>
+
+                                <div>
+                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                        Read More
+                                        <span class="arrow-right-icon-sm">
+                                            <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- d-flex -->
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-6 -->
+
+                <div class="col-lg-6">
+                    <div class="card card-style-7 wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1.5s">
+                        <div class="card-image-wrapper card-image-overlay">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/campaign-5.jpg")" class="card-img-top" alt="campaign-5">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <div class="d-flex flex-column gap-20">
+                                <div class="d-flex align-items-center gap-3 gap-xxl-20">
+                                    <div class="blog-date-wrapper">
+                                        <div class="date bg-primary">
+                                            <p class="text-white lead mb-0">20</p>
+                                        </div>
+                                        <div class="month bg-secondary ">
+                                            <p class="text-white mb-0 text-uppercase">sep</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="card-title mb-0 fw-semibold">
+                                            <a href="news-single.html" class="text-decoration-none link-hover-animation-1">
+                                                المعايطة : يؤكد على أهمية التوعية الانتخابية
+                                                .
+                                            </a>
+                                        </h5>
+
+                                        <ul class="list-unstyled mb-0 d-flex gap-10">
+                                            <li class=" body-color-style-1">
+                                                <span class="clock-icon">
+                                                    <svg width="12" height="14"><use xlink:href="#clock-icon"></use></svg>
+                                                </span>
+                                                <span class="extra-small">3:00 PM - 8:30 PM</span>
+                                            </li>
+                                            <li class=" body-color-style-1">
+                                                <span class="location-icon-sm">
+                                                    <svg width="11" height="14"><use xlink:href="#location-icon-sm"></use></svg>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- d-flex  -->
+                                <p class="card-text mb-0">أكد المهندس موسى المعايطة رئيس مجلس مفوضي الهيئة المستقلة على أهمية التوعية الانتخابية وتحفيز المواطنين على المشاركة في الانتخابات النيابية المقبلة والتي ستجري في العاشر من أيلول المقبل </p>
+
+                                <div>
+                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                        Read More
+                                        <span class="arrow-right-icon-sm">
+                                            <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- d-flex -->
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-6 -->
+
+            </div>
+            <!-- row -->
+        </div>
+        <!-- d-flex gap-40 -->
+    </div>
+    <!-- container -->
+</section>
+<!--News Section ======================-->

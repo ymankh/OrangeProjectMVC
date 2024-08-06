@@ -1,0 +1,143 @@
+﻿@model List<OrangeProjectMVC.Models.Ad>
+@{
+    ViewBag.Title = "اعلانات المرشحين";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style>
+    .row.portfolio-isotope.g-30.wow.fadeInUp {
+        margin-top: 50px;
+    }
+
+    footer.section-footer.footer-1.bg-secondary.text-bg-dark {
+        margin-top: 200px;
+    }
+
+    h3 {
+        margin-right: 40%;
+        font-family: 'Cairo';
+    }
+</style>
+
+
+
+
+<!--Gallery Section ======================-->
+<div class="section-gallery gallery-2 py-60 py-lg-100 py-xxl-120">
+    <div class="container ">
+        <h3>مرشحي الدوائر</h3>
+        <div class="d-flex flex-column gap-40 gap-lg-60">
+
+
+            <div class="row portfolio-isotope g-30 wow fadeInUp">
+
+                @foreach (var ad in Model)
+                {
+                    <div class="col-lg-4 portfolio-item education">
+                        <div class="politixy-image portfolio-image-style-4">
+                            <a href="@Url.Content(ad.img_url)" class="image-link stretched-link">
+                                <img src="@Url.Content(ad.img_url)" data-src="@Url.Content(ad.img_url)" class="img-fluid" alt="portfolio-2">
+                            </a>
+                        </div>
+                    </div>
+                }
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-4.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-4.jpg")" class="img-fluid" alt="portfolio-4">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item events election">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-3.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-3.jpg")" class="img-fluid" alt="campaign-3">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-6.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-6.jpg")" class="img-fluid" alt="event-3">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item events">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-5.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-5.jpg")" class="img-fluid" alt="portfolio-5">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item events election">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-6.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-6.jpg")" class="img-fluid" alt="portfolio-6">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item events education">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-4.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-4.jpg")" class="img-fluid" alt="portfolio-7">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election education">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-8.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-8.jpg")" class="img-fluid" alt="portfolio-8">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election education">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-3.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-3.jpg")" class="img-fluid" alt="portfolio-3">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election education">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-9.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-5.jpg")" class="img-fluid" alt="portfolio-5">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election education">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-55.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-55.jpg")" class="img-fluid" alt="portfolio-7">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+                <!-- col-4 -->
+                <!--<div class="col-lg-4 portfolio-item election education">
+                    <div class="politixy-image portfolio-image-style-4">
+                        <a href="@Url.Content("~/assets/images/portfolio-9.jpg")" class="image-link stretched-link">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/portfolio-9.jpg")" class="img-fluid" alt="portfolio-9">
+                        </a>
+                    </div>
+                </div>-->
+                <!-- col-4 -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- d-flex.gap-60 -->
+    </div>
+    <!-- container -->
+</div>
+<!--Gallery Section ======================-->

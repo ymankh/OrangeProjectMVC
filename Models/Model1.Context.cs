@@ -30,11 +30,12 @@ namespace OrangeProjectMVC.Models
         public virtual DbSet<candidate> candidates { get; set; }
         public virtual DbSet<candidate_request> candidate_request { get; set; }
         public virtual DbSet<contact_us> contact_us { get; set; }
+        public virtual DbSet<Date> Dates { get; set; }
         public virtual DbSet<debate> debates { get; set; }
         public virtual DbSet<district> districts { get; set; }
-        public virtual DbSet<election_dates> election_dates { get; set; }
         public virtual DbSet<election_list> election_list { get; set; }
         public virtual DbSet<election_list_request> election_list_request { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<voter_user> voter_user { get; set; }
     }
 }

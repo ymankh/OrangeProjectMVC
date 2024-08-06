@@ -130,7 +130,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\advController.cs" />
+    <Compile Include="Controllers\candidate_requestController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\debatesController.cs" />
+    <Compile Include="Controllers\election_list_requestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\reqistListController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserCycleController.cs" />
     <Compile Include="Controllers\voter_userController.cs" />
     <Compile Include="Global.asax.cs">
@@ -149,16 +157,17 @@
     <Compile Include="Models\candidate_request.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\contact_us.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Date.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\debate.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\district.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\election_dates.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\election_list.cs">
@@ -181,6 +190,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\voter_user.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -296,8 +308,8 @@
     <Content Include="img\undraw_rocket.svg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2174,7 +2186,6 @@
     <Content Include="Views\Shared\_TopBar.cshtml" />
     <Content Include="Views\voter_user\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
-    <Content Include="Views\UserCycle\Index.cshtml" />
     <Content Include="Views\voter_user\Results.cshtml" />
     <Content Include="Views\Admins\Create.cshtml" />
     <Content Include="Views\Admins\Delete.cshtml" />
@@ -2183,6 +2194,39 @@
     <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Admins\AdminLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutWithNoNavbar.cshtml" />
+    <Content Include="Views\Adv\adv.cshtml" />
+    <Content Include="Views\Adv\create.cshtml" />
+    <Content Include="Views\Adv\Delete.cshtml" />
+    <Content Include="Views\Adv\Edit.cshtml" />
+    <Content Include="Views\Adv\index.cshtml" />
+    <Content Include="Views\candidate_request\Delete.cshtml" />
+    <Content Include="Views\candidate_request\Details.cshtml" />
+    <Content Include="Views\candidate_request\Edit.cshtml" />
+    <Content Include="Views\candidate_request\Index.cshtml" />
+    <Content Include="Views\ContactUs\contactus.cshtml" />
+    <Content Include="Views\ContactUs\Delete.cshtml" />
+    <Content Include="Views\ContactUs\Edit.cshtml" />
+    <Content Include="Views\ContactUs\Index.cshtml" />
+    <Content Include="Views\debates\Create.cshtml" />
+    <Content Include="Views\debates\Delete.cshtml" />
+    <Content Include="Views\debates\Details.cshtml" />
+    <Content Include="Views\debates\Edit.cshtml" />
+    <Content Include="Views\debates\Index.cshtml" />
+    <Content Include="Views\election_list_request\Delete.cshtml" />
+    <Content Include="Views\election_list_request\Details.cshtml" />
+    <Content Include="Views\election_list_request\Edit.cshtml" />
+    <Content Include="Views\election_list_request\Index.cshtml" />
+    <Content Include="Views\Payment\Error.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\PaymentSuccess.cshtml" />
+    <Content Include="Views\Payment\Success.cshtml" />
+    <Content Include="Views\reqistList\Index.cshtml" />
+    <Content Include="Views\reqistList\LocalList.cshtml" />
+    <Content Include="Views\reqistList\PartyList.cshtml" />
+    <Content Include="Views\reqistList\SingleLocalList.cshtml" />
+    <Content Include="Views\UserCycle\about.cshtml" />
+    <Content Include="Views\UserCycle\advertismentst.cshtml" />
+    <Content Include="Views\UserCycle\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

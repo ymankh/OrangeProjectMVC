@@ -22,7 +22,7 @@ namespace OrangeProjectMVC.Models
     
         public int id { get; set; }
         public string name { get; set; }
-        public int district_id { get; set; }
+        public Nullable<int> district_id { get; set; }
         public string type { get; set; }
         public string status { get; set; }
     

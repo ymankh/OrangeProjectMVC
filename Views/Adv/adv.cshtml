@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "adv";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@model OrangeProjectMVC.Models.AdViewModel
+
+@{
+    ViewBag.Title = "إعلانات";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!--قسم الإعلانات ======================-->
+<section class="section-advertisement ad-2 py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+        <div class="row align-items-center g-40 justify-content-between">
+            <div class="col-lg-5">
+                <div class="about-image position-relative wow fadeInLeft" data-wow-duration="1.3s">
+                    <a href="@Url.Content("~/assets/images/volunteer-image-2.png")" class="image-link">
+                        <img src="@Url.Content("~/assets/images/volunteer-image-2.png")" class="img-fluid" alt="volunteer-image-2">
+                    </a>
+                </div>
+            </div>
+            <!-- col-5 -->
+            <div class="col-lg-7">
+                <div class="d-flex flex-column gap-3">
+                    <h6 class="subtitle lead text-primary wow fadeInRight" style="font-family:cairo;">إنشاء إعلانات انتخابية</h6>
+                    <h2 class="mb-1 wow fadeInRight" data-wow-delay=".3s" data-wow-duration="1.3s" style="font-family:cairo;">انضم إلى حركتنا وقم بالترويج لحملتك الانتخابية</h2>
+                    <p class="mb-0 mb-lg-10 wow fadeInRight" data-wow-delay=".4s" data-wow-duration="1.3s">إن إنشاء إعلان لحملتك الانتخابية سهل! استكشف منصتنا للوصول إلى مجموعة متنوعة من خيارات الإعلان، واصل إلى جمهور واسع. سواء كنت تستطيع توفير بضع ساعات أو التزام بجدول منتظم، فإن التزامك محل تقدير كبير. استخدم أدواتنا لإنشاء إعلانات مؤثرة تلامس الناخبين.</p>
+
+                    <ul class="about-lists list-unstyled mb-0 d-flex flex-column gap-10 wow fadeInRight" data-wow-delay=".5s" data-wow-duration="1.3s">
+                        <li class="d-flex gap-10 align-items-center"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>كن صادقاً وشفافاً</li>
+                        <li class="d-flex gap-10 align-items-center"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>ابق ملتزماً بأهدافك</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- col-7 -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+</section>
+<!--قسم الإعلانات ======================-->
+<!--قسم نموذج الإعلان ======================-->
+<section class="section-advertisement ad-3 bg-custom-light pt-60 pt-lg-100 pt-xxl-120 pb-40 pb-lg-80 pb-xxl-100">
+    <div class="container  ">
+        <h2 class="mb-30 mb-lg-40 text-lg-center wow fadeInUp" style="font-family:cairo;">إنشاء إعلانك الانتخابي</h2>
+        @using (Html.BeginForm("Ads", "UserCycle", FormMethod.Post, new { @class = "contact-form row g-30 wow fadeInUp" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-6">
+                <label for="InputName" class="form-label">الاسم الأول</label>
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-md-6">
+                <label for="InputLastName" class="form-label">اسم العائلة</label>
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-md-6">
+                <label for="InputEmail" class="form-label">البريد الإلكتروني</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-md-6">
+                <label for="InputNumber" class="form-label">رقم الهاتف</label>
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-12">
+                <label for="InputImageURL" class="form-label">رابط صورة الإعلان</label>
+                @Html.TextBoxFor(m => m.ImageURL, new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-12">
+                <label for="InputMessage" class="form-label">عن حملتك الانتخابية</label>
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 6 })
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">أرسل الإعلان</button>
+            </div>
+            <div class="response py-1"></div>
+        }
+        <!-- advertisement-form -->
+    </div>
+    <!-- container -->
+</section>
+<!--قسم نموذج الإعلان ======================-->

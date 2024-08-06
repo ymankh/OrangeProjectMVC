@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container mt-5" style="height:70vh; display:flex; flex-direction:column; justify-content:center;">
+
+    <div class="row justify-content-center">
+        <!-- Party List Registration Card -->
+        <div class="col-md-5 mx-2 mb-4">
+            <div class="card border border-gg shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">التسجيل في القائمة الحزبية</h5>
+                    <p class="card-text">
+                        اختر هذا الخيار إذا كنت ترغب في التسجيل في الانتخابات القائمة الحزبية.
+                    </p>
+                     <form action="@Url.Action("PartyList", "reqistList")" method="post">
+                        <button type="submit" class="btn btn-primary w-100">التسجيل الآن</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local List Registration Card -->
+        <div class="col-md-5 mx-2 mb-4">
+            <div class="card border border-gg shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">التسجيل في القائمة المحلية</h5>
+                    <p class="card-text">
+                        اختر هذا الخيار إذا كنت ترغب في التسجيل في الانتخابات القائمة المحلية.
+                    </p>
+                    <form action="@Url.Action("LocalList", "reqistList")" method="post">
+                        <button type="submit" class="btn btn-primary w-100">التسجيل الآن</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Payment Checkout";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">اكمال الدفع</h2>
+
+<div class="container mt-5" style="height:50vh; display:flex; flex-direction:column; justify-content:center">
+    <p style="text-align: center; font-family: cairo;">انقر على الزر أدناه للمتابعة في عملية الدفع عبر PayPal:</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-2-strong" style="border-radius: 1rem; padding: 2em;">
+                <div class="card-body text-center">
+                    <form action="@Url.Action("Checkout", "Payment")" method="post">
+                        <button type="submit" class="btn btn-primary" style="font-family: cairo; background-color: red; border: none;">ادفع عبر Paypal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

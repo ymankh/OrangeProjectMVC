@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "SingleLocalList";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container mt-5"></div>
+
+<form method="post" class="container" id="nominationForm" action="@Url.Action("SingleLocalList", "reqistList", new { id = ViewBag.districtId })">
+    <!-- Form title -->
+    <h2 class="text-center mb-4">تقديم طلب للترشح</h2>
+
+    <!-- Input for List Name -->
+    <div class="form-group">
+        <label for="listName" class="form-label">اسم القائمة</label>
+        <input type="text" name="list_name" id="listName" class="form-control" placeholder="ادخل اسم القائمة" required />
+    </div>
+
+    <!-- Section for Competitive Seats -->
+    <h5>المقاعد التنافسية</h5>
+    @for (int i = 0; i < ViewBag.competitive_seat; i++)
+    {
+        <div class="form-group mb-3">
+            <input type="text" name="competitive_seats" id="competitiveSeats" class="form-control" placeholder=" ادخل الرقم الوطني للمرشح @i " required />
+        </div>
+    }
+
+    <!-- Section for Women Seats -->
+    @if (ViewBag.women_seats > 0)
+    {
+        <h5>مقعد الكوته</h5>
+        <div class="form-group">
+            <input type="text" name="women_seat" id="womenSeat" class="form-control" placeholder="ادخل الرقم الوطني للمرشح" required />
+        </div>
+    }
+
+    <!-- Section for Christian Seats -->
+    @if (ViewBag.christian_seats > 0)
+    {
+        <h5>المقعد المسيحي</h5>
+        <div class="form-group">
+            <input type="text" name="christian_seat" id="christianSeat" class="form-control" placeholder="ادخل الرقم الوطني للمرشح" required />
+        </div>
+    }
+
+    <!-- Submit button -->
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-lg mt-3">احفظ القائمة</button>
+    </div>
+</form>
+
+<!-- Bootstrap Toast -->
+<div class="toast-container position-fixed top-0 right-0 p-3" style="z-index: 11">
+    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="toast-header">
+            <strong class="me-auto">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            لقد تم استلام طلبك بنجاح
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript and Custom Script -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('nominationForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        // Show the success toast
+        var toastElement = document.getElementById('successToast');
+        var toast = new bootstrap.Toast(toastElement);
+        toast.show();
+
+        // Optional: Submit the form programmatically after showing the toast
+        setTimeout(() => {
+            this.submit();
+        }, 3000); // Adjust the delay as needed
+    });
+</script>

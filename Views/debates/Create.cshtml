@@ -1,0 +1,66 @@
+﻿@model OrangeProjectMVC.Models.debate
+
+@{
+    ViewBag.Title = "إنشاء مناظرة";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container mt-5" dir="rtl">
+    <h2 class="text-center text-primary mb-4">إنشاء مناظرة جديدة</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal bg-light p-4 rounded shadow-sm">
+            <h4 class="text-secondary mb-3 text-right">أرجو تعبئة البيانات اللازمة لطلب المناظرة</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group row">
+
+
+
+                <div class="col">
+                    @Html.LabelFor(model => model.topic, "عنوان المناظرة", htmlAttributes: new { @class = "col-form-label text-right" })
+                    @Html.TextAreaFor(model => model.topic, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @rows = 1 } })
+                    @Html.ValidationMessageFor(model => model.topic, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col">
+                    @Html.LabelFor(model => model.first_list, "القائمة الاولى", htmlAttributes: new { @class = "col-form-label text-right" })
+                    @Html.DropDownList("first_list", null, "النشامى", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.first_list, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col">
+                    @Html.LabelFor(model => model.second_list, "القائمة الثانية", htmlAttributes: new { @class = "col-form-label text-right" })
+                    @Html.DropDownList("second_list", null, "القدس", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.second_list, "", new { @class = "text-danger" })
+                </div>
+
+
+
+
+
+
+                <div class="col">
+                    @Html.LabelFor(model => model.debate_date, "تاريخ المناظرة المطلوب", htmlAttributes: new { @class = "col-form-label text-right" })
+                    @Html.EditorFor(model => model.debate_date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.debate_date, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col d-flex align-items-end">
+                    <input type="submit" value="إنشاء" class="btn btn-primary btn-lg" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

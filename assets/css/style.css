@@ -9948,8 +9948,8 @@ textarea {
 }
 
 .header-2.sticky .top-bar {
-  display: none;
-}
+/*  display: none;
+*/}
 
 .menu-uppercase .nav-link {
   text-transform: uppercase;

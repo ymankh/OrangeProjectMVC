@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using OrangeProjectMVC.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using OrangeProjectMVC.Models;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Web.Mvc;
 
 namespace ElectionProject.Controllers
 {
@@ -37,7 +35,10 @@ namespace ElectionProject.Controllers
 
                 // Email settings
                 string fromEmail = "techlearnhub.contact@gmail.com";
+                // This is for testing. for production comment the nect line and uncomment the one after.
                 string toEmail = "mohammaddfawareh@gmail.com";
+                //string toEmail = user.email;
+
                 string subjectText = "Your Confirmation Code";
                 string messageText = $"Your confirmation code is {randomCode}";
 
@@ -149,7 +150,8 @@ namespace ElectionProject.Controllers
         {
             if (Session["National_ID"] == null)
                 return View();
-            return RedirectToAction("Index", "Home");
+            Session["National_ID"] = null;
+            return RedirectToAction("LoginWithPassword", "User");
 
         }
 
@@ -158,10 +160,28 @@ namespace ElectionProject.Controllers
         {
             Session["National_ID"] = newUser.national_id.ToString();
             var user = db.voter_user.FirstOrDefault(u => u.national_id == newUser.national_id && u.password == newUser.password);
+
+
             if (user != null)
             {
+                if (user.district_id == 3)
+                {
 
-                return RedirectToAction("Circles");
+                    Session["c"] = "ajloun.jpeg";
+                    return RedirectToAction("Circles");
+                }
+
+                else if (user.district_id == 1)
+                {
+                    Session["c"] = "irbid01.jpg";
+                    return RedirectToAction("Circles");
+                }
+                else
+                {
+                    Session["c"] = "irbid02.jpg";
+                    return RedirectToAction("Circles");
+                }
+
             }
 
             return View();
@@ -175,7 +195,7 @@ namespace ElectionProject.Controllers
             }
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
-            if(user.first_login) return RedirectToAction("ResetPassword");
+            if (user.first_login) return RedirectToAction("ResetPassword");
             var userDistrict = user.district_id;
 
             var circles = db.districts.Find(userDistrict);
@@ -243,7 +263,7 @@ namespace ElectionProject.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var nationalId = (string) Session["National_ID"];
+            var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
 
             // To Make sure that he has rested the password after the first login

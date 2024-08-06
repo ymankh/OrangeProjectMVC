@@ -18,5 +18,8 @@ namespace OrangeProjectMVC.Models
         public string description { get; set; }
         public string img_url { get; set; }
         public string status { get; set; }
+        public int transaction_id { get; set; }
+    
+        public virtual Transaction Transaction { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<OrangeProjectMVC.Models.district>
+@{
+    ViewBag.Title = "LocalList";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+
+
+
+<h2 class="text-center mt-4">اختر الدائرة الانتخابية </h2>
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        @foreach (var distrect in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" style="position: relative; ">
+                    <img src="~/img/district.jpg" class="card-img-top img-shadowww" alt="Image">
+                    <div class="overlayyy">
+                        <a href="@Url.Action("SingleLocalList", "reqistList", new { id = distrect.id })" class="btn overlayyy-btn btn-lg shadow-custom">
+                            @distrect.name
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
