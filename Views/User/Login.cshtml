@@ -6,17 +6,30 @@
 
 
 }
+<<section class="vh-100" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
 
-<h2>Login</h2>
+                        <h3 class="mb-5" style="font-size:large ;font-family:cairo">تسجيل الدخول</h3>
 
-@using (Html.BeginForm("Login", "User", FormMethod.Post))
-{
-    <div>
-        @Html.LabelFor(m => m.national_id)
-        @Html.TextBoxFor(m => m.national_id)
+                        @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                        {
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                @Html.TextBoxFor(m => m.national_id, new { @class = "form-control form-control-lg", @id = "typeNationalIdX-2" })
+                                <label class="form-label" style="font-size:small" for="typeNationalIdX-2">الرقم الوطني</label>
+                            </div>
+
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="font-size:small;font-family:cairo;" type="submit">دخول</button>
+
+                            <span>@ViewBag.msg</span>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="submit" value="Login" />
-        <span>@ViewBag.msg</span>
-    </div>
-}
+</section>

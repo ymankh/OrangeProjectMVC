@@ -1,76 +1,35 @@
 ﻿@model IEnumerable<OrangeProjectMVC.Models.election_list>
 @{
     ViewBag.Title = "PartyListsNames";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<h2>PartyListsNames</h2>
+<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">PartyListsNames</h2>
 
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Cards</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .custom-checkbox {
-            transform: scale(1.5); /* Adjust the scale as needed */
-        }
-    </style>
-</head>
-<body>
-
-
-    <h1>الارجاء اختيار القائمة المراد التصويت لها</h1>
-
+<div class="container mt-5">
+    <h1 style="text-align: center; font-family: cairo;">الرجاء اختيار القوائم المراد التصويت لها</h1>
 
     @using (Html.BeginForm("PartySaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-
-
-        <div class="row">
-
-
-            @foreach (var lists in Model)
+        <div class="row justify-content-center">
+            @foreach (var list in Model)
             {
-
-
-
-                <!-- Card 1 -->
-                <div class="col-md-3" style="margin: 0 auto">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 1">
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(model => lists.name)</h5>
-                            <p class="card-text">Description for card 1.</p>
-                            @*<ul>
-                                    @foreach (var c in lists.candidates)
-                                    {
-                                        <li>
-                                            @c.voter_user.name
-                                        </li>
-                                    }
-
-                                </ul>*@
-
-                            <input class="custom-checkbox" type="radio" name="election_list_id" value="@lists.id" />
+                <div class="col-md-3 my-2">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="@Html.DisplayFor(model => list.name)">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" style="font-family: cairo;">@Html.DisplayFor(model => list.name)</h5>
+                            <p class="card-text" style="font-family: cairo;">Description for @Html.DisplayFor(model => list.name).</p>
+                            <input class="custom-checkbox" type="radio" name="election_list_id" value="@list.id" />
                         </div>
                     </div>
                 </div>
             }
-
         </div>
-        <button type="submit" class="btn btn-primary" style="margin: 0 auto">Vote</button>
+        <div class="text-center mt-4">
+            <button  type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
+            @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
+        </div>
     }
-    <br />
-
-    <div class="form-group">
-        @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn btn-info" })
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    
+</div>

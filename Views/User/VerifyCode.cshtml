@@ -1,18 +1,30 @@
 ﻿@{
     ViewBag.Title = "Verify Code";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
-
 }
 
-<h2>Verify Code</h2>
+<section class="vh-100" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
 
-@using (Html.BeginForm("VerifyCode", "User", FormMethod.Post))
-{
-    <div>
-        <label for="verificationCode">Verification Code</label>
-        <input type="text" id="verificationCode" name="verificationCode" />
+                        <h3 class="mb-5">Verify Code</h3>
+
+                        @using (Html.BeginForm("VerifyCode", "User", FormMethod.Post))
+                        {
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="verificationCode">Verification Code</label>
+                                <input type="text" id="verificationCode" name="verificationCode" class="form-control form-control-lg" />
+                            </div>
+
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Verify</button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="submit" value="Verify" />
-    </div>
-}
+</section>

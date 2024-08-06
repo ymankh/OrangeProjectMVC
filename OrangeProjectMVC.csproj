@@ -2227,6 +2227,15 @@
     <Content Include="Views\UserCycle\about.cshtml" />
     <Content Include="Views\UserCycle\advertismentst.cshtml" />
     <Content Include="Views\UserCycle\Index.cshtml" />
+    <Content Include="Views\User\Circles.cshtml" />
+    <Content Include="Views\User\ListsNames.cshtml" />
+    <Content Include="Views\User\ListsType.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\LoginWithPassword.cshtml" />
+    <Content Include="Views\User\PartyListsNames.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\User\SingleList.cshtml" />
+    <Content Include="Views\User\VerifyCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

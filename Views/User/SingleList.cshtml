@@ -2,67 +2,39 @@
 @{
     ViewBag.Title = "SingleList";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
-
 }
 
-<h2>SingleList</h2>
+<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">SingleList</h2>
 
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Cards</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .custom-checkbox {
-            transform: scale(1.5); /* Adjust the scale as needed */
-        }
-    </style>
-</head>
-<body>
-
-    <h1>الارجاء اختيار القائمة المراد التصويت لها</h1>
-
+<div class="container mt-5">
+    <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار المرشح الذي تريد التصويت له</h3>
+    <p style="text-align: center; font-family: cairo;">يمكنك التصويت لأكثر من اسم</p>
 
     @using (Html.BeginForm("SaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-
-        <div class="row">
-
-                <!-- Card 1 -->
-                <div class="col-md-3" style="margin: 0 auto">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h5>@ViewBag.lsitName</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                @foreach (var c in Model)
-                                {
-                                    <li>
-                                        <input type="checkbox" name="candidates" value="@c.id" />
-                                        @c.voter_user.name
-                                    </li>
-                                }
-                            </ul>
-                        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 my-2">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-header text-center" style="font-family: cairo;">
+                        <h5>@ViewBag.lsitName</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled" style="font-family: cairo; text-align: right;">
+                            @foreach (var c in Model)
+                            {
+                                <li style="display: flex;justify-content: flex-start; margin-bottom: 0.5em;">
+                                    <input type="checkbox" name="candidates" value="@c.id" style="transform: scale(1.5); margin-left: 1em;" />
+                                    @c.voter_user.name
+                                </li>
+                            }
+                        </ul>
                     </div>
                 </div>
-
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin: 0 auto">Vote</button>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
+            @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
+        </div>
     }
-    <br />
-
-    <div class="form-group">
-        @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn btn-info" })
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>

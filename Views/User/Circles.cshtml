@@ -1,270 +1,184 @@
-﻿
+﻿@model OrangeProjectMVC.Models.voter_user
+
 @{
     ViewBag.Title = "Circles";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 
+    var x = Session["c"].ToString();
 }
 
-<h2>Circles</h2>
+<h2 style="text-align: center; margin-top: 1em; font-family: cairo;">دائرتك</h2>
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- Dynamic Card for User Circle, centered at the top -->
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="~/img/@x" class="card-img-top" alt="Ajloun">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">@ViewBag.Circle</h5>
+                    <p class="card-text" style="font-family: cairo;">أنت تتبع لدائرة @ViewBag.Circle</p>
+                    <p class="card-text" style="font-family: cairo;">اضغط استمرار للانتقال الى القوائم.</p>
+                    @Html.ActionLink("استمرار", "ListsType", "User", new { area = "" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Cards</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+    <h2 id="toggleCards" style="text-align: center; margin:1em 0 1em 0; font-family: cairo; cursor: pointer;">بقية دوائر المملكة</h2>
 
+    <!-- Additional cards container -->
+    <div class="row justify-content-center" id="additionalCards" style="display: none;">
+        <!-- Additional Cards -->
+        <!-- Dynamically generate additional cards based on the model or similar here -->
+        @* Example Card *@
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">الكرك</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 1.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat for other cards -->
+        <!-- Card 2 -->
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">اربد الثانية</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <!-- More cards can be added similarly -->
 
-
-
-    @*@using (Html.BeginForm("ListsType", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {*@
-
-
-
-        <!-- Card 1 -->
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 1">
-                <div class="card-body">
-                    <h5 class="card-title">@ViewBag.Circle</h5>
-                    <p class="card-text">أنت تتبع لدائرة @ViewBag.Circle</p>
-
-                    <p class="card-text">اضغط استمرار للانتقال الى القوائم.</p>
-
-                    
-                    @Html.ActionLink("استمرار", "ListsType", "User", new { area = "" }, new { @class = "btn btn-primary"})
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">مادبا</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
                 </div>
             </div>
         </div>
 
 
-
-    @*}*@
-
-
-
-
-
-
-        <hr style="color: #ff0000" />
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Vote Now" class="btn btn-primary" />
-            </div>
-        </div>
-
-        <div class="container mt-5">
-            <div class="row">
-                <!-- Card 1 -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 1</h5>
-                            <p class="card-text">Description for card 1.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">المفرق</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
                 </div>
-                <!-- Card 2 -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 2</h5>
-                            <p class="card-text">Description for card 2.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat similar blocks for other cards -->
-                <!-- Card 3 -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Card Title 3</h5>
-                            <p class="card-text">Description for card 3.</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add more cards here up to 18 -->
-                <!-- ... -->
             </div>
         </div>
 
 
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">جرش</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
 
-    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">معان</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">عمان</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">الطفيلة</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">الكرك</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">العقبة</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">الزرقاء</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 my-2">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <img src="https://via.placeholder.com/150/C0C0C0/808080?text=Card+1" class="card-img-top" alt="Card image 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-family: cairo;">السلط</h5>
+                    <p class="card-text" style="font-family: cairo;">Description for card 2.</p>
+                    <a href="#" class="btn btn-primary" style="font-family: cairo;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#toggleCards").click(function() {
+            $("#additionalCards").toggle(); // Toggle visibility of the additional cards
+        });
+    });
+</script>
