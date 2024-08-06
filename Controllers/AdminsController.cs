@@ -36,7 +36,7 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult AdminLogin(string email, string password)
         {
-            if (! notAdmin())
+            if (!notAdmin())
                 return RedirectToAction("Index", "Home");
 
             var admin = db.Admins.FirstOrDefault(user => user.email == email && user.password == password);
