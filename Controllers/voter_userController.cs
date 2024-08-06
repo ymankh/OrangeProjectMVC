@@ -47,10 +47,10 @@ namespace OrangeProjectMVC.Controllers
                     Where(voter => voter.has_locally_voted).
                     Count();
 
+                int threshold = (int)Math.Floor(locallyVotedCount * 0.07);
+
                 var districtLocalLists = LocalLists.
                     Where(list => list.district == _district);
-
-                int threshold = (int)Math.Floor(locallyVotedCount * 0.075);
 
                 var listsOverThreshold = LocalLists.
                     Where(list => list.district_id == _district.id).
@@ -76,7 +76,7 @@ namespace OrangeProjectMVC.Controllers
                 // Find the number of seats for each winner
 
                 if (partialSeats > 0)
-                    overThresholdLists.OrderBy(list =>
+                    overThresholdLists.OrderByDescending(list =>
                     {
                         double number = list.seatsCount;
                         double integerPart = Math.Floor(number);
@@ -90,9 +90,26 @@ namespace OrangeProjectMVC.Controllers
                 }
 
                 // Add the winners for each list 
-                var candidates = db.candidates.OrderBy(candidate => candidate.vote_count);
-                var womenWinner = candidates.Where(candidate => candidate.type_of_chair == "W").First();
-                var christianWinner = candidates.Where(candidate => candidate.type_of_chair == "W").First();
+                var candidates = db.candidates.OrderByDescending(candidate => candidate.vote_count).Where(x => true);
+                List<int> overThresholdListsIds = new List<int>();
+                foreach (var x in overThresholdLists)
+                {
+                    overThresholdListsIds.Add(x.list.id);
+                }
+                int[] overThresholdListsIdsArray = overThresholdListsIds.ToArray();
+                var womenWinner = candidates.
+                    Where(candidate => candidate.type_of_chair == "W" && overThresholdListsIdsArray.Contains(candidate.election_list_id)).
+                    OrderByDescending(c => c.vote_count).
+                    First();
+                var christianWinner = new candidate();
+                if (_district.christian_seats > 0)
+                {
+                    christianWinner = candidates.
+                    Where(candidate => candidate.type_of_chair == "H" && overThresholdListsIdsArray.Contains(candidate.election_list_id)).
+                    OrderByDescending(x => x.vote_count).
+                    First();
+                }
+                else christianWinner = null;
                 foreach (var list in overThresholdLists)
                 {
                     list.competitiveWinners = candidates.
@@ -101,7 +118,7 @@ namespace OrangeProjectMVC.Controllers
                         ToList();
                     if (womenWinner.election_list_id == list.list.id)
                         list.womenWinner = womenWinner;
-                    if (_district.christian_seats > 0)
+                    if (christianWinner != null && christianWinner.election_list_id == list.list.id)
                         list.christianWinner = christianWinner;
                 }
                 var districtWithSeats = new DistrictWithSeats();
@@ -185,7 +202,7 @@ namespace OrangeProjectMVC.Controllers
 
             ViewBag.numberOfPages = Math.Ceiling((double)voters.Count() / itemPerPage);
             if (page == null) page = 0;
-            return View(voters.OrderBy(u => u.id).Skip((int)(page * itemPerPage)).Take(itemPerPage).ToList());
+            return View(voters.OrderByDescending(u => u.id).Skip((int)(page * itemPerPage)).Take(itemPerPage).ToList());
         }
 
 
