@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserCycleController.cs" />
     <Compile Include="Controllers\voter_userController.cs" />
@@ -2175,6 +2176,13 @@
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\UserCycle\Index.cshtml" />
     <Content Include="Views\voter_user\Results.cshtml" />
+    <Content Include="Views\Admins\Create.cshtml" />
+    <Content Include="Views\Admins\Delete.cshtml" />
+    <Content Include="Views\Admins\Details.cshtml" />
+    <Content Include="Views\Admins\Edit.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Admins\AdminLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithNoNavbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

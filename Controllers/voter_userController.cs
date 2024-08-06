@@ -7,10 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrangeProjectMVC.Models;
-using static OrangeProjectMVC.Controllers.voter_userController;
 
 namespace OrangeProjectMVC.Controllers
 {
+    
     public class DistrictWithSeats
     {
         public district district;

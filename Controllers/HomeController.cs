@@ -13,8 +13,25 @@ namespace OrangeProjectMVC.Controllers
     {
         private electionEntities db = new electionEntities();
 
+
+        bool notAdmin()
+        {
+            if (Session["adminId"] == null)
+                return true;
+            else
+            {
+                int id = Convert.ToInt32(Session["adminId"]);
+                var xAdmin = db.Admins.FirstOrDefault(user => user.id == id);
+                if (xAdmin == null)
+                    return true;
+            }
+            return false;
+        }
+
         public ActionResult Index()
         {
+            if (notAdmin())
+                return RedirectToAction("Index", "UserCycle");
             ViewBag.irbidFirstVoteCount = findDistrectVotersCount(1);
             ViewBag.irbidSecondVoteCount = findDistrectVotersCount(2);
             ViewBag.ajlonVoteCount = findDistrectVotersCount(3);
@@ -43,19 +60,6 @@ namespace OrangeProjectMVC.Controllers
             return Math.Max(localVotes, partyVotes);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
