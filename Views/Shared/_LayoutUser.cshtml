@@ -144,9 +144,18 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "reqistList")" style="font-family: 'Cairo', sans-serif; font-weight: 700; color: black ">طلب الترشح</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary" href="@Url.Action("Login", "User")">الدخول</a>
-                            </li>
+                            @if (Session["National_ID"] == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-primary" href="@Url.Action("Login", "User")">الدخول</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-primary" href="@Url.Action("Logout", "User")">الخروج</a>
+                                </li>
+                            }
                         </ul>
 
                     </div>
