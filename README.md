@@ -1,3 +1,4 @@
+
 # Election Project
 
 ## Overview
@@ -16,8 +17,15 @@ This project is developed by a team of five members from Orange Coding Academy: 
 - **Backend**: C#, ASP.NET
 - **Database**: SQL Server
 
+## Design and Planning
+- **Figma Design**: You can view the project's design on [Figma](https://www.figma.com/design/eJ8gMQqWyEEsf4XkL0Ogp6/Untitled?node-id=0-1&t=MQAS8nyrgb4jHJq2-1).
+- **Trello Board**: The project tasks and progress are tracked on [Trello](https://trello.com/invite/b/668f7acd1a05df3b5e310991/ATTI0147eb694ea8666af7fb1a10a78c8580D56256EC/al-nashama).
+
 ## Installation
 1. Clone the repository to your local machine.
+   ```bash
+   git clone [repository link]
+   ```
 2. Open the project in Visual Studio.
 3. Restore the NuGet packages.
 4. Configure the database connection string in the `web.config` file.
@@ -35,3 +43,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 For any questions or inquiries, please contact any of the team members.
+
