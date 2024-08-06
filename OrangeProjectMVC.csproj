@@ -2174,6 +2174,7 @@
     <Content Include="Views\voter_user\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\UserCycle\Index.cshtml" />
+    <Content Include="Views\voter_user\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

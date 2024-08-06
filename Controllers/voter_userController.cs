@@ -7,12 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrangeProjectMVC.Models;
+using static OrangeProjectMVC.Controllers.voter_userController;
 
 namespace OrangeProjectMVC.Controllers
 {
+    public class DistrictWithSeats
+    {
+        public district district;
+        public List<ListsWithSeats> lists;
+    }
+
+    public class ListsWithSeats
+    {
+        public election_list list;
+        public double seatsCount;
+        public List<candidate> competitiveWinners;
+        public candidate womenWinner;
+        public candidate christianWinner;
+    }
+
     public class voter_userController : Controller
     {
         private electionEntities db = new electionEntities();
+
+        public ActionResult Results()
+        {
+            var districts = db.districts;
+
+            var LocalLists = db.election_list.
+                Where(list => list.type == "L").
+                Include(list => list.district);
+
+            var listOfDistricts = new List<DistrictWithSeats>();
+
+            foreach (var _district in districts)
+            {
+                int locallyVotedCount = db.voter_user.
+                    Where(voter => voter.district_id == _district.id).
+                    Where(voter => voter.has_locally_voted).
+                    Count();
+
+                var districtLocalLists = LocalLists.
+                    Where(list => list.district == _district);
+
+                int threshold = (int)Math.Floor(locallyVotedCount * 0.075);
+
+                var listsOverThreshold = LocalLists.
+                    Where(list => list.district_id == _district.id).
+                    Where(list => list.vote_count > threshold).ToList();
+
+                var overThresholdVotesCount = listsOverThreshold.Sum(list => list.vote_count);
+
+                var overThresholdLists = new List<ListsWithSeats>();
+
+                foreach (var list in listsOverThreshold)
+                {
+                    var seatsPercentage = (double)list.vote_count / overThresholdVotesCount;
+                    var numberOfSeats = seatsPercentage * _district.competitive_seat;
+                    var listWithSeats = new ListsWithSeats();
+                    listWithSeats.list = list;
+                    listWithSeats.seatsCount = numberOfSeats;
+                    overThresholdLists.Add(listWithSeats);
+                }
+
+                int holeSeats = overThresholdLists.Sum(list => (int)Math.Truncate(list.seatsCount));
+                int partialSeats = _district.competitive_seat - holeSeats;
+
+                // Find the number of seats for each winner
+
+                if (partialSeats > 0)
+                    overThresholdLists.OrderBy(list =>
+                    {
+                        double number = list.seatsCount;
+                        double integerPart = Math.Floor(number);
+                        double decimalPart = number - integerPart;
+                        return decimalPart;
+                    });
+
+                for (int i = 0; i < partialSeats; i++)
+                {
+                    overThresholdLists[i].seatsCount++;
+                }
+
+                // Add the winners for each list 
+                var candidates = db.candidates.OrderBy(candidate => candidate.vote_count);
+                var womenWinner = candidates.Where(candidate => candidate.type_of_chair == "W").First();
+                var christianWinner = candidates.Where(candidate => candidate.type_of_chair == "W").First();
+                foreach (var list in overThresholdLists)
+                {
+                    list.competitiveWinners = candidates.
+                        Where(candidate => candidate.election_list.id == list.list.id).
+                        Take((int)list.seatsCount).
+                        ToList();
+                    if (womenWinner.election_list_id == list.list.id)
+                        list.womenWinner = womenWinner;
+                    if (_district.christian_seats > 0)
+                        list.christianWinner = christianWinner;
+                }
+                var districtWithSeats = new DistrictWithSeats();
+                districtWithSeats.district = _district;
+                districtWithSeats.lists = overThresholdLists;
+                listOfDistricts.Add(districtWithSeats);
+            }
+            return View(listOfDistricts);
+        }
 
         // GET: voter_user
         public ActionResult Index(int? page)
@@ -257,5 +355,6 @@ namespace OrangeProjectMVC.Controllers
             }
             return "?" + string.Join("&", queryString);
         }
+
     }
 }

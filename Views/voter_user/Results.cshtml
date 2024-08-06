@@ -1,0 +1,22 @@
+﻿@model List<OrangeProjectMVC.Controllers.DistrictWithSeats>
+
+
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+@foreach (var distict in Model)
+{
+    <h1>@distict.district.name</h1>
+    foreach (var winnerLists in distict.lists)
+    {
+        <h3>@winnerLists.list.name</h3>
+        foreach (var winnerCanedate in winnerLists.competitiveWinners)
+        {
+            <h5>@winnerCanedate.voter_user.name</h5>
+        }
+    }
+}
