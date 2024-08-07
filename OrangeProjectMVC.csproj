@@ -133,6 +133,7 @@
     <Compile Include="Controllers\advController.cs" />
     <Compile Include="Controllers\candidate_requestController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\DatesController.cs" />
     <Compile Include="Controllers\debatesController.cs" />
     <Compile Include="Controllers\election_list_requestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2237,6 +2238,11 @@
     <Content Include="Views\User\SingleList.cshtml" />
     <Content Include="Views\User\VerifyCode.cshtml" />
     <Content Include="Views\debates\ShowDebates.cshtml" />
+    <Content Include="Views\Dates\Create.cshtml" />
+    <Content Include="Views\Dates\Delete.cshtml" />
+    <Content Include="Views\Dates\Details.cshtml" />
+    <Content Include="Views\Dates\Edit.cshtml" />
+    <Content Include="Views\Dates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
