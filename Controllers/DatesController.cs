@@ -11,25 +11,25 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: Dates
-        public ActionResult Index()
-        {
-            return View(db.Dates.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    return View(db.Dates.ToList());
+        //}
 
         // GET: Dates/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Date date = db.Dates.Find(id);
-            if (date == null)
-            {
-                return HttpNotFound();
-            }
-            return View(date);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Date date = db.Dates.Find(id);
+        //    if (date == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(date);
+        //}
 
         //// GET: Dates/Create
         //public ActionResult Create()
@@ -40,28 +40,22 @@ namespace OrangeProjectMVC.Controllers
         // POST: Dates/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nomination_start_date,nomination_end_date,election_start_date,election_end_date,results_date")] Date date)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Dates.Add(date);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "id,nomination_start_date,nomination_end_date,election_start_date,election_end_date,results_date")] Date date)
+        //{
+        //    if (!ModelState.IsValid) return View(date);
+        //    db.Dates.Add(date);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
 
-            return View(date);
-        }
+        //}
 
         // GET: Dates/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Date date = db.Dates.Find(id);
+
+            var date = db.Dates.FirstOrDefault();
             if (date == null)
             {
                 return HttpNotFound();
@@ -76,13 +70,10 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,nomination_start_date,nomination_end_date,election_start_date,election_end_date,results_date")] Date date)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(date).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(date);
+            if (!ModelState.IsValid) return View(date);
+            db.Entry(date).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Dates/Delete/5
