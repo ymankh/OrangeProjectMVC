@@ -131,10 +131,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\advController.cs" />
+    <Compile Include="Controllers\candidatesController.cs" />
     <Compile Include="Controllers\candidate_requestController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\DatesController.cs" />
     <Compile Include="Controllers\debatesController.cs" />
+    <Compile Include="Controllers\election_listController.cs" />
     <Compile Include="Controllers\election_list_requestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -2243,6 +2245,16 @@
     <Content Include="Views\Dates\Details.cshtml" />
     <Content Include="Views\Dates\Edit.cshtml" />
     <Content Include="Views\Dates\Index.cshtml" />
+    <Content Include="Views\candidates\Create.cshtml" />
+    <Content Include="Views\candidates\Delete.cshtml" />
+    <Content Include="Views\candidates\Details.cshtml" />
+    <Content Include="Views\candidates\Edit.cshtml" />
+    <Content Include="Views\candidates\Index.cshtml" />
+    <Content Include="Views\election_list\Create.cshtml" />
+    <Content Include="Views\election_list\Delete.cshtml" />
+    <Content Include="Views\election_list\Details.cshtml" />
+    <Content Include="Views\election_list\Edit.cshtml" />
+    <Content Include="Views\election_list\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

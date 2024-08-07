@@ -1,17 +1,18 @@
-﻿@model List<OrangeProjectMVC.Controllers.DistrictWithSeats>
+﻿@using OrangeProjectMVC.Controllers
+@model List<OrangeProjectMVC.Controllers.DistrictWithSeats>
 
 
 @{
     ViewBag.Title = "Results";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
-
+    var partyListsWithSeats = ViewBag.partyListsWithSeats as List<ListsWithSeats>;
 
 }
 
 
-@foreach (var distict in Model)
-{
-    <div class="container my-4 text-right" dir="rtl">
+<div class="container my-4 text-right" dir="rtl">
+    @foreach (var distict in Model)
+    {
         <div class="card">
             <div class="card-header">
                 <h3 class="mb-0">@distict.district.name</h3>
@@ -79,5 +80,13 @@
                 }
             </div>
         </div>
-    </div>
-}
+    }
+    @foreach (var list in partyListsWithSeats)
+    {
+        <h5>@list.list.name</h5>
+        foreach (var competitiveWinner in list.competitiveWinners)
+        {
+            <h6>@competitiveWinner.voter_user.name</h6>
+        }
+    }
+</div>

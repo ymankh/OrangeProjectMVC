@@ -1,0 +1,51 @@
+﻿@model IEnumerable<OrangeProjectMVC.Models.candidate>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.type_of_chair)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vote_count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.election_list.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.voter_user.national_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.type_of_chair)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vote_count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.election_list.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.voter_user.national_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

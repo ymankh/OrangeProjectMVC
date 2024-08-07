@@ -10,7 +10,7 @@ using OrangeProjectMVC.Models;
 
 namespace OrangeProjectMVC.Controllers
 {
-    
+
     public class DistrictWithSeats
     {
         public district district;
@@ -32,102 +32,183 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Results()
         {
+            // Retrieve all districts from the database
             var districts = db.districts;
 
-            var LocalLists = db.election_list.
-                Where(list => list.type == "L").
-                Include(list => list.district);
+            // Retrieve all local election lists and include related districts
+            var LocalLists = db.election_list
+                .Where(list => list.type == "L")
+                .Include(list => list.district);
 
+            // Initialize a list to store the results for each district
             var listOfDistricts = new List<DistrictWithSeats>();
 
+            // Iterate over each district
             foreach (var _district in districts)
             {
-                int locallyVotedCount = db.voter_user.
-                    Where(voter => voter.district_id == _district.id).
-                    Where(voter => voter.has_locally_voted).
-                    Count();
+                // Count the number of voters who have locally voted in the district
+                int locallyVotedCount = db.voter_user
+                    .Where(voter => voter.district_id == _district.id)
+                    .Count(voter => voter.has_locally_voted);
 
+                // Calculate the vote threshold (7% of locally voted count)
                 int threshold = (int)Math.Floor(locallyVotedCount * 0.07);
 
-                var districtLocalLists = LocalLists.
-                    Where(list => list.district == _district);
+                // Retrieve local lists for the current district
+                var districtLocalLists = LocalLists
+                    .Where(list => list.district == _district);
 
-                var listsOverThreshold = LocalLists.
-                    Where(list => list.district_id == _district.id).
-                    Where(list => list.vote_count > threshold).ToList();
+                // Retrieve lists that have votes over the threshold
+                var listsOverThreshold = LocalLists
+                    .Where(list => list.district_id == _district.id)
+                    .Where(list => list.vote_count > threshold)
+                    .ToList();
 
+                // Sum the votes of lists over the threshold
                 var overThresholdVotesCount = listsOverThreshold.Sum(list => list.vote_count);
 
+                // Initialize a list to store lists with seats
                 var overThresholdLists = new List<ListsWithSeats>();
 
+                // Calculate the number of seats for each list over the threshold
                 foreach (var list in listsOverThreshold)
                 {
                     var seatsPercentage = (double)list.vote_count / overThresholdVotesCount;
                     var numberOfSeats = seatsPercentage * _district.competitive_seat;
-                    var listWithSeats = new ListsWithSeats();
-                    listWithSeats.list = list;
-                    listWithSeats.seatsCount = numberOfSeats;
+                    var listWithSeats = new ListsWithSeats
+                    {
+                        list = list,
+                        seatsCount = numberOfSeats
+                    };
                     overThresholdLists.Add(listWithSeats);
                 }
 
+                // Calculate the total whole seats assigned
                 int holeSeats = overThresholdLists.Sum(list => (int)Math.Truncate(list.seatsCount));
+
+                // Calculate the remaining partial seats to be assigned
                 int partialSeats = _district.competitive_seat - holeSeats;
 
-                // Find the number of seats for each winner
-
+                // Assign partial seats based on the largest decimal part
                 if (partialSeats > 0)
-                    overThresholdLists.OrderByDescending(list =>
+                    overThresholdLists = overThresholdLists.OrderByDescending(list =>
                     {
                         double number = list.seatsCount;
                         double integerPart = Math.Floor(number);
                         double decimalPart = number - integerPart;
                         return decimalPart;
-                    });
+                    }).ToList();
 
+                // Distribute remaining partial seats
                 for (int i = 0; i < partialSeats; i++)
                 {
                     overThresholdLists[i].seatsCount++;
                 }
 
-                // Add the winners for each list 
-                var candidates = db.candidates.OrderByDescending(candidate => candidate.vote_count).Where(x => true);
-                List<int> overThresholdListsIds = new List<int>();
-                foreach (var x in overThresholdLists)
-                {
-                    overThresholdListsIds.Add(x.list.id);
-                }
-                int[] overThresholdListsIdsArray = overThresholdListsIds.ToArray();
-                var womenWinner = candidates.
-                    Where(candidate => candidate.type_of_chair == "W" && overThresholdListsIdsArray.Contains(candidate.election_list_id)).
-                    OrderByDescending(c => c.vote_count).
-                    First();
-                var christianWinner = new candidate();
+                // Retrieve and assign winners for each list
+                var candidates = db.candidates
+                    .OrderByDescending(candidate => candidate.vote_count)
+                    .Where(x => true);
+
+                int[] overThresholdListsIdsArray = overThresholdLists.Select(x => x.list.id).ToArray();
+
+                var womenWinner = candidates
+                    .Where(candidate => candidate.type_of_chair == "W" && overThresholdListsIdsArray.Contains(candidate.election_list_id))
+                    .OrderByDescending(c => c.vote_count)
+                    .FirstOrDefault();
+
+                candidate christianWinner = null;
+
                 if (_district.christian_seats > 0)
                 {
-                    christianWinner = candidates.
-                    Where(candidate => candidate.type_of_chair == "H" && overThresholdListsIdsArray.Contains(candidate.election_list_id)).
-                    OrderByDescending(x => x.vote_count).
-                    First();
+                    christianWinner = candidates
+                        .Where(candidate => candidate.type_of_chair == "H" && overThresholdListsIdsArray.Contains(candidate.election_list_id))
+                        .OrderByDescending(x => x.vote_count)
+                        .FirstOrDefault();
                 }
-                else christianWinner = null;
+
                 foreach (var list in overThresholdLists)
                 {
-                    list.competitiveWinners = candidates.
-                        Where(candidate => candidate.election_list.id == list.list.id).
-                        Take((int)list.seatsCount).
-                        ToList();
-                    if (womenWinner.election_list_id == list.list.id)
+                    // Assign competitive winners to each list
+                    list.competitiveWinners = candidates
+                        .Where(candidate => candidate.election_list.id == list.list.id)
+                        .Take((int)list.seatsCount)
+                        .ToList();
+
+                    // Assign women winner if applicable
+                    if (womenWinner != null && womenWinner.election_list_id == list.list.id)
                         list.womenWinner = womenWinner;
+
+                    // Assign Christian winner if applicable
                     if (christianWinner != null && christianWinner.election_list_id == list.list.id)
                         list.christianWinner = christianWinner;
                 }
-                var districtWithSeats = new DistrictWithSeats();
-                districtWithSeats.district = _district;
-                districtWithSeats.lists = overThresholdLists;
+
+                // Create and add the result for the current district
+                var districtWithSeats = new DistrictWithSeats
+                {
+                    district = _district,
+                    lists = overThresholdLists
+                };
                 listOfDistricts.Add(districtWithSeats);
             }
+
+            double partyThreshold = db.voter_user.Count(user => user.has_party_voted) * 0.025;
+            var partyListsOverThreshold = db.election_list.
+                Include(list => list.candidates).
+                Where(list => list.type == "P" && list.vote_count > partyThreshold);
+            int partyOverThresholdCount = partyListsOverThreshold.
+                Sum(list => list.vote_count);
+
+            var partyListsWithSeats = new List<ListsWithSeats>();
+            foreach (var partyList in partyListsOverThreshold)
+            {
+                var partSeatsCount = ((double)partyList.vote_count / partyOverThresholdCount) * 41;
+                var partyListWithSeats = new ListsWithSeats
+                {
+                    list = partyList,
+                    seatsCount = partSeatsCount
+                };
+                partyListsWithSeats.Add(partyListWithSeats);
+            }
+            // Calculate the total whole seats assigned
+            int partyHoleSeats = partyListsWithSeats.
+                Sum(list => (int)Math.
+                Truncate(list.seatsCount));
+
+            // Calculate the remaining partial seats to be assigned
+            int partyPartialSeats = 41 - partyHoleSeats;
+
+            // Assign partial seats based on the largest decimal part
+            if (partyPartialSeats > 0)
+                partyListsWithSeats = partyListsWithSeats.OrderByDescending(list =>
+                {
+                    double number = list.seatsCount;
+                    double integerPart = Math.Floor(number);
+                    double decimalPart = number - integerPart;
+                    return decimalPart;
+                }).ToList();
+
+            // Distribute remaining partial seats
+            for (int i = 0; i < partyPartialSeats; i++)
+            {
+                partyListsWithSeats[i].seatsCount++;
+            }
+            // Find the hole seats for each list
+            foreach (var list in partyListsWithSeats)
+            {
+                // Assign competitive winners to each list
+                list.competitiveWinners = list.list.candidates.
+                    OrderBy(candidate => candidate.id).
+                    Take((int)list.seatsCount).
+                    ToList();
+            }
+
+            ViewBag.partyListsWithSeats = partyListsWithSeats;
+            // Return the view with the results
             return View(listOfDistricts);
         }
+
 
         // GET: voter_user
         [Route("admin/voters/{int?}")]
