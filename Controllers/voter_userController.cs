@@ -130,6 +130,7 @@ namespace OrangeProjectMVC.Controllers
         }
 
         // GET: voter_user
+        [Route("admin/voters/{int?}")]
         public ActionResult Index(int? page)
         {
             var filter = new VoterFilterViewModel
