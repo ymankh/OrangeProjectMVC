@@ -76,7 +76,7 @@
           <Property Name="second_list" Type="int" Nullable="false" />
           <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zoom_link" Type="varchar" MaxLength="255" />
-          <Property Name="details" Type="text" />
+          <Property Name="details" Type="nvarchar(max)" />
           <Property Name="debate_date" Type="datetime" />
         </EntityType>
         <EntityType Name="district">
@@ -391,7 +391,7 @@
           <Property Name="second_list" Type="Int32" Nullable="false" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zoom_link" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="debate_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="election_list" Relationship="Self.debates_first_list_foreign" FromRole="debates" ToRole="election_list" />
           <NavigationProperty Name="election_list1" Relationship="Self.debates_second_list_foreign" FromRole="debates" ToRole="election_list" />

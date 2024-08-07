@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Date</h4>
         <hr />
@@ -17,7 +17,7 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.nomination_start_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nomination Start Sate</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nomination_start_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nomination_start_date, "", new { @class = "text-danger" })
@@ -25,7 +25,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.nomination_end_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nomination End Date</label>
+
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nomination_end_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nomination_end_date, "", new { @class = "text-danger" })
@@ -33,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.election_start_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Election Start Date</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.election_start_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.election_start_date, "", new { @class = "text-danger" })
@@ -41,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.election_end_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Election End Date</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.election_end_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.election_end_date, "", new { @class = "text-danger" })
@@ -49,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.results_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Results Date</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.results_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.results_date, "", new { @class = "text-danger" })
