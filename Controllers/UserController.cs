@@ -1,13 +1,13 @@
-﻿using OrangeProjectMVC.Models;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
+using OrangeProjectMVC.Models;
 
-namespace ElectionProject.Controllers
+namespace OrangeProjectMVC.Controllers
 {
     public class UserController : Controller
     {
@@ -162,29 +162,20 @@ namespace ElectionProject.Controllers
             var user = db.voter_user.FirstOrDefault(u => u.national_id == newUser.national_id && u.password == newUser.password);
 
 
-            if (user != null)
+            if (user == null) return View();
+            switch (user.district_id)
             {
-                if (user.district_id == 3)
-                {
-
+                case 3:
                     Session["c"] = "ajloun.jpeg";
                     return RedirectToAction("Circles");
-                }
-
-                else if (user.district_id == 1)
-                {
+                case 1:
                     Session["c"] = "irbid01.jpg";
                     return RedirectToAction("Circles");
-                }
-                else
-                {
+                default:
                     Session["c"] = "irbid02.jpg";
                     return RedirectToAction("Circles");
-                }
-
             }
 
-            return View();
         }
 
         public ActionResult Circles()
@@ -212,6 +203,7 @@ namespace ElectionProject.Controllers
             }
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
+            if (user == null) return RedirectToAction("Index", "Home");
 
             // To Make sure that he has rested the password after the first login
             if (user.first_login) return RedirectToAction("ResetPassword");
@@ -236,10 +228,11 @@ namespace ElectionProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
 
-            // To Make sure that he has rested the password after the first login
+            // Ensure the user has reset their password after the first login
             if (user.first_login) return RedirectToAction("ResetPassword");
 
             var userDistrict = user.district_id;
@@ -248,11 +241,30 @@ namespace ElectionProject.Controllers
                 .Include(list => list.candidates)  // Assuming 'candidates' is the navigation property
                 .ToList();
 
+            // Image paths array
+            string[] imgs =
+            {
+        "~/img/Archaeological-Sites-In-Jordan-1.jpg",
+        "~/img/ec36e1e53da7b48f126d9d49a0e43681.jpg",
+        "~/img/2017_09_14_12_56_41.jpg",
+        "~/img/jarash1.jpg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+        "~/img/undraw_profile.svg",
+    };
 
+            ViewBag.Images = imgs;
 
             return View(electionList);
-
         }
+
 
 
         [HttpPost]
@@ -265,6 +277,7 @@ namespace ElectionProject.Controllers
 
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
+            if (user == null) return RedirectToAction("Index", "Home");
 
             // To Make sure that he has rested the password after the first login
             if (user.first_login) return RedirectToAction("ResetPassword");
@@ -291,6 +304,7 @@ namespace ElectionProject.Controllers
             }
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
+            if (user == null) return RedirectToAction("Index", "Home");
 
             // To Make sure that he has rested the password after the first login
             if (user.first_login) return RedirectToAction("ResetPassword");
@@ -320,6 +334,7 @@ namespace ElectionProject.Controllers
             }
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
+            if (user == null) return RedirectToAction("Index", "Home");
 
             // To Make sure that he has rested the password after the first login
             if (user.first_login) return RedirectToAction("ResetPassword");
@@ -336,7 +351,7 @@ namespace ElectionProject.Controllers
 
         }
 
-        public ActionResult PartySaveVote(int election_list_id)
+        public ActionResult PartySaveVote(int? election_list_id)
         {
             if (Session["National_ID"] == null)
             {
@@ -344,6 +359,8 @@ namespace ElectionProject.Controllers
             }
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
+            if (user == null) return RedirectToAction("Index", "Home");
+
 
             // To Make sure that he has rested the password after the first login
             if (user.first_login) return RedirectToAction("ResetPassword");
@@ -351,9 +368,12 @@ namespace ElectionProject.Controllers
             user.has_party_voted = true;
             db.voter_user.AddOrUpdate(user);
 
-            var c = db.election_list.Find((election_list_id));
-            c.vote_count = c.vote_count + 1;
-            db.Entry(c).State = EntityState.Modified;
+            var c = db.election_list.FirstOrDefault(list => list.id == election_list_id);
+            if (c != null)
+            {
+                c.vote_count++;
+                db.Entry(c).State = EntityState.Modified;
+            }
             db.SaveChanges();
 
 

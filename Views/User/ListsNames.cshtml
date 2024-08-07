@@ -2,28 +2,64 @@
 @{
     ViewBag.Title = "ListsNames";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    string[] imgs = ViewBag.Images as string[];
 }
+
+<style>
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .image-item {
+        margin: 10px;
+        flex: 1 1 22%; /* Adjust this to change the number of cards per row */
+        max-width: 22%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        border-radius: 1rem;
+    }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 1rem 1rem 0 0;
+        }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+</style>
 
 <h2 style="text-align: center; font-family: cairo; margin-top: 1em;">ListsNames</h2>
 
 <div class="container mt-5">
-    <h1 style="text-align: center; font-family: cairo;">الرجاء اختيار القائمة المراد التصويت لها</h1>
+    <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار القائمة المراد التصويت لها</h3>
 
     @using (Html.BeginForm("SingleList", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div class="row justify-content-center">
+        <div class="row">
+            @{ int i = -1; }
             @foreach (var lists in Model)
             {
-                <div class="col-md-3 my-2">
-                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                        <img src="~/img/petra.png" class="card-img-top" alt="Card image for @Html.DisplayFor(model => lists.name)">
+                { i += 1; }
+                <div class="col-sm-12 col-md-6 col-lg-3 my-2 image-item">
+                    <div class="card shadow-2-strong">
+                        <img src="@Url.Content(imgs[i % imgs.Length])" class="card-img-top" alt="Card image for @Html.DisplayFor(model => lists.name)">
                         <div class="card-body text-center">
                             <h5 class="card-title" style="font-family: cairo;">@Html.DisplayFor(model => lists.name)</h5>
-                            <p class="card-text" style="font-family: cairo;">Description for @Html.DisplayFor(model => lists.name).</p>
-                            <ul class="list-unstyled" style="font-family: cairo;">
+                            <p class="card-text" style="font-family: cairo;">@Html.DisplayFor(model => lists.name).</p>
+                            <ul class="list-group" style="font-family: cairo; flex-grow:1;">
                                 @foreach (var c in lists.candidates)
                                 {
-                                    <li>@c.voter_user.name</li>
+                                    <li class="list-group-item">@c.voter_user.name</li>
                                 }
                             </ul>
                             <div style="text-align: center;">
@@ -35,7 +71,7 @@
             }
         </div>
         <div class="text-center mt-4">
-            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
+            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت لان</button>
             @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
         </div>
     }

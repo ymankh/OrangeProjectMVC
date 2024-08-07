@@ -2,21 +2,71 @@
 @{
     ViewBag.Title = "PartyListsNames";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    string[] imgs =
+            {
+                "~/img/Archaeological-Sites-In-Jordan-1.jpg",
+                "~/img/ec36e1e53da7b48f126d9d49a0e43681.jpg",
+                "~/img/2017_09_14_12_56_41.jpg",
+                "~/img/jarash1.jpg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+            };
 }
 
-<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">PartyListsNames</h2>
+<style>
+    .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .image-item {
+        margin: 10px;
+        flex: 1 1 22%; /* Adjust this to change the number of cards per row */
+        max-width: 22%;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        border-radius: 1rem;
+    }
+
+        .card img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 1rem 1rem 0 0;
+        }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+</style>
 
 <div class="container mt-5">
-    <h1 style="text-align: center; font-family: cairo;">الرجاء اختيار القوائم المراد التصويت لها</h1>
+    <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار القوائم المراد التصويت لها</h3>
 
     @using (Html.BeginForm("PartySaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div class="row justify-content-center">
+        <div class="row justify-content-center image-gallery">
+            @{ int i = -1;}
             @foreach (var list in Model)
             {
-                <div class="col-md-3 my-2">
-                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="@Html.DisplayFor(model => list.name)">
+                { i += 1; }
+                <div class="col-md-3 my-2 image-item">
+                    <div class="card shadow-2-strong">
+                        <img src="@Url.Content(imgs[i])" class="card-img-top" alt="@Html.DisplayFor(model => list.name)">
                         <div class="card-body text-center">
                             <h5 class="card-title" style="font-family: cairo;">@Html.DisplayFor(model => list.name)</h5>
                             <p class="card-text" style="font-family: cairo;">Description for @Html.DisplayFor(model => list.name).</p>
@@ -27,9 +77,8 @@
             }
         </div>
         <div class="text-center mt-4">
-            <button  type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
+            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
             @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
         </div>
     }
-    
 </div>
