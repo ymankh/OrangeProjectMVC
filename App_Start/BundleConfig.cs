@@ -38,9 +38,7 @@ namespace OrangeProjectMVC
                 "~/Scripts/vendor/bootstrap/js/bootstrap.bundle.min.js",
                 "~/Scripts/vendor/jquery-easing/jquery.easing.min.js",
                 "~/Scripts/js/sb-admin-2.min.js",
-                "~/Scripts/vendor/chart.js/Chart.min.js",
-                "~/Scripts/js/demo/chart-area-demo.js",
-                "~/Scripts/js/demo/chart-pie-demo.js"));
+                "~/Scripts/vendor/chart.js/Chart.min.js"));
 
 
 

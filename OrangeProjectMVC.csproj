@@ -2236,6 +2236,7 @@
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\User\SingleList.cshtml" />
     <Content Include="Views\User\VerifyCode.cshtml" />
+    <Content Include="Views\debates\ShowDebates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

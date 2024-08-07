@@ -43,10 +43,15 @@ namespace OrangeProjectMVC.Controllers
             long partyVoteCount = db.election_list.Where(list => list.type == "P").Sum(list => list.vote_count);
             long numberOfVoters = db.voter_user.Count();
 
+
+
             ViewBag.distrect_voter_count = localVoteCount;
             ViewBag.party_voter_count = partyVoteCount;
             ViewBag.number_of_lists = db.election_list.Count();
-            @ViewBag.voting_ratio = Math.Floor((Math.Max(localVoteCount, partyVoteCount) / (double)numberOfVoters) * 100);
+            ViewBag.voting_ratio = Math.Floor((Math.Max(localVoteCount, partyVoteCount) / (double)numberOfVoters) * 100);
+
+            ViewBag.womenVoters = db.voter_user.Count(voter => voter.gender == "F");
+            ViewBag.menVoters = db.voter_user.Count(voter => voter.gender == "M");
 
             return View();
         }

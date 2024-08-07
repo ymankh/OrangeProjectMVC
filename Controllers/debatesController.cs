@@ -137,6 +137,39 @@ namespace OrangeProjectMVC.App_Start
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        //show debate in home page
+        // GET: debates/ShowDebates
+        public ActionResult ShowDebates()
+        {
+            // Fetch debates with the status 'approved' and include related election lists
+            var approvedDebates = db.debates
+                .Where(d => d.status == "Accept")
+                .Include(d => d.election_list)
+                .Include(d => d.election_list1)
+                .ToList();
+
+            return View(approvedDebates);
+        }
+
+        // POST: debates/ShowDebates
+        [HttpPost]
+        public ActionResult ShowDebates(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            debate debate = db.debates.Find(id);
+
+
+            if (debate == null || debate.status != "Accept")
+            {
+                return HttpNotFound();
+            }
+
+            return View(debate);
+        }
 
         protected override void Dispose(bool disposing)
         {
