@@ -30,10 +30,10 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Index()
         {
-            //if (NotAdmin())
-            //{
-            //    return RedirectToAction("Index", "UserCycle");
-            //}
+            if (NotAdmin())
+            {
+                return RedirectToAction("Index", "UserCycle");
+            }
 
             ViewBag.irbidFirstVoteCount = FindDistrectVotersCount(1);
             ViewBag.irbidSecondVoteCount = FindDistrectVotersCount(2);
