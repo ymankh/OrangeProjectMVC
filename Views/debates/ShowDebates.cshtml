@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<h2 class="text-center">المناظرات المتاحة </h2>
+<h2 class="text-center">قائمة المناظرات  </h2>
 
 
 <div class="container">
+    <a class="btn btn-primary my-4" href="@Url.Action("Create", "debates")">طلب مناظرة</a>
     <div class="row">
         @foreach (var debate in Model)
         {
@@ -16,18 +17,18 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title"><strong>العنوان</strong>@debate.topic</h5>
-                            <p class="card-text"><strong>القائمة الاولى:</strong> @debate.election_list.name</p>
-                        <p class="card-text"><strong>القائمة الثانية:</strong> @debate.election_list1.name</p>
-                            <p class="card-text"><strong>التفاصيل:</strong> @debate.details</p>
-                        <p class="card-text"><strong>موعد المناظرة:</strong> @debate.debate_date</p>
+                        <p class="card-text"><strong>القائمة الاولى: </strong> @debate.election_list.name</p>
+                        <p class="card-text"><strong>القائمة الثانية: </strong> @debate.election_list1.name</p>
+                        <p class="card-text"><strong>التفاصيل: </strong> @debate.details</p>
+                        <p class="card-text"><strong>موعد المناظرة: </strong> @debate.debate_date</p>
                         <a href="@debate.Zoom_link" target="_blank" class="btn btn-primary">رابط الزوم</a>
                     </div>
-                               
+
                 </div>
             </div>
         }
     </div>
-    </div>
+</div>
 
 
 

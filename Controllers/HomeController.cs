@@ -39,8 +39,8 @@ namespace OrangeProjectMVC.Controllers
             ViewBag.irbidSecondVoteCount = FindDistrectVotersCount(2);
             ViewBag.ajlonVoteCount = FindDistrectVotersCount(3);
 
-            long localVoteCount = db.election_list.Where(list => list.type == "L").Sum(list => list.vote_count);
-            long partyVoteCount = db.election_list.Where(list => list.type == "P").Sum(list => list.vote_count);
+            long localVoteCount = db.voter_user.Count(voter => voter.has_locally_voted);
+            long partyVoteCount = db.voter_user.Count(voter => voter.has_party_voted);
             long numberOfVoters = db.voter_user.Count();
 
 
@@ -50,8 +50,9 @@ namespace OrangeProjectMVC.Controllers
             ViewBag.number_of_lists = db.election_list.Count();
             ViewBag.voting_ratio = Math.Floor((Math.Max(localVoteCount, partyVoteCount) / (double)numberOfVoters) * 100);
 
-            ViewBag.womenVoters = db.voter_user.Count(voter => voter.gender == "F");
-            ViewBag.menVoters = db.voter_user.Count(voter => voter.gender == "M");
+            ViewBag.womenVoters = db.voter_user.
+                Count(voter => voter.gender == "F" && (voter.has_party_voted || voter.has_locally_voted));
+            ViewBag.menVoters = db.voter_user.Count(voter => voter.gender == "M" && (voter.has_party_voted || voter.has_locally_voted));
 
             return View();
         }
@@ -62,7 +63,7 @@ namespace OrangeProjectMVC.Controllers
                 Count(voter => voter.district_id == distrectId && voter.has_locally_voted);
 
             long partyVotes = db.voter_user.
-                Count(voter => voter.district_id == 3 && voter.has_party_voted);
+                Count(voter => voter.district_id == distrectId && voter.has_party_voted);
             return Math.Max(localVotes, partyVotes);
         }
 
