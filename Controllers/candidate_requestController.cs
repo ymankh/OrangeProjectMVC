@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OrangeProjectMVC.Controllers
 {
-    public class CandidateRequestController : Controller
+    public class candidate_requestController : Controller
     {
         private electionEntities db = new electionEntities();
 

@@ -264,7 +264,6 @@
     <Content Include="assets\images\video-image.jpg" />
     <Content Include="assets\images\vmh-pattern-rtl.png" />
     <Content Include="assets\images\vmh-pattern.png" />
-    <Content Include="assets\images\volunteer-image-2.png" />
     <Content Include="assets\images\volunteer-image.jpg" />
     <Content Include="assets\images\volunterr-bg.jpg" />
     <Content Include="assets\js\animate.js" />
@@ -319,6 +318,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="assets\images\volunteer-image-2.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

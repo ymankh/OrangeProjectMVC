@@ -177,6 +177,10 @@ namespace OrangeProjectMVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             election_list_request election_list_request = db.election_list_request.Find(id);
+            foreach (var candidateRequest in db.candidate_request.Where(request => request.election_list_request_id == id).ToArray())
+            {
+                db.candidate_request.Remove(candidateRequest);
+            }
             db.election_list_request.Remove(election_list_request);
             db.SaveChanges();
             return RedirectToAction("Index");

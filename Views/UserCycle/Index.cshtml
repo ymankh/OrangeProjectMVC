@@ -481,3 +481,17 @@
     <!-- container -->
 </section>
 <!--News Section ======================-->
+
+@if (Session["SwalMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: "@Session["SwalMessage"]",
+            icon: "question",
+            iconHtml: "!",
+            confirmButtonText: "الخروج",
+            showCloseButton: true
+        });
+    </script>
+    { Session["SwalMessage"] = null; }
+}

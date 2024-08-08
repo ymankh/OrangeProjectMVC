@@ -22,12 +22,14 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult LocalList()
         {
+            //Session["Message"] = "هذه تجربة لميزة الرسائل";
             var distrects = db.districts.ToList();
             return View(distrects);
         }
 
         public ActionResult SingleLocalList(int? id)
         {
+
             var distrect = db.districts.Find(id);
             ViewBag.competitive_seat = distrect.competitive_seat;
             ViewBag.women_seats = distrect.women_seats;
@@ -38,8 +40,9 @@ namespace OrangeProjectMVC.Controllers
         [HttpPost]
         public ActionResult SingleLocalList(int? id, string list_name, string[] competitive_seats, string women_seat, string christian_seat)
         {
+
             id = Convert.ToInt32(Session["Distinctid"].ToString());
-            //var x1 = UrlParameter.Optional;
+
             var distrect = db.districts.Find(id);
             var newList = new election_list_request();
             newList.district_id = id;
@@ -52,6 +55,11 @@ namespace OrangeProjectMVC.Controllers
             foreach (string nationalId in competitive_seats)
             {
                 var canedet_user = db.voter_user.FirstOrDefault(user => user.national_id == nationalId);
+                if (canedet_user == null)
+                {
+                    Session["Message"] = "تاكد من ادخال ارقام وطنية صحيحة وحاول مرة اخرى.";
+                    return RedirectToAction("SingleLocalList", new { id });
+                }
                 var canedet = new candidate_request();
                 canedet.user_id = canedet_user.id;
                 canedet.election_list_request_id = savedLsit.id;
@@ -62,22 +70,40 @@ namespace OrangeProjectMVC.Controllers
             if (!String.IsNullOrEmpty(women_seat))
             {
                 var canedet_user = db.voter_user.FirstOrDefault(user => user.national_id == women_seat);
-                var canedet = new candidate_request();
-                canedet.user_id = canedet_user.id;
-                canedet.election_list_request_id = savedLsit.id;
-                canedet.type_of_chair = "W";
-                db.candidate_request.Add(canedet);
+                if (canedet_user != null && canedet_user.gender == "F")
+                {
+                    var canedet = new candidate_request();
+                    canedet.user_id = canedet_user.id;
+                    canedet.election_list_request_id = savedLsit.id;
+                    canedet.type_of_chair = "W";
+                    db.candidate_request.Add(canedet);
+
+                }
+                else
+                {
+                    Session["Message"] = "يجب ادخال سيدة في مقعد الكوتة";
+                    return RedirectToAction("SingleLocalList", new { id = id });
+                }
             }
             if (!String.IsNullOrEmpty(christian_seat))
             {
                 var canedet_user = db.voter_user.FirstOrDefault(user => user.national_id == christian_seat);
-                var canedet = new candidate_request();
-                canedet.user_id = canedet_user.id;
-                canedet.election_list_request_id = savedLsit.id;
-                canedet.type_of_chair = "H";
-                db.candidate_request.Add(canedet);
+                if (canedet_user != null && canedet_user.religion == "Christian")
+                {
+                    var canedet = new candidate_request();
+                    canedet.user_id = canedet_user.id;
+                    canedet.election_list_request_id = savedLsit.id;
+                    canedet.type_of_chair = "H";
+                    db.candidate_request.Add(canedet);
+                }
+                else
+                {
+                    Session["Message"] = "يجب ادخال مسيحي في المقعد المسيحي";
+                    return RedirectToAction("SingleLocalList", new { id = id });
+                }
             }
             db.SaveChanges();
+            Session["SwalMessage"] = "شكرا لقد تم استلام طلبك بنجاح";
             return RedirectToAction("Index", "UserCycle");
 
         }
@@ -107,6 +133,7 @@ namespace OrangeProjectMVC.Controllers
                 }
                 db.SaveChanges();
                 Session["PreviousSearches"] = null;
+                Session["SwalMessage"] = "شكرا لقد تم استلام طلبك بنجاح";
             }
             return RedirectToAction("Index", "UserCycle");
         }
