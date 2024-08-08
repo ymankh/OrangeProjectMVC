@@ -15,13 +15,12 @@ namespace OrangeProjectMVC.Controllers
             return View();
         }
 
-
-
         public ActionResult contact()
         {
             ViewBag.Message = "Your application description page.";
             return View();
         }
+
         public ActionResult about()
         {
             ViewBag.Message = "Your application description page.";

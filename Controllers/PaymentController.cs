@@ -165,15 +165,15 @@ namespace OrangeProjectMVC.Controllers
                         if (executedPayment.state == "approved")
                         {
                             // Save transaction to database
-                            using (var db = new electionEntities())
+                            using (var db = new electionEntities1())
                             {
-                                var transaction = new Transaction
+                                var transaction = new transaction
                                 {
                                     status = executedPayment.state,
                                     amount = Convert.ToDecimal(executedPayment.transactions[0].amount.total),
                                     paypal_transaction_id = executedPayment.id // Save the PayPal transaction ID
                                 };
-                                db.Transactions.Add(transaction);
+                                db.transactions.Add(transaction);
                                 db.SaveChanges();
                             }
 
@@ -212,5 +212,3 @@ namespace OrangeProjectMVC.Controllers
         }
     }
 }
-
-
