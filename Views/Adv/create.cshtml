@@ -33,7 +33,7 @@
         </div>
     </div>
 </section>
-<a href="@Url.Action("advertismentst", "UserCycle")" class="btn btn-primary" style="margin-bottom:1.5em;">عرض إعلانات المرشحين</a>
+<a href="@Url.Action("advertismentst", "UserCycle")" class="btn btn-primary">إعلانات المرشحين</a>
 
 <section class="section-advertisement ad-3 bg-custom-light pt-60 pt-lg-100 pt-xxl-120 pb-40 pb-lg-80 pb-xxl-100 rtl">
     <div class="container formcontainer">
@@ -57,33 +57,3 @@
         }
     </div>
 </section>
-
-@section scripts {
-    <script>
-        document.getElementById('advertisementForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            var form = this;
-
-            // Use AJAX to submit the form
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', form.action, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-            // Set up the request
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // Redirect to the payment page
-                    window.location.href = '@Url.Action("Index", "Payment")';
-                }
-            };
-
-            // Serialize the form data
-            var formData = new FormData(form);
-            var urlEncodedData = new URLSearchParams(formData).toString();
-
-            // Send the request with the form data
-            xhr.send(urlEncodedData);
-        });
-    </script>
-}

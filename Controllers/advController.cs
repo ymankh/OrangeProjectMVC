@@ -30,7 +30,7 @@ namespace OrangeProjectMVC.Controllers
 
                 db.Ads.Add(ad);
                 db.SaveChanges();
-                return RedirectToAction("Create"); // Redirect to an appropriate page
+                return RedirectToAction("Index", "Payment"); // Redirect to payment page after saving ad
             }
 
             return View(model);
