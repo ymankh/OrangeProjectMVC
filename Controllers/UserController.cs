@@ -311,12 +311,13 @@ namespace OrangeProjectMVC.Controllers
 
             user.has_locally_voted = true;
             db.voter_user.AddOrUpdate(user);
-            foreach (var candidate in candidates)
-            {
-                var c = db.candidates.Find(Convert.ToInt32(candidate));
-                c.vote_count = c.vote_count + 1;
-                db.candidates.AddOrUpdate(c);
-            }
+            if (candidates != null)
+                foreach (var candidate in candidates)
+                {
+                    var c = db.candidates.Find(Convert.ToInt32(candidate));
+                    c.vote_count = c.vote_count + 1;
+                    db.candidates.AddOrUpdate(c);
+                }
             var election_list_id = (int)Session["election_list_id"];
             var election_list = db.election_list.Find(election_list_id);
             election_list.vote_count += 1;

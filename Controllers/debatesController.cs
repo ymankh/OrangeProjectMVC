@@ -60,7 +60,8 @@ namespace OrangeProjectMVC.App_Start
                 debate.status = "Pending";
                 db.debates.Add(debate);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Session["SwalMessage"] = "شكرا لقد تم استلام طلبك بنجاح";
+                return RedirectToAction("Index", "UserCycle");
             }
 
             ViewBag.first_list = new SelectList(db.election_list, "id", "name", debate.first_list);

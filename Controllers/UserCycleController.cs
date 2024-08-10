@@ -30,7 +30,7 @@ namespace OrangeProjectMVC.Controllers
         public ActionResult advertismentst()
         {
             ViewBag.Message = "Your application description page.";
-            var ads = db.Ads.Where(ad => ad.status == "Accepted").ToList();
+            var ads = db.Ads.Where(ad => ad.status == "Active").ToList();
             return View(ads);
         }
     }
