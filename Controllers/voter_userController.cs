@@ -227,7 +227,7 @@ namespace OrangeProjectMVC.Controllers
                 LocallyVoted = Request.QueryString["locallyVoted"] == "on",
                 PartyVoted = Request.QueryString["partyVoted"] == "on"
             };
-            var voters = db.voter_user.Include(v => v.district).AsQueryable(); // Assuming you have a Voters DbSet in your DbContext
+            var voters = db.voter_user.Include(v => v.district); // Assuming you have a Voters DbSet in your DbContext
 
             if (!string.IsNullOrEmpty(filter.NationalId))
             {

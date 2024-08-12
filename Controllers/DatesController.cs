@@ -73,7 +73,7 @@ namespace OrangeProjectMVC.Controllers
             if (!ModelState.IsValid) return View(date);
             db.Entry(date).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Dates/Delete/5
