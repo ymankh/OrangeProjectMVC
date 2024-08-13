@@ -10,7 +10,7 @@
     <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار المرشح الذي تريد التصويت له</h3>
     <p style="text-align: center; font-family: cairo;">يمكنك التصويت لأكثر من اسم</p>
 
-    @using (Html.BeginForm("SaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("SaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "VoteForm" }))
     {
         <div class="row justify-content-center">
             <div class="col-md-6 my-2">
@@ -33,8 +33,31 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
+            <button type="submit" class="btn " style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
             @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
         </div>
     }
 </div>
+
+
+@section Scripts {
+    <script>
+        document
+            .getElementById("VoteForm")
+            .addEventListener("submit", (form) => {
+                form.preventDefault();
+                Swal.fire({
+                    title:
+                        "لم تقم باختيار اي قائمة وبذلك سيتم تسليم صوتك فارغا! هل تريد الاستمرار؟",
+                    icon: "question",
+                    iconHtml: "؟",
+                    confirmButtonText: "استمر",
+                    cancelButtonText: "عودة الى القائمة",
+                    showCancelButton: true,
+                    showCloseButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) form.target.submit();
+                });
+            });
+    </script>
+}
