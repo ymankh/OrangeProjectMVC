@@ -244,21 +244,21 @@ namespace OrangeProjectMVC.Controllers
             // Image paths array
             string[] imgs =
             {
-        "~/img/Archaeological-Sites-In-Jordan-1.jpg",
-        "~/img/ec36e1e53da7b48f126d9d49a0e43681.jpg",
-        "~/img/2017_09_14_12_56_41.jpg",
-        "~/img/jarash1.jpg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-        "~/img/undraw_profile.svg",
-    };
+                "~/img/Archaeological-Sites-In-Jordan-1.jpg",
+                "~/img/ec36e1e53da7b48f126d9d49a0e43681.jpg",
+                "~/img/2017_09_14_12_56_41.jpg",
+                "~/img/jarash1.jpg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+                "~/img/undraw_profile.svg",
+            };
 
             ViewBag.Images = imgs;
 
