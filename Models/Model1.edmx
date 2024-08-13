@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="electionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="electionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Ad">
           <Key>
             <PropertyRef Name="id" />
@@ -317,7 +317,8 @@
             <End Role="voter_user" EntitySet="voter_user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="electionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -350,10 +351,10 @@
           <Property Name="type_of_chair" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="vote_count" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="election_list" Relationship="Self.candidate_election_list_id_foreign" FromRole="candidate" ToRole="election_list" />
-          <NavigationProperty Name="voter_user" Relationship="Self.candidate_user_id_foreign" FromRole="candidate" ToRole="voter_user" />
           <Property Name="img_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="is_representative" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="election_list" Relationship="Self.candidate_election_list_id_foreign" FromRole="candidate" ToRole="election_list" />
+          <NavigationProperty Name="voter_user" Relationship="Self.candidate_user_id_foreign" FromRole="candidate" ToRole="voter_user" />
         </EntityType>
         <EntityType Name="candidate_request">
           <Key>
@@ -363,10 +364,10 @@
           <Property Name="election_list_request_id" Type="Int32" Nullable="false" />
           <Property Name="type_of_chair" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="election_list_request" Relationship="Self.candidate_request_election_list_request_id_foreign" FromRole="candidate_request" ToRole="election_list_request" />
-          <NavigationProperty Name="voter_user" Relationship="Self.candidate_request_user_id_foreign" FromRole="candidate_request" ToRole="voter_user" />
           <Property Name="is_representative" Type="Boolean" Nullable="false" />
           <Property Name="img_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="election_list_request" Relationship="Self.candidate_request_election_list_request_id_foreign" FromRole="candidate_request" ToRole="election_list_request" />
+          <NavigationProperty Name="voter_user" Relationship="Self.candidate_request_user_id_foreign" FromRole="candidate_request" ToRole="voter_user" />
         </EntityType>
         <EntityType Name="contact_us">
           <Key>
@@ -429,11 +430,11 @@
           <Property Name="district_id" Type="Int32" />
           <Property Name="type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="vote_count" Type="Int32" Nullable="false" />
+          <Property Name="image_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="candidates" Relationship="Self.candidate_election_list_id_foreign" FromRole="election_list" ToRole="candidate" />
           <NavigationProperty Name="debates" Relationship="Self.debates_first_list_foreign" FromRole="election_list" ToRole="debates" />
           <NavigationProperty Name="debates1" Relationship="Self.debates_second_list_foreign" FromRole="election_list" ToRole="debates" />
           <NavigationProperty Name="district" Relationship="Self.election_list_district_id_foreign" FromRole="election_list" ToRole="district" />
-          <Property Name="image_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="election_list_request">
           <Key>
@@ -444,9 +445,9 @@
           <Property Name="district_id" Type="Int32" />
           <Property Name="type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="candidate_request" Relationship="Self.candidate_request_election_list_request_id_foreign" FromRole="election_list_request" ToRole="candidate_request" />
           <NavigationProperty Name="district" Relationship="Self.election_list_request_district_id_foreign" FromRole="election_list_request" ToRole="district" />
-          <Property Name="image_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -480,7 +481,7 @@
           <NavigationProperty Name="district" Relationship="Self.voter_user_district_id_foreign" FromRole="voter_user" ToRole="district" />
         </EntityType>
         <Association Name="ad_transaction_id_foreign">
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="0..1" />
           <End Role="Ad" Type="Self.Ad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Transactions">
@@ -683,25 +684,25 @@
           <EntitySetMapping Name="candidates">
             <EntityTypeMapping TypeName="electionModel.candidate">
               <MappingFragment StoreEntitySet="candidate">
-                <ScalarProperty Name="is_representative" ColumnName="is_representative" />
-                <ScalarProperty Name="img_url" ColumnName="img_url" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="election_list_id" ColumnName="election_list_id" />
                 <ScalarProperty Name="type_of_chair" ColumnName="type_of_chair" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="vote_count" ColumnName="vote_count" />
+                <ScalarProperty Name="img_url" ColumnName="img_url" />
+                <ScalarProperty Name="is_representative" ColumnName="is_representative" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="candidate_request">
             <EntityTypeMapping TypeName="electionModel.candidate_request">
               <MappingFragment StoreEntitySet="candidate_request">
-                <ScalarProperty Name="img_url" ColumnName="img_url" />
-                <ScalarProperty Name="is_representative" ColumnName="is_representative" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="election_list_request_id" ColumnName="election_list_request_id" />
                 <ScalarProperty Name="type_of_chair" ColumnName="type_of_chair" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="is_representative" ColumnName="is_representative" />
+                <ScalarProperty Name="img_url" ColumnName="img_url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -759,24 +760,24 @@
           <EntitySetMapping Name="election_list">
             <EntityTypeMapping TypeName="electionModel.election_list">
               <MappingFragment StoreEntitySet="election_list">
-                <ScalarProperty Name="image_url" ColumnName="image_url" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="district_id" ColumnName="district_id" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="vote_count" ColumnName="vote_count" />
+                <ScalarProperty Name="image_url" ColumnName="image_url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="election_list_request">
             <EntityTypeMapping TypeName="electionModel.election_list_request">
               <MappingFragment StoreEntitySet="election_list_request">
-                <ScalarProperty Name="image_url" ColumnName="image_url" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="district_id" ColumnName="district_id" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="image_url" ColumnName="image_url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
