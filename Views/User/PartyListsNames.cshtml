@@ -84,9 +84,13 @@
 
 @section Scripts {
     <script>
-        document
-            .getElementById("PartySaveVoteForm")
+        let form = document
+            .getElementById("PartySaveVoteForm");
+        form
             .addEventListener("submit", (form) => {
+                let formData = new FormData(form.target);
+                if (formData.get("election_list_id"))
+                    return
                 form.preventDefault();
                 Swal.fire({
                     title:
