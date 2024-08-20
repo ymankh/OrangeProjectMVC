@@ -14,17 +14,92 @@ namespace OrangeProjectMVC.Controllers
         // GET: User
         electionEntities db = new electionEntities();
 
-        public ActionResult Login()
+        public ActionResult Login(bool isResend = false)
         {
-            if (Session["National_ID"] == null)
-                return View();
-            return RedirectToAction("Index", "Home");
+            // If the user is already logged in, redirect them to the home page.
+            if (Session["National_ID"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Handle resend verification code scenario
+            if (isResend)
+            {
+                if (Session["tempNational_ID"] != null)
+                {
+                    string national_id = Session["tempNational_ID"].ToString();
+                    var user = db.voter_user.FirstOrDefault(u => u.national_id == national_id);
+
+                    if (user != null)
+                    {
+                        // Generate and send verification code
+                        Random random = new Random();
+                        int randomCode = random.Next(100000, 1000000);
+                        Session["ConfCode"] = randomCode.ToString();
+
+                        // Email settings
+                        string fromEmail = "techlearnhub.contact@gmail.com";
+                        string toEmail = "mohammaddfawareh@gmail.com";
+                        string subjectText = "Your Confirmation Code";
+                        string messageText = $"Your confirmation code is {randomCode}";
+
+                        string smtpServer = "smtp.gmail.com";
+                        int smtpPort = 587;
+                        string smtpUsername = "techlearnhub.contact@gmail.com";
+                        string smtpPassword = "lyrlogeztsxclank";
+
+                        // Send the email
+                        using (MailMessage mailMessage = new MailMessage())
+                        {
+                            mailMessage.From = new MailAddress(fromEmail);
+                            mailMessage.To.Add(toEmail);
+                            mailMessage.Subject = subjectText;
+                            mailMessage.Body = messageText;
+                            mailMessage.IsBodyHtml = false;
+
+                            using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+                            {
+                                smtpClient.UseDefaultCredentials = false;
+                                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                                smtpClient.EnableSsl = true;
+
+                                smtpClient.Send(mailMessage);
+
+                                ViewBag.Emailsent = "The code has been resent to your Email";
+                                return RedirectToAction("VerifyCode");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Handle case where user is not found
+                        ViewBag.Msg = "User not found.";
+                        return View();
+                    }
+                }
+                else
+                {
+                    // If tempNational_ID is null, redirect to login or show an error
+                    ViewBag.Msg = "Your session has expired. Please log in again.";
+                    return View();
+                }
+            }
+
+            // Just render the login page if not resending a code
+            return View();
         }
+
         [HttpPost]
         public ActionResult Login(string national_id)
         {
-
             var user = db.voter_user.FirstOrDefault(u => u.national_id == national_id);
+
+            if (user == null)
+            {
+                ViewBag.Msg = "الرقم الوطني غير صحيح";
+                return View();
+            }
+
             if (user != null && user.first_login == true)
             {
                 // Generate and send verification code
@@ -32,12 +107,10 @@ namespace OrangeProjectMVC.Controllers
                 int randomCode = random.Next(100000, 1000000);
                 Session["ConfCode"] = randomCode.ToString();
 
-
                 // Email settings
                 string fromEmail = "techlearnhub.contact@gmail.com";
-                // This is for testing. for production comment the nect line and uncomment the one after.
-                string toEmail = "mohammaddfawareh@gmail.com";
-                //string toEmail = user.email;
+                string toEmail = "mohammaddfawareh@gmail.com";  // For testing
+                                                                // string toEmail = user.email;  // For production
 
                 string subjectText = "Your Confirmation Code";
                 string messageText = $"Your confirmation code is {randomCode}";
@@ -72,7 +145,6 @@ namespace OrangeProjectMVC.Controllers
                     }
                 }
             }
-
             else if (user.first_login == false)
             {
                 return RedirectToAction("LoginWithPassword");
@@ -111,6 +183,7 @@ namespace OrangeProjectMVC.Controllers
             }
 
             ModelState.AddModelError("", "Invalid verification code.");
+            ViewBag.Msg = "رقم التحقق غير صحيح";
             return View();
         }
 
@@ -142,6 +215,8 @@ namespace OrangeProjectMVC.Controllers
             }
 
             ModelState.AddModelError("", "Passwords do not match.");
+
+            ViewBag.Msg = "كلمات المرور غير متطابقة";
             return View();
         }
 
@@ -162,7 +237,13 @@ namespace OrangeProjectMVC.Controllers
             var user = db.voter_user.FirstOrDefault(u => u.national_id == newUser.national_id && u.password == newUser.password);
 
 
-            if (user == null) return View();
+            if (user == null)
+            {
+                ViewBag.Msg = "كلمة المرور او الرقم الوطني غير صحيح";
+
+                return View();
+
+            }
             switch (user.district_id)
             {
                 case 3:
