@@ -2271,7 +2271,6 @@
     <Content Include="Views\election_list\Edit.cshtml" />
     <Content Include="Views\election_list\Delete.cshtml" />
     <Content Include="Views\election_list\Details.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
