@@ -141,6 +141,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\reqistListController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserCycleController.cs" />
     <Compile Include="Controllers\voter_userController.cs" />
@@ -2271,6 +2272,7 @@
     <Content Include="Views\election_list\Edit.cshtml" />
     <Content Include="Views\election_list\Delete.cshtml" />
     <Content Include="Views\election_list\Details.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
