@@ -6,6 +6,11 @@
 <style>
     a.btn.btn-primary {
         margin-right: 50%;
+        margin-bottom:5%;
+
+    }
+    .container.formcontainer {
+        width: 50%;
     }
 </style>
 <section class="section-advertisement ad-2 py-60 py-lg-100 py-xxl-120">
@@ -38,20 +43,20 @@
 <section class="section-advertisement ad-3 bg-custom-light pt-60 pt-lg-100 pt-xxl-120 pb-40 pb-lg-80 pb-xxl-100 rtl">
     <div class="container formcontainer">
         <h2 class="mb-30 mb-lg-40 text-lg-center wow fadeInUp" style="font-family:cairo;">إنشاء إعلانك الانتخابي</h2>
-        @using (Html.BeginForm("Create", "Adv", FormMethod.Post, new { id = "advertisementForm" }))
+        @using (Html.BeginForm("Create", "Adv", FormMethod.Post, new { id = "advertisementForm", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="col-12">
-                <label for="InputImageURL" class="form-label">رابط صورة الإعلان</label>
-                <input type="text" class="form-control" id="InputImageURL" name="img_url" required="">
+                <label for="InputImage" class="form-label">صورة الإعلان</label>
+                <input type="file" class="form-control" id="InputImage" name="ImageFile" required="">
             </div>
             <div class="col-12">
                 <label for="InputDescription" class="form-label">وصف الإعلان</label>
                 <textarea class="form-control" id="InputDescription" name="description" rows="6" required=""></textarea>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary" style="margin-top:8px;">أرسل الإعلان</button>
+                <button style="font-family:cairo; margin-top:10px;" type="submit" class="btn btn-primary" style="margin-top:8px;">أرسل الإعلان</button>
             </div>
             <div class="response py-1"></div>
         }
