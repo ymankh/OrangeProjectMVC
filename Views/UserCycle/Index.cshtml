@@ -29,14 +29,7 @@
                 <div class="col-lg-5 col-xxl-6 wow slideInRight" data-wow-duration="1.5s">
                     <div class="about-image position-relative">
                         <img src="~/assets/images/about-image-2.jpg" class="img-fluid" alt="about-image-2">
-                        <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-5">
-                            <span class="video-icon">
-                                <svg width="40" height="50" viewBox="0 0 33 41" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="20.5" cy="20.5" r="20.5" fill="white" />
-                                    <polygon points="12,8 26,20.5 12,33" fill="#D10024" />
-                                </svg>
-                            </span>
-                        </a>
+                        
 
                     </div>
                 </div>
@@ -106,11 +99,7 @@
                 <div class="col-lg-7">
                     <div class="politixy-image gallery-image-style-2 position-relative active wow fadeInRight">
                         <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-4.jpg")" class="img-fluid" alt="gallery-4">
-                        <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-1">
-                            <span class="video-icon">
-                                <svg width="20" height="24"><use xlink:href="#video-icon"></use></svg>
-                            </span>
-                        </a>
+                        
                     </div>
                     <!-- politixy-image -->
                 </div>
@@ -123,6 +112,112 @@
     <!-- container -->
 </section>
 <!--Gallery Section ======================-->
+@* Vision Section ====================== *@
+<section class="section-vison vison-1 bg-custom-light py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+        <div class="d-flex flex-column gap-40">
+            <div class="row">
+                <div class="col-lg-9 offset-lg-2 text-lg-center">
+                    <div class="contents-width">
+                        <div class="d-flex flex-column gap-3 wow slideInUp">
+                          
+                            <h2 style="font-family:cairo; text-align:right" class="mb-0">نحو مشاركة فعّالة</h2>
+                            <br />
+                            <p style="text-align:right" class="mb-0">
+                                إلى جانب الانتخابات النيابية، يسعى موقعنا إلى تقديم مجموعة متنوعة من الخدمات التي تشمل تسهيل العملية الانتخابية في الجامعات والبلديات والنقابات. نحن نؤمن بأن تعزيز الشفافية والديمقراطية في جميع مستويات المجتمع أمر حيوي لتحقيق مستقبل مشرق ومستدام للجميع.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- contents-width -->
+                </div>
+                <!-- col-8 -->
+            </div>
+            <!-- row -->
+
+            <div class="row g-30">
+                <!-- First Card: University Elections -->
+                <div class="col-lg-4">
+                    <div class="card card-style-2 wow fadeInUp" data-wow-delay=".2s" data-wow-duration="1.2s">
+                        <div class="card-image-wrapper">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/university-elections.jpg")" class="card-img-top" alt="university-elections">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <svg width="46" height="40"><use xlink:href="#election-icon"></use></svg>
+                            <div class="d-flex flex-column gap-10">
+                                <h5 class="card-title fw-semibold">
+                                    <a href="@Url.Action("UniversityElections", "News")" class="text-decoration-none stretched-link link-hover-animation-1">انتخابات جامعية</a>
+                                </h5>
+                                <p class="card-text">الانتخابات الجامعية هي فرصة للطلاب للمشاركة في صنع القرار في الحرم الجامعي وتعزيز التجربة الديمقراطية في المجتمع الأكاديمي.</p>
+                            </div>
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-4 -->
+                <!-- Second Card: Municipal Elections in Jordan -->
+                <div class="col-lg-4">
+                    <div class="card card-style-2 wow fadeInUp" data-wow-delay=".4s" data-wow-duration="1.2s">
+                        <div class="card-image-wrapper">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/municipal-elections.jpg")" class="card-img-top" alt="municipal-elections">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <svg width="46" height="40"><use xlink:href="#election-icon"></use></svg>
+                            <div class="d-flex flex-column gap-10">
+                                <h5 class="card-title fw-semibold">
+                                    <a href="@Url.Action("MunicipalElections", "News")" class="text-decoration-none stretched-link link-hover-animation-1">انتخابات بلدية في الأردن</a>
+                                </h5>
+                                <p class="card-text">انتخابات البلديات في الأردن هي عملية ديمقراطية تهدف إلى اختيار ممثلين محليين لتحسين الخدمات والبنية التحتية في المناطق المحلية.</p>
+                            </div>
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-4 -->
+                <!-- Third Card: Syndicate Elections in Jordan -->
+                <div class="col-lg-4">
+                    <div class="card card-style-2 wow fadeInUp" data-wow-delay=".6s" data-wow-duration="1.2s">
+                        <div class="card-image-wrapper">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/syndicate-elections.jpg")" class="card-img-top" alt="syndicate-elections">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <svg width="46" height="40"><use xlink:href="#election-icon"></use></svg>
+                            <div class="d-flex flex-column gap-10">
+                                <h5 class="card-title fw-semibold">
+                                    <a href="@Url.Action("SyndicateElections", "News")" class="text-decoration-none stretched-link link-hover-animation-1">انتخابات النقابة في الأردن</a>
+                                </h5>
+                                <p class="card-text">انتخابات النقابات المهنية في الأردن تهدف إلى تعزيز حقوق ومصالح العاملين في مختلف المهن من خلال اختيار قيادات نقابية فعالة.</p>
+                            </div>
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-4 -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- d-flex -->
+    </div>
+    <!-- container -->
+</section>
+@* Vision Section ====================== *@
+
+
+
+
+
+
+
+
+
+
+
+
 <!--News Section ======================-->
 <section class="section-news news-1 py-60 py-lg-100 py-xxl-120">
     <div class="container">
