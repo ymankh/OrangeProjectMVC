@@ -1,13 +1,26 @@
 ﻿@model OrangeProjectMVC.Models.debate
 
-@{
-    ViewBag.Title = "إنشاء مناظرة";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
-}
+    @{
+        ViewBag.Title = "إنشاء مناظرة";
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
 
 <div class="container mt-5" dir="rtl">
     <h2 class="text-center text-primary mb-4">إنشاء مناظرة جديدة</h2>
+    <!-- Information Section -->
+    <div class="mb-4 p-4  rounded">
+        <h4 class="text-right">معلومات عن كيفية طلب مناظرة</h4>
+        <p class="text-right">لإتمام طلب المناظرة بنجاح، يرجى اتباع التعليمات التالية:</p>
+        <ul class="text-right">
+            <li>تأكد من تعبئة جميع الحقول المطلوبة بشكل صحيح.</li>
+            <li>اختر القوائم المناسبة للمناظرة من القوائم المتاحة.</li>
+            <li>حدد تاريخ المناظرة المرغوب فيه.</li>
+            <li>تأكد من صحة المعلومات المدخلة قبل الضغط على زر "إنشاء".</li>
+        </ul>
+        <p class="text-right">في حالة وجود أي استفسارات، يمكنك التواصل مع فريق الدعم الفني.</p>
+    </div>
 
+    <div></div>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -17,33 +30,31 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-            <div class="form-group row">
+        <div class="form-group row">
 
-
-
+            <div class="col-lg-6 order-lg-2">
+                <img src="~/assets/images/debatePic.jpg" class="img-fluid rounded wow fadeInRight" data-wow-duration="1.3s" alt="الدوائر الانتخابية والمحافظات">
+            </div>
+            <div class="col-6">
                 <div class="col">
                     @Html.LabelFor(model => model.topic, "عنوان المناظرة", htmlAttributes: new { @class = "col-form-label text-right" })
-                    @Html.TextAreaFor(model => model.topic, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @rows = 1 } })
+                    @Html.EditorFor(model => model.topic, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @rows = 1 } })
                     @Html.ValidationMessageFor(model => model.topic, "", new { @class = "text-danger" })
                 </div>
 
 
                 <div class="col">
                     @Html.LabelFor(model => model.first_list, "القائمة الاولى", htmlAttributes: new { @class = "col-form-label text-right" })
-                    @Html.DropDownList("first_list", null, "النشامى", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("first_list", null, "القائمة الاولى", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.first_list, "", new { @class = "text-danger" })
                 </div>
 
 
                 <div class="col">
                     @Html.LabelFor(model => model.second_list, "القائمة الثانية", htmlAttributes: new { @class = "col-form-label text-right" })
-                    @Html.DropDownList("second_list", null, "القدس", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("second_list", null, "القائمة الاولى", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.second_list, "", new { @class = "text-danger" })
                 </div>
-
-
-
-
 
 
                 <div class="col">
@@ -58,9 +69,12 @@
                 </div>
             </div>
         </div>
+        </div>
     }
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
