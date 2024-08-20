@@ -18,6 +18,12 @@
             @Html.DisplayNameFor(model => model.vote_count)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.img_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_representative)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.election_list.name)
         </th>
         <th>
@@ -34,6 +40,23 @@
         <td>
             @Html.DisplayFor(modelItem => item.vote_count)
         </td>
+       
+        @if (!string.IsNullOrEmpty(item.img_url))
+        {
+            <td>
+                <img width="100" src="@Url.Content(item.img_url)" alt="Image" />
+            </td>
+        }
+        else
+        {
+            <td>
+                No image available
+            </td>
+        }
+        <td>
+        <td>
+            @Html.DisplayFor(modelItem => item.is_representative)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.election_list.name)
         </td>
@@ -41,9 +64,9 @@
             @Html.DisplayFor(modelItem => item.voter_user.national_id)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
         </td>
     </tr>
 }
