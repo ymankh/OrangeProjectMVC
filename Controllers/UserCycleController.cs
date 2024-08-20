@@ -9,7 +9,7 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: UserCycle
-        [Route("")]
+
         public ActionResult Index()
         {
             return View();
