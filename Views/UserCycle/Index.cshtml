@@ -5,7 +5,17 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <style>
-   
+    #map {
+        width: 50%; /* Adjust this as needed */
+        height: 45%; /* Adjust this as needed */
+        background-color: white; /* Set background to white */
+        margin: 20px 0; /* Add some margin for spacing */
+        border: 1px solid #ddd; /* Optional: add a border to the map */
+        margin-right:20%
+    }
+    a {
+        display: none;
+    }
     /* Ensure all custom cards have the same height */
     .custom-card {
         overflow: hidden;
@@ -36,13 +46,15 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+    .leaflet-control-zoom.leaflet-bar.leaflet-control {
+        display: none;
+    }
 
     .custom-card:hover .custom-card-body p {
         opacity: 1;
     }
 </style>
-<script src="~/Scripts/map/mapdata.js"></script>
-<script src="~/Scripts/map/countrymap.js"></script>
+
 
 <div class="page landing-page">
     <!-- About Section ====================== -->
@@ -102,9 +114,7 @@
         </div>
     </section>
 
-    <div  class="wow fadeInUp" data-wow-delay="0.1s">
-        <div id="map"></div>
-    </div>
+
 
     <!-- Gallery Section ====================== -->
     <section class="section-gallery gallery-1 py-60 py-lg-100 py-xxl-120">
@@ -631,7 +641,9 @@
         <!-- container -->
     </section>
     <!--News Section ======================-->
-
+    <div class="wow fadeInUp" data-wow-delay="0.1s">
+        <div id="map"></div>
+    </div>
 
     @if (Session["SwalMessage"] != null)
     {
@@ -646,7 +658,8 @@
         </script>
         { Session["SwalMessage"] = null; }
     }
-
+    <script src="~/Scripts/map/mapdata.js"></script>
+    <script src="~/Scripts/map/countrymap.js"></script>
     <script>
       function handleTickInit(tick) {
         var counter = Tick.count.down("@ViewBag.Date");
@@ -660,4 +673,4 @@
       }
       new WOW().init();
     </script>
-    </div>
+</div>
