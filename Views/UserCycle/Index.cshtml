@@ -3,6 +3,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+<script src="~/Scripts/map/mapdata.js"></script>
+<script src="~/Scripts/map/countrymap.js"></script>
+
+<div style=" width:700px; " class="wow fadeInUp" data-wow-delay="0.1s">
+    <div id="map"></div>
+</div>
 
 <div class="page landing-page">
     <!--About Section ======================-->
@@ -29,14 +35,7 @@
                 <div class="col-lg-5 col-xxl-6 wow slideInRight" data-wow-duration="1.5s">
                     <div class="about-image position-relative">
                         <img src="~/assets/images/about-image-2.jpg" class="img-fluid" alt="about-image-2">
-                        <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-5">
-                            <span class="video-icon">
-                                <svg width="40" height="50" viewBox="0 0 33 41" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="20.5" cy="20.5" r="20.5" fill="white" />
-                                    <polygon points="12,8 26,20.5 12,33" fill="#D10024" />
-                                </svg>
-                            </span>
-                        </a>
+
 
                     </div>
                 </div>
@@ -44,6 +43,30 @@
         </div>
     </section>
 </div>
+<section>
+    <div class="container">
+        <h2 class="mb-4"> @ViewBag.TimerTitle </h2>
+        <div class="text-ltr align-text-start" dir="ltr">
+
+            <div class="tick" data-did-init="handleTickInit">
+                <div data-repeat="true"
+                     data-layout="horizontal fit"
+                     data-transform="preset(d, h, m, s) -> delay">
+                    <div class="tick-group">
+                        <div data-key="value"
+                             data-repeat="true"
+                             data-transform="pad(00) -> split -> delay">
+                            <span data-view="flip"></span>
+                        </div>
+
+                        <span data-key="label" data-view="text" class="tick-label"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <!--Gallery Section ======================-->
@@ -106,11 +129,7 @@
                 <div class="col-lg-7">
                     <div class="politixy-image gallery-image-style-2 position-relative active wow fadeInRight">
                         <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-4.jpg")" class="img-fluid" alt="gallery-4">
-                        <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-1">
-                            <span class="video-icon">
-                                <svg width="20" height="24"><use xlink:href="#video-icon"></use></svg>
-                            </span>
-                        </a>
+
                     </div>
                     <!-- politixy-image -->
                 </div>
@@ -123,6 +142,112 @@
     <!-- container -->
 </section>
 <!--Gallery Section ======================-->
+@* Vision Section ====================== *@
+<section class="section-vison vison-1 bg-custom-light py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+        <div class="d-flex flex-column gap-40">
+            <div class="row">
+                <div class="col-lg-9 offset-lg-2 text-lg-center">
+                    <div class="contents-width">
+                        <div class="d-flex flex-column gap-3 wow slideInUp">
+
+                            <h2 style="font-family:cairo; text-align:right" class="mb-0">نحو مشاركة فعّالة</h2>
+                            <br />
+                            <p style="text-align:right" class="mb-0">
+                                إلى جانب الانتخابات النيابية، يسعى موقعنا إلى تقديم مجموعة متنوعة من الخدمات التي تشمل تسهيل العملية الانتخابية في الجامعات والبلديات والنقابات. نحن نؤمن بأن تعزيز الشفافية والديمقراطية في جميع مستويات المجتمع أمر حيوي لتحقيق مستقبل مشرق ومستدام للجميع.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- contents-width -->
+                </div>
+                <!-- col-8 -->
+            </div>
+            <!-- row -->
+
+            <div class="row g-30">
+                <!-- First Card: University Elections -->
+                <div class="col-lg-4">
+                    <div class="card card-style-2 wow fadeInUp" data-wow-delay=".2s" data-wow-duration="1.2s">
+                        <div class="card-image-wrapper">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/university-elections.jpg")" class="card-img-top" alt="university-elections">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <svg width="46" height="40"><use xlink:href="#election-icon"></use></svg>
+                            <div class="d-flex flex-column gap-10">
+                                <h5 class="card-title fw-semibold">
+                                    <a href="@Url.Action("Index", "UserCycle")" class="text-decoration-none stretched-link link-hover-animation-1">انتخابات جامعية</a>
+                                </h5>
+                                <p class="card-text">الانتخابات الجامعية هي فرصة للطلاب للمشاركة في صنع القرار في الحرم الجامعي وتعزيز التجربة الديمقراطية في المجتمع الأكاديمي.</p>
+                            </div>
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-4 -->
+                <!-- Second Card: Municipal Elections in Jordan -->
+                <div class="col-lg-4">
+                    <div class="card card-style-2 wow fadeInUp" data-wow-delay=".4s" data-wow-duration="1.2s">
+                        <div class="card-image-wrapper">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/municipal-elections.jpg")" class="card-img-top" alt="municipal-elections">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <svg width="46" height="40"><use xlink:href="#election-icon"></use></svg>
+                            <div class="d-flex flex-column gap-10">
+                                <h5 class="card-title fw-semibold">
+                                    <a href="@Url.Action("Index", "UserCycle")" class="text-decoration-none stretched-link link-hover-animation-1">انتخابات بلدية في الأردن</a>
+                                </h5>
+                                <p class="card-text">انتخابات البلديات في الأردن هي عملية ديمقراطية تهدف إلى اختيار ممثلين محليين لتحسين الخدمات والبنية التحتية في المناطق المحلية.</p>
+                            </div>
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-4 -->
+                <!-- Third Card: Syndicate Elections in Jordan -->
+                <div class="col-lg-4">
+                    <div class="card card-style-2 wow fadeInUp" data-wow-delay=".6s" data-wow-duration="1.2s">
+                        <div class="card-image-wrapper">
+                            <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/syndicate-elections.jpg")" class="card-img-top" alt="syndicate-elections">
+                        </div>
+                        <!-- card-image-wrapper -->
+                        <div class="card-body position-relative">
+                            <svg width="46" height="40"><use xlink:href="#election-icon"></use></svg>
+                            <div class="d-flex flex-column gap-10">
+                                <h5 class="card-title fw-semibold">
+                                    <a href="@Url.Action("Index", "UserCycle")" class="text-decoration-none stretched-link link-hover-animation-1">انتخابات النقابة في الأردن</a>
+                                </h5>
+                                <p class="card-text">انتخابات النقابات المهنية في الأردن تهدف إلى تعزيز حقوق ومصالح العاملين في مختلف المهن من خلال اختيار قيادات نقابية فعالة.</p>
+                            </div>
+                        </div>
+                        <!-- card-body -->
+                    </div>
+                    <!-- card -->
+                </div>
+                <!-- col-4 -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- d-flex -->
+    </div>
+    <!-- container -->
+</section>
+@* Vision Section ====================== *@
+
+
+
+
+
+
+
+
+
+
+
+
 <!--News Section ======================-->
 <section class="section-news news-1 py-60 py-lg-100 py-xxl-120">
     <div class="container">
@@ -148,7 +273,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <h5 class="card-title mb-0 fw-semibold"><a href="news-single.html" class="text-decoration-none link-hover-animation-1">توقيع مذكرة تفاهم بين المستقلة للانتخاب والأعلى للأشخاص ذوي الإعاقة والوطني لحقوق الانسان ونقابة المحامين</a></h5>
+                                        <h5 class="card-title mb-0 fw-semibold"><a href="" class="text-decoration-none link-hover-animation-1">توقيع مذكرة تفاهم بين المستقلة للانتخاب والأعلى للأشخاص ذوي الإعاقة والوطني لحقوق الانسان ونقابة المحامين</a></h5>
 
                                         <ul class="list-unstyled mb-0 d-flex gap-10">
                                             <li class=" body-color-style-1">
@@ -170,8 +295,8 @@
                                 <p class="card-text mb-0">وقعت الهيئة المستقلة للانتخاب والمجلس الأعلى للأشخاص ذوي الإعاقة والمركز الوطني لحقوق الانسان ونقابة المحامين الأردنيين، مذكرة تفاهم في مجال تقديم المساعدة القانونية للأشخاص ذوي.</p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -205,7 +330,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <h5 class="card-title mb-0 fw-semibold">
-                                            <a href="news-single.html" class="text-decoration-none link-hover-animation-1">
+                                            <a href="" class="text-decoration-none link-hover-animation-1">
                                                 المعايطة يستقبل بعثة الاتحاد الأوروبي لمراقبة الانتخابات النيابية
                                             </a>
                                         </h5>
@@ -231,7 +356,7 @@
 
                                 <div>
                                     <a href="" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -264,7 +389,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <h5 class="card-title mb-0 fw-semibold"><a href="news-single.html" class="text-decoration-none link-hover-animation-1">المعايطة : يؤكد على أهمية التوعية الانتخابية </a></h5>
+                                        <h5 class="card-title mb-0 fw-semibold"><a href="" class="text-decoration-none link-hover-animation-1">المعايطة : يؤكد على أهمية التوعية الانتخابية </a></h5>
 
                                         <ul class="list-unstyled mb-0 d-flex gap-10">
                                             <li class=" body-color-style-1">
@@ -283,11 +408,11 @@
                                     </div>
                                 </div>
                                 <!-- d-flex  -->
-                                <p class="card-text mb-0">Iجاء ذلك خلال زيارته  لسوق جارا  في العاصمة عمان، ومشاركته عددا من المتطوعين والمنسقين في برنامج أنا أشارك. .</p>
+                                <p class="card-text mb-0">جاء ذلك خلال زيارته  لسوق جارا  في العاصمة عمان، ومشاركته عددا من المتطوعين والمنسقين في برنامج أنا أشارك. .</p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -321,7 +446,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <h5 class="card-title mb-0 fw-semibold">
-                                            <a href="news-single.html" class="text-decoration-none link-hover-animation-1">
+                                            <a href="" class="text-decoration-none link-hover-animation-1">
                                                 114 قائمة مترشحة في اليوم الأول من استقبال طلبات الترشح
                                             </a>
                                         </h5>
@@ -346,8 +471,8 @@
                                 <p class="card-text mb-0">وقعت الهيئة المستقلة للانتخاب والمجلس الأعلى للأشخاص ذوي الإعاقة والمركز الوطني لحقوق الانسان ونقابة المحامين الأردنيين، مذكرة تفاهم في مجال تقديم المساعدة القانونية للأشخاص ذوي</p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -380,7 +505,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <h5 class="card-title mb-0 fw-semibold"><a href="news-single.html" class="text-decoration-none link-hover-animation-1">المستقلة للانتخاب تطلق الإطار المرجعي لتمكين المرأة في الانتخاب والأحزاب</a></h5>
+                                        <h5 class="card-title mb-0 fw-semibold"><a href="" class="text-decoration-none link-hover-animation-1">المستقلة للانتخاب تطلق الإطار المرجعي لتمكين المرأة في الانتخاب والأحزاب</a></h5>
 
                                         <ul class="list-unstyled mb-0 d-flex gap-10">
                                             <li class=" body-color-style-1">
@@ -401,8 +526,8 @@
                                 <p class="card-text mb-0">أطلق المهندس موسى المعايطة رئيس مجلس مفوضي الهيئة المستقلة للانتخاب الإطار المرجعي لتمكين المرأة ( استراتيجية تمكين المرأة في الانتخاب والأحزاب 2024 - 2026)، بحضور عدد من المختصين والمهتمين بشؤون المرأة، والجهات ذات العلاقة..</p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -436,7 +561,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <h5 class="card-title mb-0 fw-semibold">
-                                            <a href="news-single.html" class="text-decoration-none link-hover-animation-1">
+                                            <a href="" class="text-decoration-none link-hover-animation-1">
                                                 المعايطة : يؤكد على أهمية التوعية الانتخابية
                                                 .
                                             </a>
@@ -461,8 +586,8 @@
                                 <p class="card-text mb-0">أكد المهندس موسى المعايطة رئيس مجلس مفوضي الهيئة المستقلة على أهمية التوعية الانتخابية وتحفيز المواطنين على المشاركة في الانتخابات النيابية المقبلة والتي ستجري في العاشر من أيلول المقبل </p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -485,26 +610,6 @@
     <!-- container -->
 </section>
 <!--News Section ======================-->
-<section class="text-ltr align-text-start" dir="ltr">
-    <div class="container">
-
-        <div class="tick" data-did-init="handleTickInit">
-            <div data-repeat="true"
-                 data-layout="horizontal fit"
-                 data-transform="preset(d, h, m, s) -> delay">
-                <div class="tick-group">
-                    <div data-key="value"
-                         data-repeat="true"
-                         data-transform="pad(00) -> split -> delay">
-                        <span data-view="flip"></span>
-                    </div>
-
-                    <span data-key="label" data-view="text" class="tick-label"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 @if (Session["SwalMessage"] != null)
@@ -523,12 +628,13 @@
 
 <script>
       function handleTickInit(tick) {
-        var counter = Tick.count.down("2024-08-22T00:00:00");
+        var counter = Tick.count.down("@ViewBag.Date");
 
         counter.onupdate = function (value) {
           tick.value = value;
         };
-
-        counter.onended = function () {};
+        counter.onended = function () {
+              location.reload();
+        };
       }
 </script>

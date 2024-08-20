@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<OrangeProjectMVC.Models.election_list_request>
 
 @{
-    ViewBag.Title = "election_list_request";
- 
+    ViewBag.Title = "Index";
 }
 
-<h2>election_list_request</h2>
+<h2>Index</h2>
 
-
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -25,7 +26,6 @@
         <th>
             @Html.DisplayNameFor(model => model.district.name)
         </th>
-
         <th></th>
     </tr>
 
@@ -40,13 +40,22 @@
         <td>
             @Html.DisplayFor(modelItem => item.status)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image_url)
-        </td>
+       
+        @if (!string.IsNullOrEmpty(item.image_url))
+        {
+            <td>
+                <img width="100" src="@Url.Content(item.image_url)" alt="Image" />
+            </td>
+        }
+        else
+        {
+            <td>
+                No image available
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.district.name)
         </td>
-
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
             @Html.ActionLink("Details", "Details", new { id = item.id }) |

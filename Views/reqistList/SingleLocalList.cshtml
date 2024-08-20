@@ -3,94 +3,195 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<div class="container mt-5"></div>
-
-<!-- Added enctype="multipart/form-data" to handle file uploads -->
-<form method="post" class="container" id="nominationForm" action="@Url.Action("SingleLocalList", "reqistList", new { id = ViewBag.districtId })" enctype="multipart/form-data">
-    <!-- Form title -->
-    <h2 class="text-center mb-4">تقديم طلب للترشح</h2>
-
-    <!-- Input for List Name -->
-    <div class="form-group">
-        <label for="listName" >اسم القائمة</label>
-        <input type="text" name="list_name" id="listName"  placeholder="ادخل اسم القائمة" required />
-        <label for="listImage" class="form-label">صورة القائمة</label>
-        <input type="file" name="list_image" id="listImage" required />
-    </div>
-
-    <!-- Section for Competitive Seats -->
-    <h5>المقاعد التنافسية</h5>
-    @for (int i = 0; i < ViewBag.competitive_seat; i++)
-    {
-        <div class="form-group mb-3">
-            <input type="text" name="competitive_seats" id="competitiveSeats"  placeholder=" ادخل الرقم الوطني للمرشح @i " required />
-            <!-- Input for Candidate Image -->
-            <input type="file" name="candidate_images" id="candidateImage_@i"  required />
-        </div>
+<style>
+    .form-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 80%; /* عرض الفورم إلى 80% */
+        margin: 0 auto; /* وضع الفورم في المنتصف */
+        background-color:lightgray;
     }
 
-    <!-- Section for Women Seats -->
-    @if (ViewBag.women_seats > 0)
-    {
-        <h5>مقعد الكوته</h5>
-        <div class="form-group">
-            <input type="text" name="women_seat" id="womenSeat" placeholder="ادخل الرقم الوطني للمرشح" required />
-            <!-- Input for Women Candidate Image -->
-            <input type="file" name="women_candidate_image" id="womenCandidateImage"  required />
-        </div>
+        .form-container h2 {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2rem; /* تكبير حجم الخط */
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+        
     }
 
-    <!-- Section for Christian Seats -->
-    @if (ViewBag.christian_seats > 0)
-    {
-        <h5>المقعد المسيحي</h5>
-        <div class="form-group">
-            <input type="text" name="christian_seat" id="christianSeat"  placeholder="ادخل الرقم الوطني للمرشح" required />
-            <!-- Input for Christian Candidate Image -->
-            <input type="file" name="christian_candidate_image" id="christianCandidateImage" required />
-        </div>
+        .form-group label {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem; /* تكبير حجم الخط */
+            color: #495057;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            padding: 10px;
+            font-size: 1.1rem; /* تكبير حجم الخط */
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            width: 100%;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .form-group input[type="text"]:focus,
+            .form-group input[type="file"]:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+    .input-row {
+        display: flex;
+        gap: 20px;
+        align-items: center;
     }
 
-    <!-- Submit button -->
-    <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary btn-lg mt-3">احفظ القائمة</button>
-    </div>
-</form>
+        .input-row .form-group {
+            flex: 1;
+        }
 
-<!-- Bootstrap Toast -->
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
-    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-        <div class="toast-header">
-            <strong class="me-auto">الاشعارات</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            @Session["Message"]
-        </div>
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        font-family: 'Cairo', sans-serif;
+        font-size: 1.3rem; /* تكبير حجم الخط */
+        padding: 12px 30px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 15px rgba(0, 86, 179, 0.3);
+        }
+</style>
+
+<div class="container mt-5">
+    <div class="form-container">
+        <!-- Added enctype="multipart/form-data" to handle file uploads -->
+        <form method="post" id="nominationForm" action="@Url.Action("SingleLocalList", "reqistList", new { id = ViewBag.districtId })" enctype="multipart/form-data">
+            <!-- Form title -->
+            <h2>تقديم طلب للترشح</h2>
+
+            <!-- Input for List Name and Image -->
+            <div class="input-row">
+                <div class="form-group">
+                    <label for="listName">اسم القائمة</label>
+                    <input type="text" name="list_name" id="listName" placeholder="ادخل اسم القائمة" required />
+                </div>
+                <div class="form-group">
+                    <label for="listImage" class="form-label">صورة القائمة</label>
+                    <input type="file" name="list_image" id="listImage" required />
+                    <img id="listImagePreview" src="#" alt="صورة القائمة" style="display:none;" />
+                </div>
+            </div>
+
+            <!-- Section for Competitive Seats -->
+            <h5>المقاعد التنافسية</h5>
+            @for (int i = 0; i < ViewBag.competitive_seat; i++)
+            {
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="competitiveSeats_@i">الرقم الوطني للمرشح @(i+1)</label>
+                        <input type="text" name="competitive_seats" id="competitiveSeats_@i" placeholder=" ادخل الرقم الوطني للمرشح @(i+1) " required />
+                    </div>
+                    <!-- Input for Candidate Image -->
+                    <div class="form-group">
+                        <label for="candidateImage_@i">صورة المرشح</label>
+                        <input type="file" name="candidate_images" id="candidateImage_@i" required />
+                        <img id="candidateImagePreview_@i" src="#" alt="صورة المرشح" style="display:none;" />
+                    </div>
+                </div>
+            }
+
+            <!-- Section for Women Seats -->
+            @if (ViewBag.women_seats > 0)
+            {
+                <h5>مقعد الكوته</h5>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="womenSeat">الرقم الوطني للمرشحة</label>
+                        <input type="text" name="women_seat" id="womenSeat" placeholder="ادخل الرقم الوطني للمرشحة" required />
+                    </div>
+                    <!-- Input for Women Candidate Image -->
+                    <div class="form-group">
+                        <label for="womenCandidateImage">صورة المرشحة</label>
+                        <input type="file" name="women_candidate_image" id="womenCandidateImage" required />
+                        <img id="womenCandidateImagePreview" src="#" alt="صورة المرشحة" style="display:none;" />
+                    </div>
+                </div>
+            }
+
+            <!-- Section for Christian Seats -->
+            @if (ViewBag.christian_seats > 0)
+            {
+                <h5>المقعد المسيحي</h5>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="christianSeat">الرقم الوطني للمرشح</label>
+                        <input type="text" name="christian_seat" id="christianSeat" placeholder="ادخل الرقم الوطني للمرشح" required />
+                    </div>
+                    <!-- Input for Christian Candidate Image -->
+                    <div class="form-group">
+                        <label for="christianCandidateImage">صورة المرشح</label>
+                        <input type="file" name="christian_candidate_image" id="christianCandidateImage" required />
+                        <img id="christianCandidateImagePreview" src="#" alt="صورة المرشح" style="display:none;" />
+                    </div>
+                </div>
+            }
+
+            <!-- Submit button inside the form -->
+            <div class="form-group d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg mt-3">احفظ القائمة</button>
+            </div>
+        </form>
     </div>
 </div>
 
-<!-- Bootstrap JavaScript and Custom Script -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-@if (Session["Message"] != null)
-{
-    { Session["Message"] = null; }
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Show the success toast
-            var toastElement = document.getElementById('successToast');
-            var toast = new bootstrap.Toast(toastElement);
-            toast.show();
+<script>
+    // Preview uploaded images
+    function readURL(input, imgElement) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById(imgElement).src = e.target.result;
+                document.getElementById(imgElement).style.display = "block";
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-            // Handle form submission
-            document.getElementById('nominationForm').addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent the form from submitting normally
+    document.getElementById("listImage").addEventListener("change", function () {
+        readURL(this, 'listImagePreview');
+    });
 
-                // Optional: Submit the form programmatically after showing the toast
-                setTimeout(() => {
-                    this.submit();
-                }, 3000); // Adjust the delay as needed
-            });
+    @for (int i = 0; i < ViewBag.competitive_seat; i++)
+    {
+        <text>
+        document.getElementById("candidateImage_@i").addEventListener("change", function () {
+            readURL(this, 'candidateImagePreview_@i');
         });
-    </script>
-}
+        </text>
+    }
+
+    document.getElementById("womenCandidateImage").addEventListener("change", function () {
+        readURL(this, 'womenCandidateImagePreview');
+    });
+
+    document.getElementById("christianCandidateImage").addEventListener("change", function () {
+        readURL(this, 'christianCandidateImagePreview');
+    });
+</script>
