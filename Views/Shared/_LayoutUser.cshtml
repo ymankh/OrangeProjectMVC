@@ -217,6 +217,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "reqistList")">طلب الترشح</a>
                             </li>
+                            @if (true)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Results", "voter_user")">النتائج</a>
+                                </li>
+                            }
                             @if (Session["National_ID"] == null)
                             {
                                 <li class="nav-item">
