@@ -27,6 +27,28 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.img_url)
+        </dt>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.img_url))
+            {
+                <img src="@Url.Content(Model.img_url)" alt="Image" style="max-width: 200px; max-height: 200px;" />
+            }
+            else
+            {
+                <p>No image available</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.is_representative)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_representative)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.election_list.name)
         </dt>
 
