@@ -2211,9 +2211,6 @@
     <Content Include="Views\Adv\Delete.cshtml" />
     <Content Include="Views\Adv\Edit.cshtml" />
     <Content Include="Views\Adv\index.cshtml" />
-    <Content Include="Views\candidate_request\Delete.cshtml" />
-    <Content Include="Views\candidate_request\Details.cshtml" />
-    <Content Include="Views\candidate_request\Edit.cshtml" />
     <Content Include="Views\ContactUs\contactus.cshtml" />
     <Content Include="Views\ContactUs\Delete.cshtml" />
     <Content Include="Views\ContactUs\Edit.cshtml" />
@@ -2264,6 +2261,10 @@
     <Content Include="Views\election_list\Edit.cshtml" />
     <Content Include="Views\election_list\Index.cshtml" />
     <Content Include="Views\candidate_request\Index.cshtml" />
+    <Content Include="Views\candidate_request\Details.cshtml" />
+    <Content Include="Views\candidate_request\Create.cshtml" />
+    <Content Include="Views\candidate_request\Delete.cshtml" />
+    <Content Include="Views\candidate_request\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
