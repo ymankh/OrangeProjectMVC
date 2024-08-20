@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">قائمة المرشحين داخل القائمة</h2>
+<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">المرشحين داخل القائمة</h2>
 
-<div class="container mt-5">
-    <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار المرشح الذي تريد التصويت له</h3>
+<div class="container mt-5" style="margin-bottom:2em">
+    <h6 style="text-align: center; font-family: cairo;">الرجاء اختيار المرشح الذي تريد التصويت له</h6>
     <p style="text-align: center; font-family: cairo;">يمكنك التصويت لأكثر من مرشح</p>
 
     @using (Html.BeginForm("SaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "VoteForm" }))
