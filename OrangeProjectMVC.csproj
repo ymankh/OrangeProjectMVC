@@ -141,7 +141,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\reqistListController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserCycleController.cs" />
     <Compile Include="Controllers\voter_userController.cs" />
