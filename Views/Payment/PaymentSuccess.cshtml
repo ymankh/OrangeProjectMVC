@@ -14,10 +14,10 @@
 <body>
     <script>
         Swal.fire({
-            title: 'Payment Successful!',
-            text: 'Your payment was successful. Thank you!',
+            title: 'تم الدفع بنجاح!',
+            text: 'تمت عملية الدفع بنجاح. شكراً لك',
             icon: 'success',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'استمر'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = '@Url.Action("Success", "Payment")';
