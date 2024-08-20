@@ -29,7 +29,7 @@
                 <div class="col-lg-5 col-xxl-6 wow slideInRight" data-wow-duration="1.5s">
                     <div class="about-image position-relative">
                         <img src="~/assets/images/about-image-2.jpg" class="img-fluid" alt="about-image-2">
-                        
+
 
                     </div>
                 </div>
@@ -37,7 +37,30 @@
         </div>
     </section>
 </div>
+<section>
+    <div class="container">
+        <h2 class="mb-4"> @ViewBag.TimerTitle </h2>
+        <div class="text-ltr align-text-start" dir="ltr">
 
+            <div class="tick" data-did-init="handleTickInit">
+                <div data-repeat="true"
+                     data-layout="horizontal fit"
+                     data-transform="preset(d, h, m, s) -> delay">
+                    <div class="tick-group">
+                        <div data-key="value"
+                             data-repeat="true"
+                             data-transform="pad(00) -> split -> delay">
+                            <span data-view="flip"></span>
+                        </div>
+
+                        <span data-key="label" data-view="text" class="tick-label"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 <!--Gallery Section ======================-->
 <section class="section-gallery gallery-1 py-60 py-lg-100 py-xxl-120">
@@ -99,7 +122,7 @@
                 <div class="col-lg-7">
                     <div class="politixy-image gallery-image-style-2 position-relative active wow fadeInRight">
                         <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-4.jpg")" class="img-fluid" alt="gallery-4">
-                        
+
                     </div>
                     <!-- politixy-image -->
                 </div>
@@ -120,7 +143,7 @@
                 <div class="col-lg-9 offset-lg-2 text-lg-center">
                     <div class="contents-width">
                         <div class="d-flex flex-column gap-3 wow slideInUp">
-                          
+
                             <h2 style="font-family:cairo; text-align:right" class="mb-0">نحو مشاركة فعّالة</h2>
                             <br />
                             <p style="text-align:right" class="mb-0">
@@ -580,27 +603,6 @@
     <!-- container -->
 </section>
 <!--News Section ======================-->
-<section class="text-ltr align-text-start" dir="ltr">
-    <h2> @ViewBag.TimerTitle </h2>
-    <div class="container">
-
-        <div class="tick" data-did-init="handleTickInit">
-            <div data-repeat="true"
-                 data-layout="horizontal fit"
-                 data-transform="preset(d, h, m, s) -> delay">
-                <div class="tick-group">
-                    <div data-key="value"
-                         data-repeat="true"
-                         data-transform="pad(00) -> split -> delay">
-                        <span data-view="flip"></span>
-                    </div>
-
-                    <span data-key="label" data-view="text" class="tick-label"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 @if (Session["SwalMessage"] != null)
@@ -624,7 +626,8 @@
         counter.onupdate = function (value) {
           tick.value = value;
         };
-
-        counter.onended = function () {};
+        counter.onended = function () {
+              location.reload();
+        };
       }
 </script>
