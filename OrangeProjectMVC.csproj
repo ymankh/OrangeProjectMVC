@@ -2252,11 +2252,6 @@
     <Content Include="Views\Dates\Details.cshtml" />
     <Content Include="Views\Dates\Edit.cshtml" />
     <Content Include="Views\Dates\Index.cshtml" />
-    <Content Include="Views\candidates\Create.cshtml" />
-    <Content Include="Views\candidates\Delete.cshtml" />
-    <Content Include="Views\candidates\Details.cshtml" />
-    <Content Include="Views\candidates\Edit.cshtml" />
-    <Content Include="Views\candidates\Index.cshtml" />
     <Content Include="Views\election_list\Create.cshtml" />
     <Content Include="Views\election_list\Delete.cshtml" />
     <Content Include="Views\election_list\Details.cshtml" />
@@ -2267,6 +2262,11 @@
     <Content Include="Views\candidate_request\Create.cshtml" />
     <Content Include="Views\candidate_request\Delete.cshtml" />
     <Content Include="Views\candidate_request\Edit.cshtml" />
+    <Content Include="Views\candidates\Index.cshtml" />
+    <Content Include="Views\candidates\Details.cshtml" />
+    <Content Include="Views\candidates\Create.cshtml" />
+    <Content Include="Views\candidates\Edit.cshtml" />
+    <Content Include="Views\candidates\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
