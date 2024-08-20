@@ -523,7 +523,7 @@
 
 <script>
       function handleTickInit(tick) {
-        var counter = Tick.count.down("2024-08-22T00:00:00");
+        var counter = Tick.count.down("@ViewBag.Date");
 
         counter.onupdate = function (value) {
           tick.value = value;

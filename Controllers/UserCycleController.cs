@@ -12,6 +12,7 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Date = db.Dates.FirstOrDefault().election_end_date;
             return View();
         }
 
