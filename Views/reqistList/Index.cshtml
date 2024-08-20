@@ -4,10 +4,12 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<style>
+@*<style>
+    
     .card-body {
         position: relative;
         overflow: hidden;
+        width: 50%
     }
 
         .card-body img {
@@ -35,6 +37,66 @@
         }
 
 
+</style>*@
+<style>
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cardrequst{
+        width:33%;
+        margin-bottom:3%;
+        
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+        .card-body img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+            .card-body img:hover {
+                transform: scale(1.05);
+            }
+
+    .card-title {
+        font-family: 'Cairo', sans-serif;
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-family: 'Cairo', sans-serif;
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .btn-primary {
+        background-color: #f9b934;
+        border-color: #f9b934;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #f08c00;
+            transform: translateY(-3px);
+        }
+
+        .btn-primary:focus {
+            outline: none;
+            box-shadow: none;
+        }
 </style>
 
 <section class="section-advertisement ad-2 py-60 py-lg-100 py-xxl-120">
@@ -65,11 +127,11 @@
 
 
 
-<div class="container mt-5">
+<div class="container mt-5 ">
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center ">
         <!-- Party List Registration Card -->
-        <div class="col-md-5 ">
+        <div class="col-md-5 cardrequst">
             <div class="card border  shadow-sm">
                 <div class="card-body text-center">
                     <img src="@Url.Content("~/assets/images/annotationRequest.png")" class="img-fluid mb-3"  alt="Party List Image">
@@ -85,7 +147,7 @@
         </div>
 
         <!-- Local List Registration Card -->
-        <div class="col-md-5  ">
+        <div class="col-md-5  cardrequst">
             <div class="card border shadow-sm">
                 <div class="card-body text-center">
                     <img src="@Url.Content("~/assets/images/annotationRequest.png")" class="img-fluid mb-3"  alt="Party List Image">

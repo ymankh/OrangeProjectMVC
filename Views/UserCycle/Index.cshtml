@@ -5,8 +5,7 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <style>
-    /* Ensure all cards have the same height */
-    <style >
+   
     /* Ensure all custom cards have the same height */
     .custom-card {
         overflow: hidden;
@@ -43,7 +42,8 @@
     }
 </style>
 
-</style>
+<script src="~/Scripts/map/countrymap.js"></script>
+<script src="~/Scripts/map/mapdata.js"></script>
 
 <div class="page landing-page">
     <!-- About Section ====================== -->
@@ -102,11 +102,10 @@
             </div>
         </div>
     </section>
-
-
-
-
-
+    
+    <div  class="wow fadeInUp" data-wow-delay="0.1s">
+        <div id="map"></div>
+    </div>
 
     <!-- Gallery Section ====================== -->
     <section class="section-gallery gallery-1 py-60 py-lg-100 py-xxl-120">
