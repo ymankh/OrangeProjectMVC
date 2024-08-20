@@ -31,9 +31,13 @@
                         <img src="~/assets/images/about-image-2.jpg" class="img-fluid" alt="about-image-2">
                         <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-5">
                             <span class="video-icon">
-                                <svg width="33" height="41"><use xlink:href="#video-icon"></use></svg>
+                                <svg width="40" height="50" viewBox="0 0 33 41" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="20.5" cy="20.5" r="20.5" fill="white" />
+                                    <polygon points="12,8 26,20.5 12,33" fill="#D10024" />
+                                </svg>
                             </span>
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -481,6 +485,27 @@
     <!-- container -->
 </section>
 <!--News Section ======================-->
+<section class="text-ltr align-text-start" dir="ltr">
+    <div class="container">
+
+        <div class="tick" data-did-init="handleTickInit">
+            <div data-repeat="true"
+                 data-layout="horizontal fit"
+                 data-transform="preset(d, h, m, s) -> delay">
+                <div class="tick-group">
+                    <div data-key="value"
+                         data-repeat="true"
+                         data-transform="pad(00) -> split -> delay">
+                        <span data-view="flip"></span>
+                    </div>
+
+                    <span data-key="label" data-view="text" class="tick-label"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 @if (Session["SwalMessage"] != null)
 {
@@ -495,3 +520,15 @@
     </script>
     { Session["SwalMessage"] = null; }
 }
+
+<script>
+      function handleTickInit(tick) {
+        var counter = Tick.count.down("2024-08-22T00:00:00");
+
+        counter.onupdate = function (value) {
+          tick.value = value;
+        };
+
+        counter.onended = function () {};
+      }
+</script>
