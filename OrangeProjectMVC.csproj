@@ -311,9 +311,6 @@
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Content\img\141683_0_1618560092 %281%29.jpg" />
-    <Content Include="Content\img\141683_0_1618560092.jpg" />
-    <Content Include="Content\img\459688 %281%29.jpg" />
-    <Content Include="Content\img\AN_d5f37image_story.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -365,6 +362,8 @@
     <Content Include="Scripts\js\demo\datatables-demo.js" />
     <Content Include="Scripts\js\sb-admin-2.js" />
     <Content Include="Scripts\js\sb-admin-2.min.js" />
+    <Content Include="Scripts\map\countrymap.js" />
+    <Content Include="Scripts\map\mapdata.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.min.js" />
