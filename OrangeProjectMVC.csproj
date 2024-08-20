@@ -310,6 +310,10 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\img\141683_0_1618560092 %281%29.jpg" />
+    <Content Include="Content\img\141683_0_1618560092.jpg" />
+    <Content Include="Content\img\459688 %281%29.jpg" />
+    <Content Include="Content\img\AN_d5f37image_story.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
