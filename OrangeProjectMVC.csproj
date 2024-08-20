@@ -310,6 +310,10 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\img\141683_0_1618560092 %281%29.jpg" />
+    <Content Include="Content\img\141683_0_1618560092.jpg" />
+    <Content Include="Content\img\459688 %281%29.jpg" />
+    <Content Include="Content\img\AN_d5f37image_story.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2249,11 +2253,6 @@
     <Content Include="Views\Dates\Details.cshtml" />
     <Content Include="Views\Dates\Edit.cshtml" />
     <Content Include="Views\Dates\Index.cshtml" />
-    <Content Include="Views\election_list\Create.cshtml" />
-    <Content Include="Views\election_list\Delete.cshtml" />
-    <Content Include="Views\election_list\Details.cshtml" />
-    <Content Include="Views\election_list\Edit.cshtml" />
-    <Content Include="Views\election_list\Index.cshtml" />
     <Content Include="Views\candidate_request\Index.cshtml" />
     <Content Include="Views\candidate_request\Details.cshtml" />
     <Content Include="Views\candidate_request\Create.cshtml" />
@@ -2268,6 +2267,10 @@
     <Content Include="Views\election_list_request\Details.cshtml" />
     <Content Include="Views\election_list_request\Edit.cshtml" />
     <Content Include="Views\election_list_request\Delete.cshtml" />
+    <Content Include="Views\election_list\Index.cshtml" />
+    <Content Include="Views\election_list\Edit.cshtml" />
+    <Content Include="Views\election_list\Delete.cshtml" />
+    <Content Include="Views\election_list\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

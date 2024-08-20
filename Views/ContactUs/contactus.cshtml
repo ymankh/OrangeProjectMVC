@@ -18,47 +18,106 @@
         text-align: right;
     }
 
-        .rtl label {
-            text-align: right;
+    .rtl label {
+        text-align: right;
+    }
+
+    .rtl .form-control {
+        text-align: right;
+    }
+
+    .contact-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .contact-form-wrapper {
+        width: 100%;
+        width: 80%;
+        padding: 10px;
+        background-color: #f9f9f9;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .contact-image {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .contact-image img {
+        width: 100%;
+        height: 97vh;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .contact-form {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .contact-form h2 {
+        font-family: cairo;
+    }
+
+    @@media (max-width: 768px) {
+        .contact-form-wrapper {
+            flex-direction: column;
         }
 
-        .rtl .form-control {
-            text-align: right;
+        .contact-image,
+        .contact-form {
+            width: 100%;
         }
-  
+    }
+
+    @@media (max-width: 428px) {
+        .contact-image {
+            display: none;
+        }
+    }
 </style>
 
-<!--Contact Section ======================-->
 <section class="section-contact contact-3 pt-60 pt-lg-100 pt-xxl-120 pb-40">
     <div class="container formcontainer">
-        <div class="contact-form-wrapper bg-custom-light p-4 p-lg-40 rtl">
-            <h2 class="mb-30 mb-lg-40 text-lg-center wow fadeInUp" style="font-family:cairo;">تواصل معنا</h2>
+        <div class="contact-container">
+            <div class="contact-form-wrapper bg-custom-light p-4 p-lg-40 rtl">
+                <div class="contact-image">
+                    <img src="~/Content/img/141683_0_1618560092 (1).jpg" alt="Contact Us">
+                </div>
+                <div class="contact-form">
+                    <h2 class="mb-30 mb-lg-40 text-lg-center wow fadeInUp">تواصل معنا</h2>
 
-            @using (Html.BeginForm("contactus", "contactus", FormMethod.Post, new { id = "contactForm" }))
-            {
-                @Html.AntiForgeryToken()
+                    @using (Html.BeginForm("contactus", "contactus", FormMethod.Post, new { id = "contactForm" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-                <div class="col mb-3">
-                    <label for="InputName" class="form-label">الاسم</label>
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "InputName", required = "required" })
+                        <div class="col mb-3">
+                            <label for="InputName" class="form-label">الاسم</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "InputName", required = "required" })
+                        </div>
+                        <div class="col mb-3">
+                            <label for="InputEmail" class="form-label">البريد الإلكتروني</label>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "InputEmail", type = "email", required = "required" })
+                        </div>
+                        <div class="col mb-3">
+                            <label for="InputSubject" class="form-label">الموضوع</label>
+                            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @id = "InputSubject" })
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="InputMessage" class="form-label">الرسالة</label>
+                            @Html.TextAreaFor(m => m.Message, new { @class = "form-control", @id = "InputMessage", rows = "3" })
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" style="font-family:cairo; margin-top:5px;">إرسال الآن</button>
+                        </div>
+                        <div class="response py-1"></div>
+                    }
                 </div>
-                <div class="col mb-3">
-                    <label for="InputEmail" class="form-label">البريد الإلكتروني</label>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "InputEmail", type = "email", required = "required" })
-                </div>
-                <div class="col mb-3">
-                    <label for="InputSubject" class="form-label">الموضوع</label>
-                    @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @id = "InputSubject" })
-                </div>
-                <div class="col-12 mb-3">
-                    <label for="InputMessage" class="form-label">الرسالة</label>
-                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control", @id = "InputMessage", rows = "3" })
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary" style="font-family:cairo; margin-top:5px;">إرسال الآن</button>
-                </div>
-                <div class="response py-1"></div>
-            }
+            </div>
         </div>
     </div>
 </section>
