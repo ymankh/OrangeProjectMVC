@@ -29,11 +29,15 @@
                 <div class="col-lg-5 col-xxl-6 wow slideInRight" data-wow-duration="1.5s">
                     <div class="about-image position-relative">
                         <img src="~/assets/images/about-image-2.jpg" class="img-fluid" alt="about-image-2">
-                        <a href="https://www.youtube.com/watch?v=lfDZJqSrIuk" class="video-popup video-popup-style-5">
+                        <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-5">
                             <span class="video-icon">
-                                <svg width="33" height="41"><use xlink:href="#video-icon"></use></svg>
+                                <svg width="40" height="50" viewBox="0 0 33 41" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="20.5" cy="20.5" r="20.5" fill="white" />
+                                    <polygon points="12,8 26,20.5 12,33" fill="#D10024" />
+                                </svg>
                             </span>
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -102,7 +106,7 @@
                 <div class="col-lg-7">
                     <div class="politixy-image gallery-image-style-2 position-relative active wow fadeInRight">
                         <img src="@Url.Content("~/assets/images/placeholder.svg")" data-src="@Url.Content("~/assets/images/gallery-4.jpg")" class="img-fluid" alt="gallery-4">
-                        <a href="https://www.youtube.com/watch?v=lfDZJqSrIuk" class="video-popup video-popup-style-1">
+                        <a href="https://www.youtube.com/watch?v=qj9i3gNmMjA" class="video-popup video-popup-style-1">
                             <span class="video-icon">
                                 <svg width="20" height="24"><use xlink:href="#video-icon"></use></svg>
                             </span>
@@ -226,7 +230,7 @@
                                 <p class="card-text mb-0">استقبل المهندس موسى المعايطة رئيس مجلس مفوضي الهيئة المستقلة للانتخاب اليوم بعثة الاتحاد الأوروبي المشاركة في الرقابة على انتخابات مجلس النواب 2024، برئاسة نائب رئيس البعثة ( دلفين..</p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
                                         Read More
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
@@ -279,11 +283,11 @@
                                     </div>
                                 </div>
                                 <!-- d-flex  -->
-                                <p class="card-text mb-0">Iجاء ذلك خلال زيارته  لسوق جارا  في العاصمة عمان، ومشاركته عددا من المتطوعين والمنسقين في برنامج أنا أشارك. .</p>
+                                <p class="card-text mb-0">جاء ذلك خلال زيارته  لسوق جارا  في العاصمة عمان، ومشاركته عددا من المتطوعين والمنسقين في برنامج أنا أشارك. .</p>
 
                                 <div>
-                                    <a href="news-single.html" class="blog-link text-decoration-none link-hover-animation-1">
-                                        Read More
+                                    <a href="" class="blog-link text-decoration-none link-hover-animation-1">
+                                        اقرأ المزيد
                                         <span class="arrow-right-icon-sm">
                                             <svg width="12" height="12"><use xlink:href="#arrow-right-icon-sm"></use></svg>
                                         </span>
@@ -481,6 +485,27 @@
     <!-- container -->
 </section>
 <!--News Section ======================-->
+<section class="text-ltr align-text-start" dir="ltr">
+    <div class="container">
+
+        <div class="tick" data-did-init="handleTickInit">
+            <div data-repeat="true"
+                 data-layout="horizontal fit"
+                 data-transform="preset(d, h, m, s) -> delay">
+                <div class="tick-group">
+                    <div data-key="value"
+                         data-repeat="true"
+                         data-transform="pad(00) -> split -> delay">
+                        <span data-view="flip"></span>
+                    </div>
+
+                    <span data-key="label" data-view="text" class="tick-label"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 @if (Session["SwalMessage"] != null)
 {
@@ -495,3 +520,15 @@
     </script>
     { Session["SwalMessage"] = null; }
 }
+
+<script>
+      function handleTickInit(tick) {
+        var counter = Tick.count.down("@ViewBag.Date");
+
+        counter.onupdate = function (value) {
+          tick.value = value;
+        };
+
+        counter.onended = function () {};
+      }
+</script>

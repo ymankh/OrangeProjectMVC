@@ -3,17 +3,19 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-
 <div class="container mt-5"></div>
 
-<form method="post" class="container" id="nominationForm" action="@Url.Action("SingleLocalList", "reqistList", new { id = ViewBag.districtId })">
+<!-- Added enctype="multipart/form-data" to handle file uploads -->
+<form method="post" class="container" id="nominationForm" action="@Url.Action("SingleLocalList", "reqistList", new { id = ViewBag.districtId })" enctype="multipart/form-data">
     <!-- Form title -->
     <h2 class="text-center mb-4">تقديم طلب للترشح</h2>
 
     <!-- Input for List Name -->
     <div class="form-group">
-        <label for="listName" class="form-label">اسم القائمة</label>
-        <input type="text" name="list_name" id="listName" class="form-control" placeholder="ادخل اسم القائمة" required />
+        <label for="listName" >اسم القائمة</label>
+        <input type="text" name="list_name" id="listName"  placeholder="ادخل اسم القائمة" required />
+        <label for="listImage" class="form-label">صورة القائمة</label>
+        <input type="file" name="list_image" id="listImage" required />
     </div>
 
     <!-- Section for Competitive Seats -->
@@ -21,7 +23,9 @@
     @for (int i = 0; i < ViewBag.competitive_seat; i++)
     {
         <div class="form-group mb-3">
-            <input type="text" name="competitive_seats" id="competitiveSeats" class="form-control" placeholder=" ادخل الرقم الوطني للمرشح @i " required />
+            <input type="text" name="competitive_seats" id="competitiveSeats"  placeholder=" ادخل الرقم الوطني للمرشح @i " required />
+            <!-- Input for Candidate Image -->
+            <input type="file" name="candidate_images" id="candidateImage_@i"  required />
         </div>
     }
 
@@ -30,7 +34,9 @@
     {
         <h5>مقعد الكوته</h5>
         <div class="form-group">
-            <input type="text" name="women_seat" id="womenSeat" class="form-control" placeholder="ادخل الرقم الوطني للمرشح" required />
+            <input type="text" name="women_seat" id="womenSeat" placeholder="ادخل الرقم الوطني للمرشح" required />
+            <!-- Input for Women Candidate Image -->
+            <input type="file" name="women_candidate_image" id="womenCandidateImage"  required />
         </div>
     }
 
@@ -39,7 +45,9 @@
     {
         <h5>المقعد المسيحي</h5>
         <div class="form-group">
-            <input type="text" name="christian_seat" id="christianSeat" class="form-control" placeholder="ادخل الرقم الوطني للمرشح" required />
+            <input type="text" name="christian_seat" id="christianSeat"  placeholder="ادخل الرقم الوطني للمرشح" required />
+            <!-- Input for Christian Candidate Image -->
+            <input type="file" name="christian_candidate_image" id="christianCandidateImage" required />
         </div>
     }
 
@@ -85,5 +93,4 @@
             });
         });
     </script>
-} 
 }

@@ -9,17 +9,18 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: UserCycle
-        [Route("")]
+
         public ActionResult Index()
         {
+            ViewBag.Date = db.Dates.FirstOrDefault().election_end_date;
             return View();
         }
 
-        public ActionResult contact()
-        {
-            ViewBag.Message = "Your application description page.";
-            return View();
-        }
+        //public ActionResult contact()
+        //{
+        //    ViewBag.Message = "Your application description page.";
+        //    return View();
+        //}
 
         public ActionResult about()
         {

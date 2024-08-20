@@ -35,6 +35,20 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.image_url)
+        </dt>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.image_url))
+            {
+                <img src="@Url.Content(Model.image_url)" alt="Image" style="max-width: 200px; max-height: 200px;" />
+            }
+            else
+            {
+                <p>No image available</p>
+            }
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.district.name)
         </dt>
 
