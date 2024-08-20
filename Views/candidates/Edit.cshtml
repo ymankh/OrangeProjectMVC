@@ -50,6 +50,28 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.img_url, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (!string.IsNullOrEmpty(Model.img_url))
+                {
+                    <img src="@Url.Content(Model.img_url)" alt="Image" style="max-width: 200px; max-height: 200px;" />
+                }
+                @Html.EditorFor(model => model.img_url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.img_url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.is_representative, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.is_representative)
+                    @Html.ValidationMessageFor(model => model.is_representative, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
