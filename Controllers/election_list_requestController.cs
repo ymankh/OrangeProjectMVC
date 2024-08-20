@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace OrangeProjectMVC.Controllers
@@ -70,91 +72,76 @@ namespace OrangeProjectMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,district_id,type,status")] election_list_request election_list_request, int id)
+        public ActionResult Edit(election_list_request election_list_request, HttpPostedFileBase image_file)
         {
             if (ModelState.IsValid)
             {
-                var newelection_list_request = election_list_request;
-                // Find the election_list_request by id
-                var entity = db.election_list_request.Where(x => x.id == id).FirstOrDefault();
-                var entityType = entity.type;
-                var entitydistincrID = entity.district_id;
-                if (entity != null && election_list_request.status == "Accept")
+                if (image_file != null && image_file.ContentLength > 0)
                 {
-                    // Find related candidate_requests
-                    var relatedCandidateRequests = db.candidate_request
-                        .Where(cr => cr.election_list_request_id == id).ToList();
+                    var fileName = Path.GetFileName(image_file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/ElectionLists/"), fileName);
+                    image_file.SaveAs(path);
+                    election_list_request.image_url = "~/Images/ElectionLists/" + fileName;
+                }
 
-                    // Remove related candidate_requests
-                    foreach (var candidateRequest in relatedCandidateRequests)
+                var entity = db.election_list_request.Find(election_list_request.id);
+                if (entity != null)
+                {
+                    entity.name = election_list_request.name;
+                    entity.type = election_list_request.type;
+                    entity.status = election_list_request.status;
+                    entity.district_id = election_list_request.district_id;
+                    entity.image_url = election_list_request.image_url;
+
+                    if (entity.status == "Accept")
                     {
-                        db.candidate_request.Remove(candidateRequest);
+                        var relatedCandidateRequests = db.candidate_request
+                            .Where(cr => cr.election_list_request_id == election_list_request.id).ToList();
+
+                        foreach (var candidateRequest in relatedCandidateRequests)
+                        {
+                            db.candidate_request.Remove(candidateRequest);
+                        }
+
+                        db.election_list_request.Remove(entity);
+
+                        var election_List1 = new election_list()
+                        {
+                            name = election_list_request.name,
+                            district_id = entity.district_id,
+                            type = entity.type,
+                            vote_count = 0
+                        };
+                        db.election_list.Add(election_List1);
                     }
 
-                    // Remove the election_list_request
-                    db.election_list_request.Remove(entity);
-
-                    election_list election_List1 = new election_list()
-                    {
-                        name = newelection_list_request.name,
-                        district_id = entitydistincrID,
-                        type = entityType,
-                        vote_count = 0
-                    };
-                    db.election_list.Add(election_List1);
-
-                    // Save changes to the database
                     db.SaveChanges();
-
                 }
+                return RedirectToAction("Index");
             }
 
-            // Redirect or return as needed
-            return RedirectToAction("Index");
+            // Reload ViewBag data in case of validation errors
+            ViewBag.StatusList = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Pending", Text = "Pending" },
+        new SelectListItem { Value = "Reject", Text = "Reject" },
+        new SelectListItem { Value = "Accept", Text = "Accept" }
+    }, "Value", "Text", election_list_request.status);
+
+            ViewBag.TypeList = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "P", Text = "Party" },
+        new SelectListItem { Value = "L", Text = "Local" }
+    }, "Value", "Text", election_list_request.type);
+
+            ViewBag.district_id = new SelectList(db.districts, "id", "name", election_list_request.district_id);
+
+            return View(election_list_request);
         }
 
 
-        //    //if (election_list_request.status == "Accept")
-        //    //{
-        //    //    var newList = new election_list();
-        //    //    newList.name = election_list_request.name;
-        //    //    newList.type = election_list_request.type;
 
 
-        //    //    var requestedCandidate = db.candidate_request.
-        //    //        Where(c => c.election_list_request_id == id).
-        //    //        ToList();
-
-        //    //    if (election_list_request.type == "L")
-        //    //    {
-        //    //        newList.district_id = election_list_request.district_id;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        newList.district_id = 1;
-        //    //    }
-        //    //    db.election_list.Add(newList);
-        //    //    db.SaveChanges();
-        //    //    foreach (var c in requestedCandidate)
-        //    //    {
-        //    //        var newC = new candidate();
-        //    //        newC.user_id = c.user_id;
-        //    //        newC.type_of_chair = c.type_of_chair;
-        //    //        newC.election_list_id = newList.id;
-        //    //        newC.vote_count = 0;
-
-        //    //        db.candidates.Add(newC);
-        //    //        db.candidate_request.Remove(c);
-        //    //        db.SaveChanges();
-        //    //    }
-        //    //    var electionList = db.election_list_request.Find(id);
-        //    //    db.election_list_request.Remove(electionList);
-        //    //    db.SaveChanges();
-
-        //    //}
-        //    //ViewBag.district_id = new SelectList(db.districts, "id", "name", election_list_request.district_id);
-        //    //return RedirectToAction("Index");
-        //}
 
         // GET: election_list_request/Delete/5
         public ActionResult Delete(int? id)
