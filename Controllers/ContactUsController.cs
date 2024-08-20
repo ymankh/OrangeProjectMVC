@@ -57,7 +57,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 var fromEmail = "techlearnhub.contact@gmail.com"; // Replace with your email
                 var fromPassword = "lyrlogeztsxclank"; // Replace with your email password
-                var toEmail = "raniahasi@gmail.com";
+                var toEmail = "mohammaddfawareh@gmail.com";
 
                 var smtpClient = new SmtpClient("smtp.gmail.com")
                 {
