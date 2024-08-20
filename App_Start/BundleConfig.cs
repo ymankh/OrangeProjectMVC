@@ -58,7 +58,7 @@ namespace OrangeProjectMVC
                 "~/assets/flip/flip.min.css"
             ));
 
-            bundles.Add(new Bundle("~/bundles/userCycle").Include(
+            bundles.Add(new Bundle("~/flip/js").Include(
                 "~/assets/flip/flip.js"
             ));
 

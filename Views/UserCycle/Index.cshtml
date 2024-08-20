@@ -481,6 +481,27 @@
     <!-- container -->
 </section>
 <!--News Section ======================-->
+<section class="text-ltr align-text-start" dir="ltr">
+    <div class="container">
+
+        <div class="tick" data-did-init="handleTickInit">
+            <div data-repeat="true"
+                 data-layout="horizontal fit"
+                 data-transform="preset(d, h, m, s) -> delay">
+                <div class="tick-group">
+                    <div data-key="value"
+                         data-repeat="true"
+                         data-transform="pad(00) -> split -> delay">
+                        <span data-view="flip"></span>
+                    </div>
+
+                    <span data-key="label" data-view="text" class="tick-label"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 @if (Session["SwalMessage"] != null)
 {
@@ -495,3 +516,15 @@
     </script>
     { Session["SwalMessage"] = null; }
 }
+
+<script>
+      function handleTickInit(tick) {
+        var counter = Tick.count.down("2024-08-22T00:00:00");
+
+        counter.onupdate = function (value) {
+          tick.value = value;
+        };
+
+        counter.onended = function () {};
+      }
+</script>
