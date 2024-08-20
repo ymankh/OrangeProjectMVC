@@ -4,34 +4,98 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<div class="container mt-5" style="height:70vh; display:flex; flex-direction:column; justify-content:center;">
+<style>
+    .card-body {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .card-body img {
+            transition: transform 0.5s ease, filter 0.5s ease;
+            width: 100%;
+            height: auto;
+        }
+
+            .card-body img:hover {
+                transform: scale(1.1);
+                filter: brightness(1.1) saturate(1.2);
+            }
+
+        .card-body .btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card-body:hover .btn {
+            opacity: 1;
+        }
+
+
+</style>
+
+<section class="section-advertisement ad-2 py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+        <div class="row align-items-center g-40 justify-content-between">
+            <div class="col-lg-5">
+                <div class="about-image position-relative wow fadeInLeft" data-wow-duration="1.3s">
+                    <a href="@Url.Content("~/assets/images/volunteer-image-2.png")" class="image-link">
+                        <img src="@Url.Content("~/assets/images/volunteer-image-2.png")" class="img-fluid" alt="volunteer-image-2">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="d-flex flex-column gap-3">
+                    <h6 class="subtitle lead text-primary wow fadeInRight" style="font-family:cairo;">تقديم طلبات الترشح</h6>
+                    <h2 class="mb-1 wow fadeInRight" data-wow-delay=".3s" data-wow-duration="1.3s" style="font-family:cairo;">شارك في الانتخابات وقدم طلب الترشح الآن</h2>
+                    <p class="mb-0 mb-lg-10 wow fadeInRight" data-wow-delay=".4s" data-wow-duration="1.3s">تقديم طلب الترشح الخاص بك أصبح سهلاً! انضم إلينا الآن واستعرض جميع المتطلبات اللازمة لترشحك. سواء كنت تتطلع إلى خوض الانتخابات لأول مرة أو تكرار تجربتك، فإن ترشحك يعتبر خطوة هامة نحو المستقبل. استخدم منصتنا لتقديم طلب ترشحك والتعرف على جميع التفاصيل والخطوات المطلوبة.</p>
+
+                    <ul class="about-lists list-unstyled mb-0 d-flex flex-column gap-10 wow fadeInRight" data-wow-delay=".5s" data-wow-duration="1.3s">
+                        <li class="d-flex gap-10 align-items-center"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>التزم بالشروط والأحكام</li>
+                        <li class="d-flex gap-10 align-items-center"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>تأكد من اكتمال جميع البيانات</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="container mt-5">
 
     <div class="row justify-content-center">
         <!-- Party List Registration Card -->
-        <div class="col-md-5 mx-2 mb-4">
-            <div class="card border border-gg shadow-sm">
+        <div class="col-md-5 ">
+            <div class="card border  shadow-sm">
                 <div class="card-body text-center">
+                    <img src="@Url.Content("~/assets/images/annotationRequest.png")" class="img-fluid mb-3"  alt="Party List Image">
                     <h5 class="card-title fw-bold">التسجيل في القائمة الحزبية</h5>
                     <p class="card-text">
                         اختر هذا الخيار إذا كنت ترغب في التسجيل في الانتخابات القائمة الحزبية.
                     </p>
-                     <form action="@Url.Action("PartyList", "reqistList")" method="post">
-                        <button type="submit" class="btn btn-primary w-100">التسجيل الآن</button>
+                    <form action="@Url.Action("PartyList", "reqistList")" method="post">
+                        <button type="submit" class="btn btn-primary ">التسجيل الآن</button>
                     </form>
                 </div>
             </div>
         </div>
 
         <!-- Local List Registration Card -->
-        <div class="col-md-5 mx-2 mb-4">
-            <div class="card border border-gg shadow-sm">
+        <div class="col-md-5  ">
+            <div class="card border shadow-sm">
                 <div class="card-body text-center">
+                    <img src="@Url.Content("~/assets/images/annotationRequest.png")" class="img-fluid mb-3"  alt="Party List Image">
+
                     <h5 class="card-title fw-bold">التسجيل في القائمة المحلية</h5>
                     <p class="card-text">
                         اختر هذا الخيار إذا كنت ترغب في التسجيل في الانتخابات القائمة المحلية.
                     </p>
                     <form action="@Url.Action("LocalList", "reqistList")" method="post">
-                        <button type="submit" class="btn btn-primary w-100">التسجيل الآن</button>
+                        <button type="submit" class="btn btn-primary ">التسجيل الآن</button>
                     </form>
                 </div>
             </div>

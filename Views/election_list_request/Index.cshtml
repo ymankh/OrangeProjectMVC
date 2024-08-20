@@ -19,7 +19,13 @@
         <th>
             @Html.DisplayNameFor(model => model.status)
         </th>
-       
+        <th>
+            @Html.DisplayNameFor(model => model.image_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.district.name)
+        </th>
+
         <th></th>
     </tr>
 
@@ -34,11 +40,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.status)
         </td>
-      
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.DisplayFor(modelItem => item.image_url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.district.name)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
         </td>
     </tr>
 }

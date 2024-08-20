@@ -13,8 +13,8 @@ namespace OrangeProjectMVC.Controllers
         // GET: candidate_request
         public ActionResult Index()
         {
-            var candidateRequest = db.candidate_request.Include(c => c.election_list_request).Include(c => c.voter_user);
-            return View(candidateRequest.ToList());
+            var candidateRequest = db.candidate_request.Include(c => c.election_list_request).Include(c => c.voter_user).ToList();
+            return View(candidateRequest);
         }
 
         // GET: candidate_request/Details/5
