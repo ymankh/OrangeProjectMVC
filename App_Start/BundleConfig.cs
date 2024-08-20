@@ -54,6 +54,15 @@ namespace OrangeProjectMVC
             "~/assets/css/customStyle.css"
             ));
 
+            bundles.Add(new StyleBundle("~/flip/css").Include(
+                "~/assets/flip/flip.min.css"
+            ));
+
+            bundles.Add(new Bundle("~/bundles/userCycle").Include(
+                "~/assets/flip/flip.js"
+            ));
+
+
             bundles.Add(new Bundle("~/bundles/userCycle").Include(
                 "~/assets/js/animate.js",
                 "~/assets/js/bootstrap.bundle.min.js",
