@@ -4,6 +4,13 @@
 }
 
 <style>
+    .mmm {
+        margin-bottom:3%;
+    }
+    body {
+        background-color: #ebe9e9 !important;
+    }
+
     .form-container {
         background-color: #ffffff;
         padding: 30px;
@@ -11,7 +18,7 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         max-width: 80%; /* عرض الفورم إلى 80% */
         margin: 0 auto; /* وضع الفورم في المنتصف */
-        background-color:lightgray;
+        
     }
 
         .form-container h2 {
@@ -79,7 +86,7 @@
         }
 </style>
 
-<div class="container mt-5">
+<div class="container mt-5 mmm">
     <div class="form-container">
         <!-- Added enctype="multipart/form-data" to handle file uploads -->
         <form method="post" id="nominationForm" action="@Url.Action("SingleLocalList", "reqistList", new { id = ViewBag.districtId })" enctype="multipart/form-data">

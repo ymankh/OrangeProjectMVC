@@ -236,6 +236,7 @@
     <Content Include="assets\images\campaign-6.jpg" />
     <Content Include="assets\images\campaign-7.jpg" />
     <Content Include="assets\images\contact-image-2.jpg" />
+    <Content Include="assets\images\debatePic.jpg" />
     <Content Include="assets\images\event-2.jpg" />
     <Content Include="assets\images\event-3.jpg" />
     <Content Include="assets\images\fav-icon\favicon.ico" />
