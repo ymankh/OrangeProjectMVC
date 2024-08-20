@@ -1,108 +1,81 @@
 ﻿@model IEnumerable<OrangeProjectMVC.Models.voter_user>
 
 @{
-    ViewBag.Title = "test";
+    ViewBag.Title = "تسجيل قائمة حزبية";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+<style>
+    body{
+        background-color:lightgray !important;
+    }
+    .margin {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+</style>
+<div class="container margin">
+    
 
-
-
-<div class="container">
-    <h2 class="text-center mt-4">تسجيل قائمة حزبية</h2>
-    @if (ViewBag.candetCount >= ViewBag.numberOfSeates)
-    {
+    <div class="card p-4 mb-4">
+        <h2 class="text-center mt-4">تسجيل قائمة حزبية</h2>
         <form method="post" action="@Url.Action("SavePartList")">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <label for="lsitPartyName">أسم القائمة</label> <input type="text" placeholder="ادخل اسم القائمة" class="form-control " name="lsitPartyName" />
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="lsitPartyName">أسم القائمة</label>
+                    <input type="text" class="form-control" name="lsitPartyName" placeholder="ادخل اسم القائمة"
+                           @(ViewBag.candetCount < ViewBag.numberOfSeates ? "disabled" : "") />
                 </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">حفظ الطلب</button>
+                <div class="col-md-6 mb-3">
+                    <label for="nationalID">الرقم الوطني</label>
+                    <input type="text" class="form-control" name="nationalID" id="nationalID" placeholder="ادخل الرقم الوطني" required
+                           @(ViewBag.candetCount >= ViewBag.numberOfSeates ? "disabled" : "") />
                 </div>
             </div>
-
-        </form>
-    }
-    else
-    {
-        <form method="post" action="@Url.Action("SavePartList")">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <label for="lsitPartyName">أسم القائمة</label> <input type="text" disabled placeholder="" class="form-control " name="lsitPartyName" />
-                </div>
-                <div>
-                    <button type="submit" disabled class="btn btn-primary">حفظ الطلب</button>
-                </div>
+            <div class="text-right mt-3">
+                <button type="submit" class="btn btn-primary" @(ViewBag.candetCount >= ViewBag.numberOfSeates ? "disabled" : "")>حفظ الطلب</button>
+                <button type="submit" formaction="@Url.Action("PartyList", "reqistList")" class="btn btn-secondary ml-2"
+                        @(ViewBag.candetCount >= ViewBag.numberOfSeates ? "disabled" : "")>
+                    ابحث
+                </button>
             </div>
-
         </form>
-    }
-</div>
-<div class="container ">
-    <div class="row">
-        <div class="col-md-10">
-            @if (ViewBag.candetCount < ViewBag.numberOfSeates)
-            {
+    </div>
 
-                <form method="post" action="@Url.Action("PartyList", "reqistList")">
-
-                    <div class="form-group">
-                        <label for="nationalID">الرقم الوطني</label>
-                        <input type="text" name="nationalID" id="nationalID" class="form-control w-25" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-2">ابحث</button>
-                </form>
-            }
-            else
-            {
-                <form method="post" action="@Url.Action("PartyList", "reqistList")">
-
-                    <div class="form-group">
-                        <label for="nationalID">الرقم الوطني</label>
-                        <input type="text" disabled name="nationalID" id="nationalID" class="form-control w-25" required />
-                    </div>
-                    <button type="submit" disabled class="btn btn-primary mt-2">ابحث</button>
-                </form>
-            }
-
-
-            <table class="table table-bordered mt-4">
-                <thead class="table-light">
-                    <tr>
-                        <th></th>
-                        <th scope="col">الرقم الوطني</th>
-                        <th scope="col">اسم الناخب</th>
-                        <th scope="col">البريد الالكتروني</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        int i = 0;
-                    }
-                    @if (Model.Any())
+    <div class="card p-4 " >
+        <h3 class="text-center">قائمة المرشحين</h3>
+        <table class="table table-bordered mt-4">
+            <thead class="table-light">
+                <tr>
+                    <th></th>
+                    <th scope="col">الرقم الوطني</th>
+                    <th scope="col">اسم الناخب</th>
+                    <th scope="col">البريد الالكتروني</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @if (Model.Any())
+                {
+                    foreach (var voter in Model)
                     {
-                        foreach (var voter in Model)
-                        {
-                            { i++; }
-                            <tr>
-                                <td>@i</td>
-                                <td>@voter.national_id</td>
-                                <td>@voter.name</td>
-                                <td>@voter.email</td>
-                            </tr>
-                        }
-                    }
-                    else
-                    {
+                        i++;
                         <tr>
-                            <td colspan="3" class="text-center">No records found.</td>
+                            <td>@i</td>
+                            <td>@voter.national_id</td>
+                            <td>@voter.name</td>
+                            <td>@voter.email</td>
                         </tr>
                     }
-                </tbody>
-            </table>
-        </div>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">No records found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
-
-
-}
