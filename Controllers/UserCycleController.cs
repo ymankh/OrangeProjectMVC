@@ -1,4 +1,5 @@
 ﻿using OrangeProjectMVC.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,6 +13,30 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Index()
         {
+            var dates = db.Dates.FirstOrDefault();
+
+            var dateNow = DateTime.Now;
+            var date = db.Dates.FirstOrDefault();
+            if (dateNow < date.nomination_start_date)
+            {
+                ViewBag.Date = date.nomination_start_date;
+                ViewBag.TimerTitle = "الوقت  حتى بداية فترة الترشح";
+            }
+            else if (dateNow < date.nomination_end_date)
+            {
+                ViewBag.Date = date.nomination_end_date;
+                ViewBag.TimerTitle = "الوقت  حتى انتهاء فترة الترشح";
+            }
+            else if (dateNow < date.election_start_date)
+            {
+                ViewBag.Date = date.election_start_date;
+                ViewBag.TimerTitle = "الوقت  حتى بداية فترة التصويت";
+            }
+            else if (dateNow < date.election_end_date)
+            {
+                ViewBag.Date = date.election_end_date;
+                ViewBag.TimerTitle = "الوقت  حتى انتهاء فترة التصويت";
+            }
             return View();
         }
 

@@ -37,7 +37,7 @@ namespace OrangeProjectMVC.Controllers
         }
 
         // GET: election_list/Create
-        public ActionResult Create()
+        public ActionResult Creae()
         {
             ViewBag.district_id = new SelectList(db.districts, "id", "name");
             return View();

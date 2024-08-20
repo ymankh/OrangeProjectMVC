@@ -40,7 +40,7 @@
 
 <h2 style="text-align: center; font-family: cairo; margin-top: 1em;">التصويت القوائم المحلية</h2>
 
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom:2em">
     <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار القائمة المراد التصويت لها</h3>
 
     @using (Html.BeginForm("SingleList", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "VoteForm" }))
@@ -52,7 +52,9 @@
                 { i += 1; }
                 <div class="col-sm-12 col-md-6 col-lg-3 my-2 image-item">
                     <div class="card shadow-2-strong h-100">
-                        <img src="@Url.Content(imgs[i % imgs.Length])" class="card-img-top" alt="Card image for @Html.DisplayFor(model => lists.name)">
+                        <div style="height:200px; overflow:hidden">
+                            <img src="@Url.Content(imgs[i % imgs.Length])" style="height:100%" class="card-img-top" alt="Card image for @Html.DisplayFor(model => lists.name)">
+                        </div>
                         <div class="card-body text-center">
                             <h5 class="card-title" style="font-family: cairo;">قائمة @Html.DisplayFor(model => lists.name)</h5>
                             @*<p class="card-text" style="font-family: cairo;">@Html.DisplayFor(model => lists.name).</p>*@
@@ -71,7 +73,7 @@
             }
         </div>
         <div class="text-center mt-4">
-            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت لان</button>
+            <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
             @Html.ActionLink("رجوع", "ListsType", "User", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
         </div>
     }

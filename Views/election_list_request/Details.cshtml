@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Details";
-    
 }
 
 <h2>Details</h2>
@@ -34,12 +33,19 @@
         <dd>
             @Html.DisplayFor(model => model.status)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.image_url)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.image_url)
+            @if (!string.IsNullOrEmpty(Model.image_url))
+            {
+                <img src="@Url.Content(Model.image_url)" alt="Image" style="max-width: 200px; max-height: 200px;" />
+            }
+            else
+            {
+                <p>No image available</p>
+            }
         </dd>
 
         <dt>
