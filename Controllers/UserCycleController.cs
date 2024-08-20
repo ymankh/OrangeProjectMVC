@@ -37,6 +37,8 @@ namespace OrangeProjectMVC.Controllers
                 ViewBag.Date = date.election_end_date;
                 ViewBag.TimerTitle = "الوقت  حتى انتهاء فترة التصويت";
             }
+            
+             
             return View();
         }
 
