@@ -24,7 +24,7 @@
 
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="font-size:small;font-family:cairo;" type="submit">دخول</button>
 
-                            <span>@ViewBag.msg</span>
+                          
                         }
 
                     </div>
@@ -33,3 +33,24 @@
         </div>
     </div>
 </section>
+
+
+
+@if (ViewBag.Msg != null)
+{
+
+
+    <script>
+        Toastify({
+            text: "@ViewBag.Msg",
+            duration: 3000, // Duration in milliseconds (3 seconds)
+            close: true, // Show close button
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            backgroundColor: "#FF0000", // Warning background color (orange)
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            onClick: function () { } // Callback after click
+        }).showToast();
+    </script>
+}
+}
