@@ -1,7 +1,9 @@
 ﻿using OrangeProjectMVC.Models;
+using System.IO;
+using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-
 namespace OrangeProjectMVC.Controllers
 {
     public class AdvController : Controller
@@ -17,24 +19,43 @@ namespace OrangeProjectMVC.Controllers
         // POST: Ads/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Ad model)
+        public ActionResult Create(Ad model, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
-                Ad ad = new Ad
+                if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    description = model.description,
-                    img_url = model.img_url,
-                    status = "Active"
-                };
+                    // Generate a unique filename and save the image
+                    string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                    string extension = Path.GetExtension(ImageFile.FileName);
+                    fileName = fileName + "_" + Guid.NewGuid().ToString() + extension;
 
-                db.Ads.Add(ad);
+                    // Define the path to save the uploaded file
+                    string directoryPath = Server.MapPath("~/uploads/ads/");
+
+                    // Ensure the directory exists
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+
+                    // Save the file
+                    string path = Path.Combine(directoryPath, fileName);
+                    ImageFile.SaveAs(path);
+
+                    // Save the file path in the database
+                    model.img_url = "~/uploads/ads/" + fileName;
+                }
+
+                model.status = "Active";
+                db.Ads.Add(model);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Payment"); // Redirect to payment page after saving ad
+                return RedirectToAction("Index", "Payment");
             }
 
             return View(model);
         }
+    
 
         // GET: Ads
         public ActionResult Index()
@@ -91,3 +112,6 @@ namespace OrangeProjectMVC.Controllers
         }
     }
 }
+
+
+
