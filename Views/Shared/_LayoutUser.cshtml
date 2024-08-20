@@ -10,6 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="~/assets/images/fav-icon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="~/assets/images/fav-icon/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
     @Styles.Render("~/Content/userCycle")
     @Styles.Render("~/flip/css")
     @Scripts.Render("~/flip/js")
@@ -48,31 +53,30 @@
                 background-color: #b8001e !important; /* Darker shade for the button on hover */
                 border-color: #b8001e !important;
             }
-        /*.video-popup .video-icon {
+      /*  .video-popup .video-icon {
             display: inline-block;
             width: 60px;
             height: 60px;
-            border-radius: 50%;*/
-            /*background-color: white;*/ /* White circle background */
-            /*position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);*/
+            border-radius: 50%;
+        background-color: white;  White circle background 
+        position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }*/
+
+        .video-popup .video-icon svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-            .video-popup .video-icon svg {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+            .video-popup .video-icon svg circle {
+                r: 50%;
             }
 
-                .video-popup .video-icon svg circle {
-                    r: 50%;
-                }
-
-                .video-popup .video-icon svg polygon {
-                    fill: #D10024; /* Red color for the play button */
-                }
-
+            .video-popup .video-icon svg polygon {
+                fill: #D10024; /* Red color for the play button */
+            }
     </style>
 
 </head>
