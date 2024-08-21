@@ -38,9 +38,8 @@
             nominationRunning = dates != null &&
                                 dates.nomination_start_date < DateTime.Now &&
                                 dates.nomination_end_date > DateTime.Now;
-            resultsRunning = dates != null && dates.nomination_end_date < DateTime.Now;
+            resultsRunning = dates != null && dates.election_end_date < DateTime.Now;
         }
-
     }
 
 
@@ -153,7 +152,7 @@
                                 <span class="mail-icon text-white">
                                     <svg width="12" height="12"><use xlink:href="#mail-icon"></use></svg>
                                 </span>
-                                <p class="mb-0 fw-light small"><a href="mailto:info@iec.jo" class="text-decoration-none link-hover-animation-1">info@iec.jo</a></p>
+                                <p class="mb-0 fw-light small"><a href="mailto:info@info.info" class="text-decoration-none link-hover-animation-1">info@iec.jo</a></p>
                             </li>
                             <li class="d-flex gap-2 align-items-center">
                                 <span class="location-icon text-white">
@@ -214,10 +213,10 @@
 
                         <a class="navbar-brand py-2 py-xl-0" href="@Url.Action("Index", "UserCycle")">
                             <span class="logo">
-                                <img src="~/assets/images/logo-dark.png" alt="logo-dark">
+                                <img src="~/assets/images/touch-icon-ipad.png" alt="logo-dark">
                             </span>
                         </a>
-                        <ul class="navbar-nav gap-30 gap-lg-40 justify-content-end flex-grow-1 align-items-xl-center">
+                        <ul class="navbar-nav gap-30 gap-lg-40 justify-content-center flex-grow-1 align-items-xl-center">
 
                             <li class="nav-item">
                                 <a class="nav-link active d-inline-flex gap-2 align-items-center" href="@Url.Action("Index", "UserCycle")">الصفحة الرئيسية</a>
@@ -313,25 +312,25 @@
                                     <span class="chevron-right-icon">
                                         <svg width="9" height="14"><use xlink:href="#chevron-right-icon"></use></svg>
                                     </span>
-                                    <a href="about-us-1.html" class="text-decoration-none link-hover-animation-1 fw-semibold">من نحن</a>
+                                    <a href="@Url.Action("about", "UserCycle")" class="text-decoration-none link-hover-animation-1 fw-semibold">من نحن</a>
                                 </li>
                                 <li class="d-flex gap-10 align-items-center">
                                     <span class="chevron-right-icon">
                                         <svg width="9" height="14"><use xlink:href="#chevron-right-icon"></use></svg>
                                     </span>
-                                    <a href="campaign-1.html" class="text-decoration-none link-hover-animation-1 fw-semibold">الإعلانات</a>
+                                    <a href="@Url.Action("advertismentst","UserCycle")" class="text-decoration-none link-hover-animation-1 fw-semibold">الإعلانات</a>
                                 </li>
                                 <li class="d-flex gap-10 align-items-center">
                                     <span class="chevron-right-icon">
                                         <svg width="9" height="14"><use xlink:href="#chevron-right-icon"></use></svg>
                                     </span>
-                                    <a href="volunteer-1.html" class="text-decoration-none link-hover-animation-1 fw-semibold">المناظرات</a>
+                                    <a href="@Url.Action("ShowDebates", "debates")" class="text-decoration-none link-hover-animation-1 fw-semibold">المناظرات</a>
                                 </li>
                                 <li class="d-flex gap-10 align-items-center">
                                     <span class="chevron-right-icon">
                                         <svg width="9" height="14"><use xlink:href="#chevron-right-icon"></use></svg>
                                     </span>
-                                    <a href="news.html" class="text-decoration-none link-hover-animation-1 fw-semibold">طلب الترشيح</a>
+                                    <a href="@Url." class="text-decoration-none link-hover-animation-1 fw-semibold">طلب الترشيح</a>
                                 </li>
                             </ul>
                         </div>
