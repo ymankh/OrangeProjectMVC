@@ -47,7 +47,7 @@ namespace OrangeProjectMVC.Controllers
                     model.img_url = "~/uploads/ads/" + fileName;
                 }
 
-                model.status = "Active";
+                model.status = "pending";
                 db.Ads.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Payment");
