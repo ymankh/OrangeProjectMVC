@@ -160,7 +160,7 @@ namespace OrangeProjectMVC.Controllers
         public ActionResult Logout()
         {
             Session["National_ID"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "UserCycle");
         }
 
 
