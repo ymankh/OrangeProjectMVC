@@ -1,6 +1,6 @@
 ﻿using OrangeProjectMVC.Models;
-using System.IO;
 using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,15 +11,24 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: Ads/Create
-        public ActionResult Create()
+
+
+        public ActionResult ChoosePackage()
         {
             return View();
         }
+        public ActionResult Create(decimal price)
+        {
+            ViewBag.Price = price;
+            return View();
+        }
+
+
 
         // POST: Ads/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Ad model, HttpPostedFileBase ImageFile)
+        public ActionResult Create(Ad model, HttpPostedFileBase ImageFile, decimal price)
         {
             if (ModelState.IsValid)
             {
@@ -50,12 +59,12 @@ namespace OrangeProjectMVC.Controllers
                 model.status = "pending";
                 db.Ads.Add(model);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Payment");
+                return RedirectToAction("Checkout", "Payment", new { price = price });
             }
 
             return View(model);
         }
-    
+
 
         // GET: Ads
         public ActionResult Index()
