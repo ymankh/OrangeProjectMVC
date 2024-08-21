@@ -13,7 +13,7 @@
     <link rel="icon" href="~/assets/images/fav-icon/favicon.ico" type="image/x-icon">
     <link href="~/assets/css/animate.css" rel="stylesheet" />
 
-   
+
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
@@ -32,11 +32,11 @@
             var dates = context.Dates.FirstOrDefault();
             electionRunning =
                     dates != null &&
-                    dates.election_start_date > DateTime.Now &&
-                    dates.election_end_date < DateTime.Now;
+                    dates.election_start_date < DateTime.Now &&
+                    dates.election_end_date > DateTime.Now;
             nominationRunning = dates != null &&
-                                dates.nomination_start_date > DateTime.Now &&
-                                dates.nomination_end_date < DateTime.Now;
+                                dates.nomination_start_date < DateTime.Now &&
+                                dates.nomination_end_date > DateTime.Now;
         }
     }
 
