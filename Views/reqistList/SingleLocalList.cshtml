@@ -112,7 +112,7 @@
 
             <!-- Section for Competitive Seats -->
             <h5>المقاعد التنافسية</h5>
-            @for (int i = 0; i < ViewBag.competitive_seat; i++)
+            @for (var i = 0; i < ViewBag.competitive_seat; i++)
             {
                 <div class="input-row">
                     <div class="form-group">
@@ -225,7 +225,7 @@
         readURL(this, 'listImagePreview');
     });
 
-    @for (int i = 0; i < ViewBag.competitive_seat; i++)
+    @for (var i = 0; i < ViewBag.competitive_seat; i++)
     {
         <text>
         document.getElementById("candidateImage_@i").addEventListener("change", function () {

@@ -68,7 +68,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Admin admin = db.Admins.Find(id);
+            var admin = db.Admins.Find(id);
             if (admin == null)
             {
                 return HttpNotFound();
@@ -112,7 +112,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Admin admin = db.Admins.Find(id);
+            var admin = db.Admins.Find(id);
             if (admin == null)
             {
                 return HttpNotFound();
@@ -147,7 +147,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Admin admin = db.Admins.Find(id);
+            var admin = db.Admins.Find(id);
             if (admin == null)
             {
                 return HttpNotFound();
@@ -162,7 +162,7 @@ namespace OrangeProjectMVC.Controllers
         {
             if (NotAdmin())
                 return RedirectToAction("Index", "UserCycle");
-            Admin admin = db.Admins.Find(id);
+            var admin = db.Admins.Find(id);
             db.Admins.Remove(admin);
             db.SaveChanges();
             return RedirectToAction("Index");

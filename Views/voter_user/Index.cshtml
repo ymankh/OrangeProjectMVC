@@ -255,14 +255,14 @@
             }
 
             @{
-                int currentPage = Convert.ToInt32(page);
-                int numberOfPages = (int)ViewBag.numberOfPages;
-                int maxPagesToShow = 20;
-                int firstPagesToShow = 10;
-                int lastPagesToShow = 10;
+                var currentPage = Convert.ToInt32(page);
+                var numberOfPages = (int)ViewBag.numberOfPages;
+                var maxPagesToShow = 20;
+                var firstPagesToShow = 10;
+                var lastPagesToShow = 10;
             }
 
-            @for (int i = 0; i < numberOfPages; i++)
+            @for (var i = 0; i < numberOfPages; i++)
             {
                 // Show first 10 pages
                 if (i < firstPagesToShow)

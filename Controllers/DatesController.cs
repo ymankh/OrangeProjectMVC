@@ -83,7 +83,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Date date = db.Dates.Find(id);
+            var date = db.Dates.Find(id);
             if (date == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Date date = db.Dates.Find(id);
+            var date = db.Dates.Find(id);
             db.Dates.Remove(date);
             db.SaveChanges();
             return RedirectToAction("Index");

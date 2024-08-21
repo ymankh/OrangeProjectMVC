@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<OrangeProjectMVC.Models.election_list>
 @{
-    ViewBag.Title = "PartyListsNames";
+    ViewBag.Title = "اسامي القوائم الحزبية";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
     string[] imgs =
             {
@@ -86,7 +86,7 @@
     @using (Html.BeginForm("PartySaveVote", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "PartySaveVoteForm" }))
     {
         <div class="row justify-content-center image-gallery">
-            @{ int i = -1;}
+            @{ var i = -1;}
             @foreach (var list in Model)
             {
                 { i += 1; }

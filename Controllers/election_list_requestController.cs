@@ -29,7 +29,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            election_list_request election_list_request = db.election_list_request.Find(id);
+            var election_list_request = db.election_list_request.Find(id);
             if (election_list_request == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            election_list_request election_list_request = db.election_list_request.Find(id);
+            var election_list_request = db.election_list_request.Find(id);
             if (election_list_request == null)
             {
                 return HttpNotFound();
@@ -71,18 +71,18 @@ namespace OrangeProjectMVC.Controllers
         private void SendEmail(string message, string recever, string subject)
         {
             // Email settings
-            string fromEmail = "techlearnhub.contact@gmail.com";
-            string toEmail = recever;
-            string subjectText = subject;
-            string messageText = message;
+            var fromEmail = "techlearnhub.contact@gmail.com";
+            var toEmail = recever;
+            var subjectText = subject;
+            var messageText = message;
 
-            string smtpServer = "smtp.gmail.com";
-            int smtpPort = 587;
-            string smtpUsername = "techlearnhub.contact@gmail.com";
-            string smtpPassword = "lyrlogeztsxclank";
+            var smtpServer = "smtp.gmail.com";
+            var smtpPort = 587;
+            var smtpUsername = "techlearnhub.contact@gmail.com";
+            var smtpPassword = "lyrlogeztsxclank";
 
             // Send the email
-            using (MailMessage mailMessage = new MailMessage())
+            using (var mailMessage = new MailMessage())
             {
                 mailMessage.From = new MailAddress(fromEmail);
                 mailMessage.To.Add(toEmail);
@@ -90,7 +90,7 @@ namespace OrangeProjectMVC.Controllers
                 mailMessage.Body = messageText;
                 mailMessage.IsBodyHtml = false;
 
-                using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+                using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
                 {
                     smtpClient.UseDefaultCredentials = false;
                     smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
@@ -107,9 +107,9 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(election_list_request election_list_request)
         {
-            bool isAccepted = false;
-            bool isRejected = false;
-            string representerEmail = "";
+            var isAccepted = false;
+            var isRejected = false;
+            var representerEmail = "";
             if (ModelState.IsValid)
             {
                 var entity = db.election_list_request.Find(election_list_request.id);
@@ -160,12 +160,12 @@ namespace OrangeProjectMVC.Controllers
                     db.SaveChanges();
                     if (isAccepted)
                     {
-                        string message = "تهانينا؛ لقد تم قبول قائمتكم وتم ادراجها ضمن القوائم الخاضعة للتصويت";
+                        var message = "تهانينا؛ لقد تم قبول قائمتكم وتم ادراجها ضمن القوائم الخاضعة للتصويت";
                         SendEmail(message, representerEmail, "اشعار قبول القائمة في الانتخابات");
                     }
                     else if (isRejected)
                     {
-                        string message = "نعتذر لكم ولكن قد تم رفض القائمة المقدمة وذلك لعدم استيفاء الشروط القانونية المقررة من قبل الهيئة المستقلة للانتخابات";
+                        var message = "نعتذر لكم ولكن قد تم رفض القائمة المقدمة وذلك لعدم استيفاء الشروط القانونية المقررة من قبل الهيئة المستقلة للانتخابات";
                         SendEmail(message, representerEmail, "اشعار رفض القائمة في الانتخابات");
                     }
                 }
@@ -202,7 +202,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            election_list_request election_list_request = db.election_list_request.Find(id);
+            var election_list_request = db.election_list_request.Find(id);
             if (election_list_request == null)
             {
                 return HttpNotFound();
@@ -215,7 +215,7 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            election_list_request election_list_request = db.election_list_request.Find(id);
+            var election_list_request = db.election_list_request.Find(id);
             foreach (var candidateRequest in db.candidate_request.Where(request => request.election_list_request_id == id).ToArray())
             {
                 db.candidate_request.Remove(candidateRequest);

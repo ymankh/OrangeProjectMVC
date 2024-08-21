@@ -27,7 +27,7 @@ namespace OrangeProjectMVC.App_Start
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             if (debate == null)
             {
                 return HttpNotFound();
@@ -77,7 +77,7 @@ namespace OrangeProjectMVC.App_Start
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             if (debate == null)
             {
                 return HttpNotFound();
@@ -120,7 +120,7 @@ namespace OrangeProjectMVC.App_Start
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             if (debate == null)
             {
                 return HttpNotFound();
@@ -133,7 +133,7 @@ namespace OrangeProjectMVC.App_Start
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             db.debates.Remove(debate);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -161,7 +161,7 @@ namespace OrangeProjectMVC.App_Start
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
 
 
             if (debate == null || debate.status != "Accept")

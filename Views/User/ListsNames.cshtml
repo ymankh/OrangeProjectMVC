@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<OrangeProjectMVC.Models.election_list>
 @{
-    ViewBag.Title = "ListsNames";
+    ViewBag.Title = "اسماء القوائم";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
-    string[] imgs = ViewBag.Images as string[];
+    var imgs = ViewBag.Images as string[];
 }
 
 <style>
@@ -19,7 +19,7 @@
     @using (Html.BeginForm("SingleList", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "VoteForm" }))
     {
         <div class="row">
-            @{ int i = -1; }
+            @{ var i = -1; }
             @foreach (var lists in Model)
             {
                 { i += 1; }

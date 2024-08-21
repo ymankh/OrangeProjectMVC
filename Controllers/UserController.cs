@@ -27,29 +27,29 @@ namespace OrangeProjectMVC.Controllers
             // Handle resend verification code scenario
             if (Session["tempNational_ID"] != null)
             {
-                string national_id = Session["tempNational_ID"].ToString();
+                var national_id = Session["tempNational_ID"].ToString();
                 var user = db.voter_user.FirstOrDefault(u => u.national_id == national_id);
 
                 if (user != null)
                 {
                     // Generate and send verification code
-                    Random random = new Random();
-                    int randomCode = random.Next(100000, 1000000);
+                    var random = new Random();
+                    var randomCode = random.Next(100000, 1000000);
                     Session["ConfCode"] = randomCode.ToString();
 
                     // Email settings
-                    string fromEmail = "techlearnhub.contact@gmail.com";
-                    string toEmail = "mohammaddfawareh@gmail.com";
-                    string subjectText = "Your Confirmation Code";
-                    string messageText = $"Your confirmation code is {randomCode}";
+                    const string fromEmail = "techlearnhub.contact@gmail.com";
+                    const string toEmail = "mohammaddfawareh@gmail.com";
+                    const string subjectText = "Your Confirmation Code";
+                    var messageText = $"Your confirmation code is {randomCode}";
 
-                    string smtpServer = "smtp.gmail.com";
-                    int smtpPort = 587;
-                    string smtpUsername = "techlearnhub.contact@gmail.com";
-                    string smtpPassword = "lyrlogeztsxclank";
+                    const string smtpServer = "smtp.gmail.com";
+                    const int smtpPort = 587;
+                    const string smtpUsername = "techlearnhub.contact@gmail.com";
+                    const string smtpPassword = "lyrlogeztsxclank";
 
                     // Send the email
-                    using (MailMessage mailMessage = new MailMessage())
+                    using (var mailMessage = new MailMessage())
                     {
                         mailMessage.From = new MailAddress(fromEmail);
                         mailMessage.To.Add(toEmail);
@@ -57,7 +57,7 @@ namespace OrangeProjectMVC.Controllers
                         mailMessage.Body = messageText;
                         mailMessage.IsBodyHtml = false;
 
-                        using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+                        using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
                         {
                             smtpClient.UseDefaultCredentials = false;
                             smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
@@ -100,25 +100,25 @@ namespace OrangeProjectMVC.Controllers
             if (user != null && user.first_login == true)
             {
                 // Generate and send verification code
-                Random random = new Random();
-                int randomCode = random.Next(100000, 1000000);
+                var random = new Random();
+                var randomCode = random.Next(100000, 1000000);
                 Session["ConfCode"] = randomCode.ToString();
 
                 // Email settings
-                string fromEmail = "techlearnhub.contact@gmail.com";
-                string toEmail = "mohammaddfawareh@gmail.com";  // For testing
-                                                                // string toEmail = user.email;  // For production
+                const string fromEmail = "techlearnhub.contact@gmail.com";
+                const string toEmail = "mohammaddfawareh@gmail.com";  // For testing
+                                                             // string toEmail = user.email;  // For production
 
-                string subjectText = "Your Confirmation Code";
-                string messageText = $"Your confirmation code is {randomCode}";
+                const string subjectText = "Your Confirmation Code";
+                var messageText = $"Your confirmation code is {randomCode}";
 
-                string smtpServer = "smtp.gmail.com";
-                int smtpPort = 587;
-                string smtpUsername = "techlearnhub.contact@gmail.com";
-                string smtpPassword = "lyrlogeztsxclank";
+                const string smtpServer = "smtp.gmail.com";
+                const int smtpPort = 587;
+                const string smtpUsername = "techlearnhub.contact@gmail.com";
+                const string smtpPassword = "lyrlogeztsxclank";
 
                 // Send the email
-                using (MailMessage mailMessage = new MailMessage())
+                using (var mailMessage = new MailMessage())
                 {
                     mailMessage.From = new MailAddress(fromEmail);
                     mailMessage.To.Add(toEmail);
@@ -126,7 +126,7 @@ namespace OrangeProjectMVC.Controllers
                     mailMessage.Body = messageText;
                     mailMessage.IsBodyHtml = false;
 
-                    using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+                    using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
                     {
                         smtpClient.UseDefaultCredentials = false;
                         smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
