@@ -300,6 +300,8 @@ namespace OrangeProjectMVC.Controllers
                 ViewBag.display2 = "none";
                 ViewBag.voted2 = "لقد قمت بالتصويت لهذه القائمة";
             }
+            ViewBag.LocallyVoted = user.has_locally_voted;
+            ViewBag.PartyVoted = user.has_party_voted;
             return View();
 
         }
@@ -369,7 +371,7 @@ namespace OrangeProjectMVC.Controllers
                 user.has_locally_voted = true;
                 db.voter_user.AddOrUpdate(user);
                 db.SaveChanges();
-                Session["LocallyVoted"] = true;
+                ViewBag.LocallyVoted = user.has_party_voted;
                 return RedirectToAction("ListsType");
             }
 
@@ -453,7 +455,7 @@ namespace OrangeProjectMVC.Controllers
             user.has_party_voted = true;
             db.voter_user.AddOrUpdate(user);
 
-            Session["PartyVoted"] = true;
+            ViewBag.PartyVoted = user.has_party_voted;
 
             var c = db.election_list.FirstOrDefault(list => list.id == election_list_id);
             if (c != null)
