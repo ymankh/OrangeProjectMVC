@@ -23,7 +23,7 @@ namespace OrangeProjectMVC.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Checkout()
+        public async Task<ActionResult> Checkout(decimal price)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace OrangeProjectMVC.Controllers
                         {
                             amount = new
                             {
-                                total = "100",
+                                total = price.ToString("F2"),
                                 currency = "USD"
                             },
                             description = "Payment description"
