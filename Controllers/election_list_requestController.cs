@@ -97,21 +97,33 @@ namespace OrangeProjectMVC.Controllers
                     {
                         var relatedCandidateRequests = db.candidate_request
                             .Where(cr => cr.election_list_request_id == election_list_request.id).ToList();
-
-                        foreach (var candidateRequest in relatedCandidateRequests)
-                        {
-                            db.candidate_request.Remove(candidateRequest);
-                        }
-
-                        db.election_list_request.Remove(entity);
-
                         var election_List1 = new election_list()
                         {
                             name = election_list_request.name,
                             district_id = entity.district_id,
                             type = entity.type,
+                            image_url = entity.image_url,
                             vote_count = 0
                         };
+
+                        foreach (var candidateRequest in relatedCandidateRequests)
+                        {
+                            var newCandidate = new candidate
+                            {
+                                election_list_id = election_List1.id,
+                                img_url = candidateRequest.img_url,
+                                is_representative = candidateRequest.is_representative,
+                                type_of_chair = candidateRequest.type_of_chair,
+                                vote_count = 0,
+                                user_id = candidateRequest.user_id,
+                            };
+                            db.candidates.Add(newCandidate);
+                            db.candidate_request.Remove(candidateRequest);
+                        }
+
+                        db.election_list_request.Remove(entity);
+
+
                         db.election_list.Add(election_List1);
                     }
 

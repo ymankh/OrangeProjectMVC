@@ -2276,6 +2276,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\Candidates\" />
     <Folder Include="Images\ElectionLists\" />
+    <Folder Include="Images\PartyLists\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
