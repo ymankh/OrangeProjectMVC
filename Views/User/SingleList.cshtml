@@ -43,23 +43,42 @@
 @section Scripts {
     <script>
         let form = document.getElementById("VoteForm");
-        form.addEventListener("submit", (form) => {
-            let formData = new FormData(form.target)
-            if (formData.get("candidates"))
-                return;
-            form.preventDefault();
-            Swal.fire({
-                title:
-                    "لم تقم باختيار اي مرشح داخل القائمة! هل تريد الاستمرار؟",
-                icon: "question",
-                iconHtml: "؟",
-                confirmButtonText: "استمر",
-                cancelButtonText: "عودة الى القائمة",
-                showCancelButton: true,
-                showCloseButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) form.target.submit();
-            });
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();  // Prevent default form submission
+
+            let formData = new FormData(form);
+            let candidatesSelected = formData.getAll("candidates");  // Get all selected candidates
+
+            if (candidatesSelected.length === 0) {
+                // If no candidates are selected
+                Swal.fire({
+                    title: "لم تقم باختيار اي مرشح داخل القائمة! هل تريد الاستمرار؟",
+                    icon: "question",
+                    confirmButtonText: "استمر",
+                    cancelButtonText: "عودة الى القائمة",
+                    showCancelButton: true,
+                    showCloseButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) form.submit();  // Submit form if confirmed
+                });
+            } else {
+                // If one or more candidates are selected
+                Swal.fire({
+                    title: 'تصويت',
+                    text: 'تم التصويت بنجاح',
+                    icon: 'success',
+                    confirmButtonText: 'استمر',
+                    iconHtml: '🎉',  // Emoji for visual effect
+                    customClass: {
+                        icon: 'no-border'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();  // Submit form if confirmed
+                    }
+                });
+            }
         });
     </script>
 }
+

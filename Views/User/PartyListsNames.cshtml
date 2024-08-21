@@ -21,6 +21,8 @@
             };
 }
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <style>
     .image-gallery {
         display: flex;
@@ -69,7 +71,7 @@
                         <img src="@Url.Content(imgs[i])" class="card-img-top" alt="@Html.DisplayFor(model => list.name)">
                         <div class="card-body text-center">
                             <h5 class="card-title" style="font-family: cairo;">@Html.DisplayFor(model => list.name)</h5>
-                            <input class="custom-checkbox" type="radio" name="election_list_id" value="@list.id" />
+                            <input id="PartyListName" class="custom-checkbox" type="radio" name="election_list_id" value="@list.id" />
                         </div>
                     </div>
                 </div>
@@ -84,26 +86,43 @@
 
 @section Scripts {
     <script>
-        let form = document
-            .getElementById("PartySaveVoteForm");
-        form
-            .addEventListener("submit", (form) => {
-                let formData = new FormData(form.target);
-                if (formData.get("election_list_id"))
-                    return
-                form.preventDefault();
+        let form = document.getElementById("PartySaveVoteForm");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();  // Prevent default form submission initially
+
+            let formData = new FormData(form);
+
+            if (!formData.get("election_list_id")) {
                 Swal.fire({
-                    title:
-                        "لم تقم باختيار اي قائمة وبذلك سيتم تسليم صوتك فارغا! هل تريد الاستمرار؟",
+                    title: "التصويت",
+                    text: "لم تقم باختيار اي قائمة وبذلك سوف يسجل صوتك كورقة بيضاء! هل تريد الاستمرار؟",
                     icon: "question",
-                    iconHtml: "؟",
                     confirmButtonText: "استمر",
                     cancelButtonText: "عودة الى القائمة",
                     showCancelButton: true,
                     showCloseButton: true,
                 }).then((result) => {
-                    if (result.isConfirmed) form.target.submit();
+                    if (result.isConfirmed) {
+                        form.submit();  // Proceed with form submission if confirmed
+                    }
                 });
-            });
+            } else {
+                Swal.fire({
+                    title: 'تصويت',
+                    text: 'تم التصويت بنجاح',
+                    icon: 'success',
+                    confirmButtonText: 'استمر',
+                    
+                    customClass: {
+                        icon: 'no-border'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();  // Redirect after confirmation
+                    }
+                });
+            }
+        });
     </script>
 }

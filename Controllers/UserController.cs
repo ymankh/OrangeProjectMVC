@@ -139,11 +139,12 @@ namespace OrangeProjectMVC.Controllers
 
                         Session["tempNational_ID"] = user.national_id.ToString();
 
-                        ViewBag.Emailsent = "The code has been sent to your Email";
+                        ViewBag.VerfyCode = "تم ارسال رمز التحقق على بريدك الالكتروني";
 
-                        return RedirectToAction("VerifyCode");
+                        //return RedirectToAction("VerifyCode");
                     }
                 }
+                return View();
             }
             else if (user.first_login == false)
             {
@@ -368,8 +369,10 @@ namespace OrangeProjectMVC.Controllers
                 user.has_locally_voted = true;
                 db.voter_user.AddOrUpdate(user);
                 db.SaveChanges();
+                Session["LocallyVoted"] = true;
                 return RedirectToAction("ListsType");
             }
+
             ViewBag.lsitName = db.election_list.Find(election_list_id).name;
             var electionList = db.election_list.Find(election_list_id).candidates.ToList();
             Session["election_list_id"] = election_list_id;
@@ -449,6 +452,8 @@ namespace OrangeProjectMVC.Controllers
 
             user.has_party_voted = true;
             db.voter_user.AddOrUpdate(user);
+
+            Session["PartyVoted"] = true;
 
             var c = db.election_list.FirstOrDefault(list => list.id == election_list_id);
             if (c != null)
