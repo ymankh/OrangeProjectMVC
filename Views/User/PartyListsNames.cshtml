@@ -24,6 +24,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
+    body {
+        background-color: #f1f1f1 !important;
+    }
     .image-gallery {
         display: flex;
         flex-wrap: wrap;
@@ -54,6 +57,27 @@
         flex-direction: column;
         flex-grow: 1;
     }
+    @@media (max-width: 427px) {
+        .image-item {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+
+        .card img {
+            height: 200px; /* Reduce image height for smaller screens */
+        }
+
+        .card-body {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .card-title {
+            font-size: 1.2rem; /* Adjust title font size */
+        }
+    }
+
+        
 </style>
 
 <div class="container mt-5">
@@ -77,7 +101,7 @@
                 </div>
             }
         </div>
-        <div class="text-center mt-4">
+        <div class="text-center mt-4 mb-5">
             <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
             @Html.ActionLink("رجوع", "ListsType", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
         </div>

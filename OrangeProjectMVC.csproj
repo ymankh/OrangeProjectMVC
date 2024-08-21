@@ -324,6 +324,7 @@
     <Content Include="img\undraw_profile_3.svg" />
     <Content Include="img\undraw_rocket.svg" />
     <Content Include="assets\images\volunteer-image-2.png" />
+    <Content Include="img\votenow.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
