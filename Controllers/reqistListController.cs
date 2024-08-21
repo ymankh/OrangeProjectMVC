@@ -41,13 +41,23 @@ namespace OrangeProjectMVC.Controllers
         public ActionResult SingleLocalList(int? id, string list_name, HttpPostedFileBase list_image, string[] competitive_seats, HttpPostedFileBase[] candidate_images, string women_seat, HttpPostedFileBase women_candidate_image, string christian_seat, HttpPostedFileBase christian_candidate_image)
         {
             id = Convert.ToInt32(Session["Distinctid"].ToString());
+            
+            // Check if the list name already exists in either election_list or election_list_request
+            var existingListInElectionList = db.election_list.FirstOrDefault(x => x.name == list_name);
+            var existingListInElectionListRequest = db.election_list_request.FirstOrDefault(x => x.name == list_name);
 
+            if (existingListInElectionList != null || existingListInElectionListRequest != null)
+            {
+                Session["Message"] = "اسم القائمة موجود بالفعل في النظام. يرجى اختيار اسم آخر.";
+                return RedirectToAction("SingleLocalList", new { id = id });
+            }
             var distrect = db.districts.Find(id);
             var newList = new election_list_request();
             newList.district_id = id;
             newList.name = list_name;
             newList.status = "pending";
             newList.type = "L";
+            
             
 
             // حفظ صورة القائمة
@@ -143,16 +153,31 @@ namespace OrangeProjectMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult SavePartList(string lsitPartyName)
+        public ActionResult SavePartList(string lsitPartyName, HttpPostedFileBase partyImage)
         {
+            // Check if the list name already exists in either election_list or election_list_request
+            var existingListInElectionList = db.election_list.FirstOrDefault(x => x.name == lsitPartyName);
+            var existingListInElectionListRequest = db.election_list_request.FirstOrDefault(x => x.name == lsitPartyName);
+
+            if (existingListInElectionList != null || existingListInElectionListRequest != null)
+            {
+                Session["Message"] = "اسم القائمة الحزبية موجود بالفعل في النظام. يرجى اختيار اسم آخر.";
+                return RedirectToAction("PartyList");
+            }
             var previousSearches = Session["PreviousSearches"] as List<voter_user> ?? new List<voter_user>();
             if (previousSearches.Count == PartyListSeats)
             {
                 var newList = new election_list_request();
                 newList.name = lsitPartyName;
                 newList.district_id = null;
-                newList.type = "L";
+                newList.type = "P";
                 newList.status = "Pending";
+                if (partyImage != null && partyImage.ContentLength > 0)
+                {
+                    string imagePath = Path.Combine(Server.MapPath("~/Images/PartyLists"), Path.GetFileName(partyImage.FileName));
+                    partyImage.SaveAs(imagePath);
+                    newList.image_url = "/Images/PartyLists/" + partyImage.FileName;
+                }
                 db.election_list_request.Add(newList);
                 db.SaveChanges();
 

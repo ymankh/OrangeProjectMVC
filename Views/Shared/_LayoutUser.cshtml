@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using OrangeProjectMVC.Models
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
@@ -12,7 +13,7 @@
     <link rel="icon" href="~/assets/images/fav-icon/favicon.ico" type="image/x-icon">
     <link href="~/assets/css/animate.css" rel="stylesheet" />
 
-
+   
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
@@ -21,7 +22,23 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-
+    @{
+        // Initialize your DbContext
+        bool electionRunning;
+        bool nominationRunning;
+        using (var context = new electionEntities())
+        {
+            // Retrieve the value from the database
+            var dates = context.Dates.FirstOrDefault();
+            electionRunning =
+                    dates != null &&
+                    dates.election_start_date > DateTime.Now &&
+                    dates.election_end_date < DateTime.Now;
+            nominationRunning = dates != null &&
+                                dates.nomination_start_date > DateTime.Now &&
+                                dates.nomination_end_date < DateTime.Now;
+        }
+    }
 
 
 
@@ -214,26 +231,33 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("about", "UserCycle")">من نحن</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "reqistList")">طلب الترشح</a>
-                            </li>
+                            @if (nominationRunning)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "reqistList")">طلب الترشح</a>
+                                </li>
+                            }
                             @if (true)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Results", "voter_user")">النتائج</a>
                                 </li>
                             }
-                            @if (Session["National_ID"] == null)
+                            @if (electionRunning)
                             {
-                                <li class="nav-item">
-                                    <a class="btn btn-primary" href="@Url.Action("Login", "User")">الدخول</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="btn btn-primary" href="@Url.Action("Logout", "User")">الخروج</a>
-                                </li>
+
+                                if (Session["National_ID"] == null)
+                                {
+                                    <li class="nav-item">
+                                        <a class="btn btn-primary" href="@Url.Action("Login", "User")">صوت الان</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="btn btn-primary" href="@Url.Action("Logout", "User")">الخروج</a>
+                                    </li>
+                                }
                             }
                         </ul>
 
