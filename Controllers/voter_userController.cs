@@ -206,6 +206,12 @@ namespace OrangeProjectMVC.Controllers
 
             ViewBag.partyListsWithSeats = partyListsWithSeats;
             // Return the view with the results
+
+            var resultsDate = db.Dates.FirstOrDefault().results_date;
+            var resultShon = DateTime.Now >= resultsDate;
+            ViewBag.ResultShon = resultShon;
+            @ViewBag.Date = resultsDate;
+
             return View(listOfDistricts);
         }
 

@@ -4,63 +4,73 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Candidate Requests List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.type_of_chair)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.is_representative)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.img_url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.election_list_request.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.voter_user.national_id)
-        </th>
-        <th></th>
-    </tr>
+<div class="card shadow mb-4">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.type_of_chair)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.is_representative)
-        </td>
-        @if (!string.IsNullOrEmpty(item.img_url))
-        {
-            <td>
-                <img width="100" src="@Url.Content(item.img_url)" alt="Image" />
-            </td>
-        }
-        else
-        {
-            <td>
-                No image available
-            </td>
-        }
-        <td>
-            @Html.DisplayFor(modelItem => item.election_list_request.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.voter_user.national_id)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })
-        </td>
-    </tr>
-}
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.type_of_chair)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.is_representative)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.img_url)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.election_list_request.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.voter_user.national_id)
+                    </th>
+                    <th></th>
+                </tr>
 
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.type_of_chair)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.is_representative)
+                        </td>
+                        @if (!string.IsNullOrEmpty(item.img_url))
+                        {
+                            <td>
+                                <img width="100" src="@Url.Content(item.img_url)" alt="Image" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                No image available
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.election_list_request.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.voter_user.national_id)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-secondary" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
