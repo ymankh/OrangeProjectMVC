@@ -12,7 +12,6 @@
 <div class="container my-4 text-right" dir="rtl">
     <h1 class="text-center my-4">نتائج الانتخابات</h1>
 
-
     @if (ViewBag.ResultShon)
     {
 
@@ -94,40 +93,47 @@
 
         <div class="card mb-4">
             <div class="card-body">
-                @foreach (var list in partyListsWithSeats)
+                @if (partyListsWithSeats != null)
                 {
-                    if (list.competitiveWinners.Any())
+                    foreach (var list in partyListsWithSeats)
                     {
-                        <div class="mb-3">
-                            <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
-                            <table class="table table-striped table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">اسم المرشح</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{ var i = 0; }
-
-                                    @foreach (var competitiveWinners in list.competitiveWinners)
-                                    {
-                                        { i++; }
+                        if (list.competitiveWinners.Any())
+                        {
+                            <div class="mb-3">
+                                <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
+                                <table class="table table-striped table-bordered">
+                                    <thead class="thead-dark">
                                         <tr>
-                                            <th scope="row">@i</th>
-                                            <td>@competitiveWinners.voter_user.name </td>
+                                            <th scope="col">#</th>
+                                            <th scope="col">اسم المرشح</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="mb-3">
-                            <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
-                            <h6 class="text-danger-emphasis">لم ينجح احد</h6>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var i = 0;
+
+                                            foreach (var competitiveWinners in list.competitiveWinners)
+                                            {
+                                                {
+                                                    i++;
+                                                }
+                                                <tr>
+                                                    <th scope="row">@i</th>
+                                                    <td>@competitiveWinners.voter_user.name </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
+                                <h6 class="text-danger-emphasis">لم ينجح احد</h6>
+                            </div>
+                        }
                     }
                 }
             </div>
@@ -156,7 +162,6 @@
         <script>
       function handleTickInit(tick) {
         var counter = Tick.count.down("@ViewBag.Date");
-
         counter.onupdate = function (value) {
           tick.value = value;
         };
