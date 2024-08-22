@@ -19,74 +19,71 @@ namespace OrangeProjectMVC.Controllers
             // If the user is already logged in, redirect them to the home page.
             if (Session["National_ID"] != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "UserCycle");
             }
 
+            if (!isResend) return View();
+
             // Handle resend verification code scenario
-            if (isResend)
+            if (Session["tempNational_ID"] != null)
             {
-                if (Session["tempNational_ID"] != null)
+                var national_id = Session["tempNational_ID"].ToString();
+                var user = db.voter_user.FirstOrDefault(u => u.national_id == national_id);
+
+                if (user != null)
                 {
-                    string national_id = Session["tempNational_ID"].ToString();
-                    var user = db.voter_user.FirstOrDefault(u => u.national_id == national_id);
+                    // Generate and send verification code
+                    var random = new Random();
+                    var randomCode = random.Next(100000, 1000000);
+                    Session["ConfCode"] = randomCode.ToString();
 
-                    if (user != null)
+                    // Email settings
+                    const string fromEmail = "techlearnhub.contact@gmail.com";
+                    const string toEmail = "mohammaddfawareh@gmail.com";
+                    const string subjectText = "Your Confirmation Code";
+                    var messageText = $"Your confirmation code is {randomCode}";
+
+                    const string smtpServer = "smtp.gmail.com";
+                    const int smtpPort = 587;
+                    const string smtpUsername = "techlearnhub.contact@gmail.com";
+                    const string smtpPassword = "lyrlogeztsxclank";
+
+                    // Send the email
+                    using (var mailMessage = new MailMessage())
                     {
-                        // Generate and send verification code
-                        Random random = new Random();
-                        int randomCode = random.Next(100000, 1000000);
-                        Session["ConfCode"] = randomCode.ToString();
+                        mailMessage.From = new MailAddress(fromEmail);
+                        mailMessage.To.Add(toEmail);
+                        mailMessage.Subject = subjectText;
+                        mailMessage.Body = messageText;
+                        mailMessage.IsBodyHtml = false;
 
-                        // Email settings
-                        string fromEmail = "techlearnhub.contact@gmail.com";
-                        string toEmail = "mohammaddfawareh@gmail.com";
-                        string subjectText = "Your Confirmation Code";
-                        string messageText = $"Your confirmation code is {randomCode}";
-
-                        string smtpServer = "smtp.gmail.com";
-                        int smtpPort = 587;
-                        string smtpUsername = "techlearnhub.contact@gmail.com";
-                        string smtpPassword = "lyrlogeztsxclank";
-
-                        // Send the email
-                        using (MailMessage mailMessage = new MailMessage())
+                        using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
                         {
-                            mailMessage.From = new MailAddress(fromEmail);
-                            mailMessage.To.Add(toEmail);
-                            mailMessage.Subject = subjectText;
-                            mailMessage.Body = messageText;
-                            mailMessage.IsBodyHtml = false;
+                            smtpClient.UseDefaultCredentials = false;
+                            smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                            smtpClient.EnableSsl = true;
 
-                            using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
-                            {
-                                smtpClient.UseDefaultCredentials = false;
-                                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-                                smtpClient.EnableSsl = true;
+                            smtpClient.Send(mailMessage);
 
-                                smtpClient.Send(mailMessage);
-
-                                ViewBag.Emailsent = "The code has been resent to your Email";
-                                return RedirectToAction("VerifyCode");
-                            }
+                            return RedirectToAction("VerifyCode");
                         }
-                    }
-                    else
-                    {
-                        // Handle case where user is not found
-                        ViewBag.Msg = "User not found.";
-                        return View();
                     }
                 }
                 else
                 {
-                    // If tempNational_ID is null, redirect to login or show an error
-                    ViewBag.Msg = "Your session has expired. Please log in again.";
+                    // Handle case where user is not found
+                    ViewBag.Msg = "User not found.";
                     return View();
                 }
             }
+            else
+            {
+                // If tempNational_ID is null, redirect to login or show an error
+                ViewBag.Msg = "Your session has expired. Please log in again.";
+                return View();
+            }
 
             // Just render the login page if not resending a code
-            return View();
         }
 
         [HttpPost]
@@ -103,25 +100,25 @@ namespace OrangeProjectMVC.Controllers
             if (user != null && user.first_login == true)
             {
                 // Generate and send verification code
-                Random random = new Random();
-                int randomCode = random.Next(100000, 1000000);
+                var random = new Random();
+                var randomCode = random.Next(100000, 1000000);
                 Session["ConfCode"] = randomCode.ToString();
 
                 // Email settings
-                string fromEmail = "techlearnhub.contact@gmail.com";
-                string toEmail = "mohammaddfawareh@gmail.com";  // For testing
-                                                                // string toEmail = user.email;  // For production
+                const string fromEmail = "techlearnhub.contact@gmail.com";
+                const string toEmail = "mohammaddfawareh@gmail.com";  // For testing
+                                                             // string toEmail = user.email;  // For production
 
-                string subjectText = "Your Confirmation Code";
-                string messageText = $"Your confirmation code is {randomCode}";
+                const string subjectText = "Your Confirmation Code";
+                var messageText = $"Your confirmation code is {randomCode}";
 
-                string smtpServer = "smtp.gmail.com";
-                int smtpPort = 587;
-                string smtpUsername = "techlearnhub.contact@gmail.com";
-                string smtpPassword = "lyrlogeztsxclank";
+                const string smtpServer = "smtp.gmail.com";
+                const int smtpPort = 587;
+                const string smtpUsername = "techlearnhub.contact@gmail.com";
+                const string smtpPassword = "lyrlogeztsxclank";
 
                 // Send the email
-                using (MailMessage mailMessage = new MailMessage())
+                using (var mailMessage = new MailMessage())
                 {
                     mailMessage.From = new MailAddress(fromEmail);
                     mailMessage.To.Add(toEmail);
@@ -129,7 +126,7 @@ namespace OrangeProjectMVC.Controllers
                     mailMessage.Body = messageText;
                     mailMessage.IsBodyHtml = false;
 
-                    using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+                    using (var smtpClient = new SmtpClient(smtpServer, smtpPort))
                     {
                         smtpClient.UseDefaultCredentials = false;
                         smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
@@ -234,7 +231,7 @@ namespace OrangeProjectMVC.Controllers
         [HttpPost]
         public ActionResult LoginWithPassword(voter_user newUser)
         {
-            Session["National_ID"] = newUser.national_id.ToString();
+
             var user = db.voter_user.FirstOrDefault(u => u.national_id == newUser.national_id && u.password == newUser.password);
 
 
@@ -245,6 +242,7 @@ namespace OrangeProjectMVC.Controllers
                 return View();
 
             }
+            Session["National_ID"] = newUser.national_id;
             switch (user.district_id)
             {
                 case 3:
@@ -264,7 +262,7 @@ namespace OrangeProjectMVC.Controllers
         {
             if (Session["National_ID"] == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "UserCycle");
             }
             var nationalId = (string)Session["National_ID"];
             var user = db.voter_user.FirstOrDefault(u => u.national_id == nationalId);
@@ -293,12 +291,12 @@ namespace OrangeProjectMVC.Controllers
             if (user.has_locally_voted)
             {
                 ViewBag.display1 = "none";
-                ViewBag.voted1 = "لقد قمت بالتصويت لهذه القائمة";
+                ViewBag.voted1 = "لقد قمت بالتصويت محليا";
             }
             if (user.has_party_voted)
             {
                 ViewBag.display2 = "none";
-                ViewBag.voted2 = "لقد قمت بالتصويت لهذه القائمة";
+                ViewBag.voted2 = "لقد قمت بالتصويت حزبيا";
             }
             ViewBag.LocallyVoted = user.has_locally_voted;
             ViewBag.PartyVoted = user.has_party_voted;

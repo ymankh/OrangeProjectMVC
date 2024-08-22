@@ -63,7 +63,7 @@ namespace OrangeProjectMVC.Controllers
             // حفظ صورة القائمة
             if (list_image != null && list_image.ContentLength > 0)
             {
-                string listImagePath = Path.Combine(Server.MapPath("~/Images/ElectionLists"), Path.GetFileName(list_image.FileName));
+                var listImagePath = Path.Combine(Server.MapPath("~/Images/ElectionLists"), Path.GetFileName(list_image.FileName));
                 list_image.SaveAs(listImagePath);
                 newList.image_url = "/Images/ElectionLists/" + list_image.FileName;
             }
@@ -72,9 +72,9 @@ namespace OrangeProjectMVC.Controllers
             db.SaveChanges();
             var savedLsit = db.election_list_request.FirstOrDefault(x => x.name == list_name);
 
-            for (int i = 0; i < competitive_seats.Length; i++)
+            for (var i = 0; i < competitive_seats.Length; i++)
             {
-                string nationalId = competitive_seats[i];
+                var nationalId = competitive_seats[i];
                 var canedet_user = db.voter_user.FirstOrDefault(user => user.national_id == nationalId);
                 if (canedet_user == null)
                 {
@@ -91,7 +91,7 @@ namespace OrangeProjectMVC.Controllers
                 // حفظ صورة المرشح
                 if (candidate_images[i] != null && candidate_images[i].ContentLength > 0)
                 {
-                    string candidateImagePath = Path.Combine(Server.MapPath("~/Images/Candidates"), Path.GetFileName(candidate_images[i].FileName));
+                    var candidateImagePath = Path.Combine(Server.MapPath("~/Images/Candidates"), Path.GetFileName(candidate_images[i].FileName));
                     candidate_images[i].SaveAs(candidateImagePath);
                     canedet.img_url = "/Images/Candidates/" + candidate_images[i].FileName;
                 }
@@ -110,7 +110,7 @@ namespace OrangeProjectMVC.Controllers
                     canedet.election_list_request_id = savedLsit.id;
                     canedet.type_of_chair = "W";
 
-                    string candidateImagePath = Path.Combine(Server.MapPath("~/Images/Candidates"), Path.GetFileName(women_candidate_image.FileName));
+                    var candidateImagePath = Path.Combine(Server.MapPath("~/Images/Candidates"), Path.GetFileName(women_candidate_image.FileName));
                     women_candidate_image.SaveAs(candidateImagePath);
                     canedet.img_url = "/Images/Candidates/" + women_candidate_image.FileName;
 
@@ -134,7 +134,7 @@ namespace OrangeProjectMVC.Controllers
                     canedet.election_list_request_id = savedLsit.id;
                     canedet.type_of_chair = "H";
 
-                    string candidateImagePath = Path.Combine(Server.MapPath("~/Images/Candidates"), Path.GetFileName(christian_candidate_image.FileName));
+                    var candidateImagePath = Path.Combine(Server.MapPath("~/Images/Candidates"), Path.GetFileName(christian_candidate_image.FileName));
                     christian_candidate_image.SaveAs(candidateImagePath);
                     canedet.img_url = "/Images/Candidates/" + christian_candidate_image.FileName;
 
@@ -174,14 +174,14 @@ namespace OrangeProjectMVC.Controllers
                 newList.status = "Pending";
                 if (partyImage != null && partyImage.ContentLength > 0)
                 {
-                    string imagePath = Path.Combine(Server.MapPath("~/Images/PartyLists"), Path.GetFileName(partyImage.FileName));
+                    var imagePath = Path.Combine(Server.MapPath("~/Images/PartyLists"), Path.GetFileName(partyImage.FileName));
                     partyImage.SaveAs(imagePath);
                     newList.image_url = "/Images/PartyLists/" + partyImage.FileName;
                 }
                 db.election_list_request.Add(newList);
                 db.SaveChanges();
 
-                int listId = newList.id;
+                var listId = newList.id;
                 foreach (var voter in previousSearches)
                 {
                     var candidate = new candidate_request();

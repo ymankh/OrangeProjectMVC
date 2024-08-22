@@ -28,7 +28,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            election_list election_list = db.election_list.Find(id);
+            var election_list = db.election_list.Find(id);
             if (election_list == null)
             {
                 return HttpNotFound();
@@ -68,7 +68,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            election_list election_list = db.election_list.Find(id);
+            var election_list = db.election_list.Find(id);
             if (election_list == null)
             {
                 return HttpNotFound();
@@ -101,7 +101,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            election_list election_list = db.election_list.Find(id);
+            var election_list = db.election_list.Find(id);
             if (election_list == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            election_list election_list = db.election_list.Find(id);
+            var election_list = db.election_list.Find(id);
             db.election_list.Remove(election_list);
             db.SaveChanges();
             return RedirectToAction("Index");

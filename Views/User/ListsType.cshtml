@@ -1,9 +1,13 @@
 ﻿@{
-    ViewBag.Title = "ListsType";
+    ViewBag.Title = "انواع القوائم";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-
+<style>
+    body {
+        background-color: #f1f1f1 !important;
+    }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -22,18 +26,18 @@
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '@Url.Action("Index", "UserCycle")';
+            window.location.href = '@Url.Action("Logout", "User")';
         }
     });
     </script>
-} esle {
-<div class="container mt-5">
+} else {
+<div class="container mt-5 mb-1">
     <h3 style="text-align: center; font-family: cairo; margin-bottom:0.8em;">الرجاء اختيار نوع القائمة</h3>
     <div class="row justify-content-center" style="margin-bottom: 1em">
         <!-- Card 1 -->
         <div class="col-md-4 my-2">
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                <img src="~/img/LocalList.jpg" class="card-img-top" alt="Card image 1" style="height:500px">
+                <img src="~/img/votenow.jpg" class="card-img-top" alt="Card image 1" style="height:500px">
                 <div class="card-body text-center">
                     <h5 class="card-title" style="font-family: cairo;">القوائم المحلية</h5>
                     <p class="card-text" style="font-family: cairo;">اضغط لاظهار القوائم المحلية لدائرتك</p>
@@ -47,7 +51,7 @@
         <!-- Card 2 -->
         <div class="col-md-4 my-2">
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                <img src="~/img/PartyList.jpg" class="card-img-top" alt="Card image 2" style="height:500px" />
+                <img src="~/img/votenow.jpg" class="card-img-top" alt="Card image 2" style="height:500px" />
                 <div class="card-body text-center">
                     <h5 class="card-title" style="font-family: cairo;">القوائم الحزبية</h5>
                     <p class="card-text" style="font-family: cairo;">اضغط لاظهار القوائم الحزبية لدائرتك</p>

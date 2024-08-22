@@ -24,13 +24,14 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-none">
             @Html.LabelFor(model => model.img_url, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10  d-non">
                 @Html.EditorFor(model => model.img_url, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.img_url, "", new { @class = "text-danger" })
             </div>
         </div>
+        <img src="@Url.Content(Model.img_url)" alt="" style="max-width:150px; width:150px" />
 
         <div class="form-group">
             @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -39,7 +40,7 @@
                     new SelectList(new List<SelectListItem>
                     {
                         new SelectListItem { Value = "Rejected", Text = "Rejected" },
-                        new SelectListItem { Value = "Accepted", Text = "Accepted" },
+                        new SelectListItem { Value = "Active", Text = "Active" },
                         new SelectListItem { Value = "Pending", Text = "Pending" }
                     }, "Value", "Text"),
                     "Select Status",
@@ -47,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group d-none">
                 @Html.LabelFor(model => model.transaction_id, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.transaction_id, new { htmlAttributes = new { @class = "form-control" } })
@@ -57,7 +58,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            candidate_request candidateRequest = db.candidate_request.Find(id);
+            var candidateRequest = db.candidate_request.Find(id);
             if (candidateRequest == null)
             {
                 return HttpNotFound();
@@ -66,7 +66,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            candidate_request candidateRequest = db.candidate_request.Find(id);
+            var candidateRequest = db.candidate_request.Find(id);
             if (candidateRequest == null)
             {
                 return HttpNotFound();
@@ -101,7 +101,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            candidate_request candidate_request = db.candidate_request.Find(id);
+            var candidate_request = db.candidate_request.Find(id);
             if (candidate_request == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            candidate_request candidate_request = db.candidate_request.Find(id);
+            var candidate_request = db.candidate_request.Find(id);
             db.candidate_request.Remove(candidate_request);
             db.SaveChanges();
             return RedirectToAction("Index");

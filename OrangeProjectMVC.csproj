@@ -324,6 +324,7 @@
     <Content Include="img\undraw_profile_3.svg" />
     <Content Include="img\undraw_rocket.svg" />
     <Content Include="assets\images\volunteer-image-2.png" />
+    <Content Include="img\votenow.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -2248,11 +2249,7 @@
     <Content Include="Views\User\SingleList.cshtml" />
     <Content Include="Views\User\VerifyCode.cshtml" />
     <Content Include="Views\debates\ShowDebates.cshtml" />
-    <Content Include="Views\Dates\Create.cshtml" />
-    <Content Include="Views\Dates\Delete.cshtml" />
-    <Content Include="Views\Dates\Details.cshtml" />
     <Content Include="Views\Dates\Edit.cshtml" />
-    <Content Include="Views\Dates\Index.cshtml" />
     <Content Include="Views\candidate_request\Index.cshtml" />
     <Content Include="Views\candidate_request\Details.cshtml" />
     <Content Include="Views\candidate_request\Create.cshtml" />

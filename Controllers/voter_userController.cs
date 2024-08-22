@@ -47,12 +47,12 @@ namespace OrangeProjectMVC.Controllers
             foreach (var _district in districts)
             {
                 // Count the number of voters who have locally voted in the district
-                int locallyVotedCount = db.voter_user
+                var locallyVotedCount = db.voter_user
                     .Where(voter => voter.district_id == _district.id)
                     .Count(voter => voter.has_locally_voted);
 
                 // Calculate the vote threshold (7% of locally voted count)
-                int threshold = (int)Math.Floor(locallyVotedCount * 0.07);
+                var threshold = (int)Math.Floor(locallyVotedCount * 0.07);
 
                 // Retrieve local lists for the current district
                 var districtLocalLists = LocalLists
@@ -84,23 +84,23 @@ namespace OrangeProjectMVC.Controllers
                 }
 
                 // Calculate the total whole seats assigned
-                int holeSeats = overThresholdLists.Sum(list => (int)Math.Truncate(list.seatsCount));
+                var holeSeats = overThresholdLists.Sum(list => (int)Math.Truncate(list.seatsCount));
 
                 // Calculate the remaining partial seats to be assigned
-                int partialSeats = _district.competitive_seat - holeSeats;
+                var partialSeats = _district.competitive_seat - holeSeats;
 
                 // Assign partial seats based on the largest decimal part
                 if (partialSeats > 0)
                     overThresholdLists = overThresholdLists.OrderByDescending(list =>
                     {
-                        double number = list.seatsCount;
-                        double integerPart = Math.Floor(number);
-                        double decimalPart = number - integerPart;
+                        var number = list.seatsCount;
+                        var integerPart = Math.Floor(number);
+                        var decimalPart = number - integerPart;
                         return decimalPart;
                     }).ToList();
 
                 // Distribute remaining partial seats
-                for (int i = 0; i < partialSeats; i++)
+                for (var i = 0; i < partialSeats; i++)
                 {
                     overThresholdLists[i].seatsCount++;
                 }
@@ -110,7 +110,7 @@ namespace OrangeProjectMVC.Controllers
                     .OrderByDescending(candidate => candidate.vote_count)
                     .Where(x => true);
 
-                int[] overThresholdListsIdsArray = overThresholdLists.Select(x => x.list.id).ToArray();
+                var overThresholdListsIdsArray = overThresholdLists.Select(x => x.list.id).ToArray();
 
                 var womenWinner = candidates
                     .Where(candidate => candidate.type_of_chair == "W" && overThresholdListsIdsArray.Contains(candidate.election_list_id))
@@ -153,11 +153,11 @@ namespace OrangeProjectMVC.Controllers
                 listOfDistricts.Add(districtWithSeats);
             }
 
-            double partyThreshold = db.voter_user.Count(user => user.has_party_voted) * 0.025;
+            var partyThreshold = db.voter_user.Count(user => user.has_party_voted) * 0.025;
             var partyListsOverThreshold = db.election_list.
                 Include(list => list.candidates).
                 Where(list => list.type == "P" && list.vote_count > partyThreshold);
-            int partyOverThresholdCount = partyListsOverThreshold.
+            var partyOverThresholdCount = partyListsOverThreshold.
                 Sum(list => list.vote_count);
 
             var partyListsWithSeats = new List<ListsWithSeats>();
@@ -172,25 +172,25 @@ namespace OrangeProjectMVC.Controllers
                 partyListsWithSeats.Add(partyListWithSeats);
             }
             // Calculate the total whole seats assigned
-            int partyHoleSeats = partyListsWithSeats.
+            var partyHoleSeats = partyListsWithSeats.
                 Sum(list => (int)Math.
                 Truncate(list.seatsCount));
 
             // Calculate the remaining partial seats to be assigned
-            int partyPartialSeats = 41 - partyHoleSeats;
+            var partyPartialSeats = 41 - partyHoleSeats;
 
             // Assign partial seats based on the largest decimal part
             if (partyPartialSeats > 0)
                 partyListsWithSeats = partyListsWithSeats.OrderByDescending(list =>
                 {
-                    double number = list.seatsCount;
-                    double integerPart = Math.Floor(number);
-                    double decimalPart = number - integerPart;
+                    var number = list.seatsCount;
+                    var integerPart = Math.Floor(number);
+                    var decimalPart = number - integerPart;
                     return decimalPart;
                 }).ToList();
 
             // Distribute remaining partial seats
-            for (int i = 0; i < partyPartialSeats; i++)
+            for (var i = 0; i < partyPartialSeats; i++)
             {
                 partyListsWithSeats[i].seatsCount++;
             }
@@ -206,6 +206,12 @@ namespace OrangeProjectMVC.Controllers
 
             ViewBag.partyListsWithSeats = partyListsWithSeats;
             // Return the view with the results
+
+            var resultsDate = db.Dates.FirstOrDefault().results_date;
+            var resultShon = DateTime.Now >= resultsDate;
+            ViewBag.ResultShon = resultShon;
+            @ViewBag.Date = resultsDate;
+
             return View(listOfDistricts);
         }
 
@@ -280,7 +286,7 @@ namespace OrangeProjectMVC.Controllers
             }
 
             // Change to display more pages in one single page
-            int itemPerPage = 20;
+            var itemPerPage = 20;
 
             ViewBag.numberOfPages = Math.Ceiling((double)voters.Count() / itemPerPage);
             if (page == null) page = 0;
@@ -295,7 +301,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            voter_user voter_user = db.voter_user.Find(id);
+            var voter_user = db.voter_user.Find(id);
             if (voter_user == null)
             {
                 return HttpNotFound();
@@ -335,7 +341,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            voter_user voter_user = db.voter_user.Find(id);
+            var voter_user = db.voter_user.Find(id);
             if (voter_user == null)
             {
                 return HttpNotFound();
@@ -368,7 +374,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            voter_user voter_user = db.voter_user.Find(id);
+            var voter_user = db.voter_user.Find(id);
             if (voter_user == null)
             {
                 return HttpNotFound();
@@ -381,7 +387,7 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            voter_user voter_user = db.voter_user.Find(id);
+            var voter_user = db.voter_user.Find(id);
             db.voter_user.Remove(voter_user);
             db.SaveChanges();
             return RedirectToAction("Index");

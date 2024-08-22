@@ -35,12 +35,12 @@ namespace OrangeProjectMVC.Controllers
                 if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
                     // Generate a unique filename and save the image
-                    string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
-                    string extension = Path.GetExtension(ImageFile.FileName);
+                    var fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                    var extension = Path.GetExtension(ImageFile.FileName);
                     fileName = fileName + "_" + Guid.NewGuid().ToString() + extension;
 
                     // Define the path to save the uploaded file
-                    string directoryPath = Server.MapPath("~/uploads/ads/");
+                    var directoryPath = Server.MapPath("~/uploads/ads/");
 
                     // Ensure the directory exists
                     if (!Directory.Exists(directoryPath))
@@ -49,7 +49,7 @@ namespace OrangeProjectMVC.Controllers
                     }
 
                     // Save the file
-                    string path = Path.Combine(directoryPath, fileName);
+                    var path = Path.Combine(directoryPath, fileName);
                     ImageFile.SaveAs(path);
 
                     // Save the file path in the database

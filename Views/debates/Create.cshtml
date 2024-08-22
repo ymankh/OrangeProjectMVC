@@ -73,7 +73,7 @@
 
                 <div class="col">
                     @Html.LabelFor(model => model.second_list, "القائمة الثانية", htmlAttributes: new { @class = "col-form-label text-right" })
-                    @Html.DropDownList("second_list", null, "القائمة الاولى", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("second_list", null, "القائمة الثانية", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.second_list, "", new { @class = "text-danger" })
                 </div>
 
