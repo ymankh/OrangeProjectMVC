@@ -9,7 +9,7 @@
 
     h2.text-center.text-primary.mb-4 {
         font-family: 'Cairo';
-        
+
     }
 
     h4.text-right {
@@ -22,6 +22,16 @@
     .form-horizontal.bg-light.p-4.rounded.shadow-sm {
         margin-bottom: 10%;
         margin-top: 8%;
+    }
+    @@media (max-width: 427px) {
+        .form-group.row {
+            flex-direction: column;
+            align-items: stretch;
+
+        }
+        .col{
+            width:350px;
+        }
     }
 </style>
 
