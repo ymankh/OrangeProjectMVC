@@ -14,43 +14,7 @@
         margin-right:20%
     }
    
-    /* Ensure all custom cards have the same height */
-    .custom-card {
-        overflow: hidden;
-        position: relative;
-        height: 250px; /* Adjust this height as necessary */
-        transition: all 0.3s ease;
-    }
-
-    .custom-card:hover {
-        height: 200px; /* Height when hovered */
-        z-index: 10; /* Bring the card to the front */
-    }
-
-    .custom-card-body {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-        padding: 20px;
-        transition: all 0.3s ease;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-        .custom-card-body p {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-    .leaflet-control-zoom.leaflet-bar.leaflet-control {
-        display: none;
-    }
-
-    .custom-card:hover .custom-card-body p {
-        opacity: 1;
-    }
+    
 </style>
 
 
