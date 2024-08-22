@@ -32,6 +32,11 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Results()
         {
+            var electionDates = db.Dates.FirstOrDefault();
+            if (electionDates.election_end_date > DateTime.Now)
+                return RedirectToAction("Index", "UserCycle");
+
+            var resultsDate = db.Dates.FirstOrDefault().results_date;
             // Retrieve all districts from the database
             var districts = db.districts;
 
@@ -207,7 +212,6 @@ namespace OrangeProjectMVC.Controllers
             ViewBag.partyListsWithSeats = partyListsWithSeats;
             // Return the view with the results
 
-            var resultsDate = db.Dates.FirstOrDefault().results_date;
             var resultShon = DateTime.Now >= resultsDate;
             ViewBag.ResultShon = resultShon;
             @ViewBag.Date = resultsDate;
