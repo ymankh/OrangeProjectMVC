@@ -14,11 +14,7 @@
     <link href="~/assets/css/animate.css" rel="stylesheet" />
 
 
-
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
-
-
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
@@ -26,6 +22,7 @@
         // Initialize your DbContext
         bool electionRunning;
         bool nominationRunning;
+
         bool resultsRunning;
         using (var context = new electionEntities())
         {
@@ -38,15 +35,10 @@
             nominationRunning = dates != null &&
                                 dates.nomination_start_date < DateTime.Now &&
                                 dates.nomination_end_date > DateTime.Now;
+
             resultsRunning = dates != null && dates.election_end_date < DateTime.Now;
         }
     }
-
-
-
-
-
-
 
     @Styles.Render("~/Content/userCycle")
     @Styles.Render("~/flip/css")
