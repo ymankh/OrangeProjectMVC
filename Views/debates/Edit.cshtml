@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.requested_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.requested_date, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+                @Html.EditorFor(model => model.requested_date, new { htmlAttributes = new { @class = "form-control",  } })
                 @Html.ValidationMessageFor(model => model.requested_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.first_list, "first_list", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("first_list", null, htmlAttributes: new { @class = "form-control", disabled = "" })
+                @Html.DropDownList("first_list", null, htmlAttributes: new { @class = "form-control",  })
                 @Html.ValidationMessageFor(model => model.first_list, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.second_list, "second_list", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("second_list", null, htmlAttributes: new { @class = "form-control", disabled = "" })
+                @Html.DropDownList("second_list", null, htmlAttributes: new { @class = "form-control",  })
                 @Html.ValidationMessageFor(model => model.second_list, "", new { @class = "text-danger" })
             </div>
         </div>

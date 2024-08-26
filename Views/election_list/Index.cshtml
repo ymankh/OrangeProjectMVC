@@ -4,11 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Election Lists</h2>
 
 
-<table class="table">
-    <tr>
+<div class="card shadow mb-4">
+
+<div class="card-body">
+<div class="table-responsive">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">    <tr>
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
@@ -55,11 +58,16 @@
             @Html.DisplayFor(modelItem => item.district.name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            <div class="btn-group">
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-secondary" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-danger" })
+            </div>
         </td>
     </tr>
 }
 
 </table>
+</div>
+</div>
+</div>
