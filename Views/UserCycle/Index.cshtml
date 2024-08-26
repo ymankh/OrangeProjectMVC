@@ -61,7 +61,10 @@
     
     @*Count down section*@
     
+    @if(@ViewBag.TimerTitle != null)
+            {
 
+           
     <section>
         <div class="container">
             <h3 style="font-family: cairo;" class="mb-4 animate__animated animate__fadeInUp">@ViewBag.TimerTitle</h3>
@@ -80,7 +83,7 @@
         </div>
     </section>
 
-
+    }
 
     <!-- Gallery Section ====================== -->
     <section class="section-gallery gallery-1 py-60 py-lg-100 py-xxl-120">
