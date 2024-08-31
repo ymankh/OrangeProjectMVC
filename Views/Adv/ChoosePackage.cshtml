@@ -1,0 +1,276 @@
+﻿@{
+    ViewBag.Title = "Create Ad";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+
+<style>
+    a.btn.btn-primary {
+        margin-right: 50%;
+        margin-bottom: 5%;
+    }
+
+    .container.formcontainer {
+        width: 50%;
+    }
+
+    .col-lg-4 {
+        height: 120vh;
+    }
+
+    .pricing-box {
+        -webkit-box-shadow: 0px 5px 30px -10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 5px 30px -10px rgba(0, 0, 0, 0.1);
+        padding: 35px 50px;
+        border-radius: 20px;
+        position: relative;
+    }
+
+        .pricing-box .plan {
+            font-size: 34px;
+        }
+
+    .pricing-badge {
+        position: absolute;
+        top: 0;
+        z-index: 999;
+        right: 0;
+        width: 100%;
+        display: block;
+        font-size: 15px;
+        padding: 0;
+        overflow: hidden;
+        height: 100px;
+    }
+
+        .pricing-badge .badge {
+            float: right;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            right: -67px;
+            top: 17px;
+            position: relative;
+            text-align: center;
+            width: 200px;
+            font-size: 13px;
+            margin: 0;
+            padding: 7px 10px;
+            font-weight: 500;
+            color: #ffffff;
+            background: #fb7179;
+        }
+
+    .mb-2, .my-2 {
+        margin-bottom: .5rem !important;
+    }
+
+    p {
+        line-height: 1.7;
+    }
+</style>
+
+<section class="section-advertisement ad-2 py-60 py-lg-100 py-xxl-120">
+    <div class="container">
+        <div class="row align-items-center g-40 justify-content-between">
+            <div class="col-lg-5">
+                <div class="about-image position-relative wow fadeInLeft" data-wow-duration="1.3s">
+                    <a href="@Url.Content("~/assets/images/volunteer-image-2.png")" class="image-link">
+                        <img src="@Url.Content("~/assets/images/volunteer-image-2.png")" class="img-fluid" alt="volunteer-image-2">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="d-flex flex-column gap-3">
+                    <h6 class="subtitle lead text-primary wow fadeInRight" style="font-family:cairo;">إنشاء إعلانات انتخابية</h6>
+                    <h2 class="mb-1 wow fadeInRight" data-wow-delay=".3s" data-wow-duration="1.3s" style="font-family:cairo;">انضم إلى حركتنا وقم بالترويج لحملتك الانتخابية</h2>
+                    <p class="mb-0 mb-lg-10 wow fadeInRight" data-wow-delay=".4s" data-wow-duration="1.3s">إن إنشاء إعلان لحملتك الانتخابية سهل! استكشف منصتنا للوصول إلى مجموعة متنوعة من خيارات الإعلان، واصل إلى جمهور واسع. سواء كنت تستطيع توفير بضع ساعات أو التزام بجدول منتظم، فإن التزامك محل تقدير كبير. استخدم أدواتنا لإنشاء إعلانات مؤثرة تلامس الناخبين.</p>
+
+                    <ul class="about-lists list-unstyled mb-0 d-flex flex-column gap-10 wow fadeInRight" data-wow-delay=".5s" data-wow-duration="1.3s">
+                        <li class="d-flex gap-10 align-items-center"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>كن صادقاً وشفافاً</li>
+                        <li class="d-flex gap-10 align-items-center"> <span class="check-circle-icon"><svg width="24" height="24"><use xlink:href="#check-circle-icon"></use></svg></span>ابق ملتزماً بأهدافك</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="@Url.Action("advertismentst", "UserCycle")" class="btn btn-primary">إعلانات المرشحين</a>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<section class="section" id="pricing">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-box text-center">
+                    <h3 style="font-family:cairo;" class="title-heading mt-4">اعلانك يدعم نجاحك</h3>
+                    <p class="text-muted f-17 mt-3">
+                        استهدف جمهورك من خلال نشر اعلانك وايصاله للمواطنين<br> نقدم لك خيارات متكاملة تناسب احتياجاتك.
+                    </p>
+
+                    <img src="images/home-border.png" height="15" class="mt-3" alt="">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-5 pt-4">
+            <div class="col-lg-4">
+                <div class="pricing-box mt-4">
+                    <i class="mdi mdi-account h1"></i>
+                    <h4 class="f-20">عادي</h4>
+
+                    <div class="mt-4 pt-2">
+                        <p class="mb-2 f-18">المميزات</p>
+
+                        <p class="mb-2">
+                            <i class="mdi mdi-checkbox-marked-circle text-success f-18 mr-2"></i>اعلان يستمر
+                            <b>ليوم واحد </b>
+                        </p>
+
+                    </div>
+
+                    <p class="mt-4 pt-2 text-muted">
+                        انشر اعلانك لمدة يوم كامل.
+                    </p>
+                    <div class="pricing-plan mt-4 pt-2">
+                        <h4 class="text-muted"><s> $149.9</s> <span class="plan pl-3 text-dark">$99.9 </span></h4>
+                        <p class="text-muted mb-0">للاعلان</p>
+                    </div>
+
+
+                    <div class="mt-4 pt-3">
+                        <a href="@Url.Action("Create", "Adv", new { price = 99.9 })" class="btn btn-primary btn-rounded">اشترك الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="pricing-box mt-4">
+                    <div class="pricing-badge">
+                        <span class="badge">مميز</span>
+                    </div>
+                    <i class="mdi mdi-account h1"></i>
+                    <h4 class="f-20">مميز</h4>
+
+                    <div class="mt-4 pt-2">
+                        <p class="mb-2 f-18">المميزات</p>
+
+                        <p class="mb-2">
+                            <i class="mdi mdi-checkbox-marked-circle text-success f-18 mr-2"></i>اعلان يستمر
+                            <b>لمدة اسبوع</b>
+                        </p>
+
+                    </div>
+
+                    <p class="mt-4 pt-2 text-muted">
+                        انشر اعلانك لمدة اسبوع كامل.
+                    </p>
+                    <div class="pricing-plan mt-4 pt-2">
+                        <h4 class="text-muted"><s> $199.9</s> <span class="plan pl-3 text-dark">$149.9 </span></h4>
+                        <p class="text-muted mb-0">للاعلان</p>
+                    </div>
+
+
+                    <div class="mt-4 pt-3">
+                        <a href="@Url.Action("Create", "Adv", new { price = 149.9 })" class="btn btn-primary btn-rounded">اشترك الآن</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="col-lg-4">
+                <div class="pricing-box mt-4">
+                    <div class="pricing-badge">
+                        <span class="badge">VIP</span>
+                    </div>
+                    <i class="mdi mdi-account h1"></i>
+                    <h4 class="f-20">VIP</h4>
+
+                    <div class="mt-4 pt-2">
+                        <p class="mb-2 f-18">المميزات</p>
+
+                        <p class="mb-2">
+                            <i class="mdi mdi-checkbox-marked-circle text-success f-18 mr-2"></i>اعلان يستمر
+                            <b>لمدة شهر كامل</b>
+                        </p>
+
+                    </div>
+
+                    <p class="mt-4 pt-2 text-muted">
+                        انشر اعلانك لمدة شهر كامل.
+                    </p>
+                    <div class="pricing-plan mt-4 pt-2">
+                        <h4 class="text-muted"><s> $279.99</s> <span class="plan pl-3 text-dark">$249.29 </span></h4>
+                        <p class="text-muted mb-0">للاعلان</p>
+                    </div>
+
+
+                    <div class="mt-4 pt-3">
+                        <a href="@Url.Action("Create", "Adv", new { price = 249.99 })" class="btn btn-primary btn-rounded">اشترك الآن</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @*<div class="col-lg-4">
+                    <div class="pricing-box mt-4">
+                        <i class="mdi mdi-account-multiple-plus h1"></i>
+                        <h4 class="f-20">VIP</h4>
+
+                        <div class="mt-4 pt-2">
+                            <p class="mb-2 f-18">المميزات</p>
+
+                            <p class="mb-2">
+                                <i class="mdi mdi-checkbox-marked-circle text-success f-18 mr-2"></i>اعلان يستمر
+                                <b>لمدة شهر كامل</b>
+                            </p>
+
+                        </div>
+
+                        <p class="mt-4 pt-2 text-muted">
+                            انشر اعلانك لمدة شهر كامل.
+                        </p>
+                        <div class="pricing-plan mt-4 pt-2">
+                            <h4 class="text-muted"><s> $299.9</s> <span class="plan pl-3 text-dark">$249.9 </span></h4>
+                            <p class="text-muted mb-0">للاعلان</p>
+                        </div>
+
+
+                        <div class="mt-4 pt-3">
+                            <div class="mt-4 pt-3">
+                                <a href="@Url.Action("Create", "Adv", new { price = 249.9 })" class="btn btn-primary btn-rounded">اشترِ الآن</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+</section>
+
+
+

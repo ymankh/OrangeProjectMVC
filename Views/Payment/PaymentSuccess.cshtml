@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Payment Successful";
+    ViewBag.Title = "تم الدفع بنجاح";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 
 }
@@ -8,16 +8,16 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Payment Successful</title>
+    <title>تم الدفع بنجاح</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <script>
         Swal.fire({
-            title: 'Payment Successful!',
-            text: 'Your payment was successful. Thank you!',
+            title: 'تم الدفع بنجاح!',
+            text: 'تمت عملية الدفع بنجاح. شكراً لك',
             icon: 'success',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'استمر'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = '@Url.Action("Success", "Payment")';

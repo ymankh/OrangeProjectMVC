@@ -1,83 +1,177 @@
-﻿@model List<OrangeProjectMVC.Controllers.DistrictWithSeats>
+﻿@using OrangeProjectMVC.Controllers
+@model List<OrangeProjectMVC.Controllers.DistrictWithSeats>
 
 
 @{
     ViewBag.Title = "Results";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
-
+    var partyListsWithSeats = ViewBag.partyListsWithSeats as List<ListsWithSeats>;
 
 }
 
+<div class="container my-4 text-right" dir="rtl">
+    <h1 class="text-center my-4">نتائج الانتخابات</h1>
 
-@foreach (var distict in Model)
-{
-    <div class="container my-4 text-right" dir="rtl">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="mb-0">@distict.district.name</h3>
-            </div>
-            <div class="card-body">
-                @foreach (var list in distict.lists)
-                {
-                    if (list.competitiveWinners.Count() > 0 || list.womenWinner != null || list.christianWinner != null)
+    @if (ViewBag.ResultShon)
+    {
+
+
+        <h2>نتائج الدوائر</h2>
+
+        foreach (var distict in Model)
+        {
+            <div class="card mb-4">
+                <div class="card-header text-center">
+                    <h3 class="mb-0">@distict.district.name</h3>
+                </div>
+                <div class="card-body">
+                    @foreach (var list in distict.lists)
                     {
-                        <div class="mb-3">
-                            <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
-                            <table class="table table-striped table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">اسم المرشح</th>
-                                        <th scope="col">نوع المقعد</th>
-                                        <th scope="col">عدد الاصوات</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{ int i = 0; }
+                        if (list.competitiveWinners.Any() || list.womenWinner != null || list.christianWinner != null)
+                        {
+                            <div class="mb-3">
+                                <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
+                                <table class="table table-striped table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">اسم المرشح</th>
+                                            <th scope="col">نوع المقعد</th>
+                                            <th scope="col">عدد الاصوات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{ var i = 0; }
 
-                                    @foreach (var competitiveWinners in list.competitiveWinners)
-                                    {
-                                        { i++; }
-                                        <tr>
-                                            <th scope="row">@i</th>
-                                            <td>@competitiveWinners.voter_user.name </td>
-                                            <td>تنافسي</td>
-                                            <td>@competitiveWinners.vote_count</td>
-                                        </tr>
-                                    }
-                                    @if (list.womenWinner != null && list.womenWinner.election_list_id == list.list.id)
-                                    {
-                                        { i++; }
-                                        <tr>
-                                            <th scope="row">@i</th>
-                                            <td>@list.womenWinner.voter_user.name </td>
-                                            <td>نساء</td>
-                                            <td>@list.womenWinner.vote_count</td>
-                                        </tr>
-                                    }
-                                    @if (list.christianWinner != null && list.christianWinner.election_list_id == list.list.id)
-                                    {
-                                        { i++; }
-                                        <tr>
-                                            <th scope="row">@i</th>
-                                            <td>@list.christianWinner.voter_user.name </td>
-                                            <td>المسيحي</td>
-                                            <td>@list.christianWinner.vote_count</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                        @foreach (var competitiveWinners in list.competitiveWinners)
+                                        {
+                                            { i++; }
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>@competitiveWinners.voter_user.name </td>
+                                                <td>مقعد انتخابي</td>
+                                                <td>@competitiveWinners.vote_count</td>
+                                            </tr>
+                                        }
+                                        @if (list.womenWinner != null && list.womenWinner.election_list_id == list.list.id)
+                                        {
+                                            { i++; }
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>@list.womenWinner.voter_user.name </td>
+                                                <td>كوتا نسائية</td>
+                                                <td>@list.womenWinner.vote_count</td>
+                                            </tr>
+                                        }
+                                        @if (list.christianWinner != null && list.christianWinner.election_list_id == list.list.id)
+                                        {
+                                            { i++; }
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>@list.christianWinner.voter_user.name </td>
+                                                <td>مقعد مسيحي</td>
+                                                <td>@list.christianWinner.vote_count</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
+                                <h6 class="text-danger-emphasis">لم ينجح احد</h6>
+                            </div>
+                        }
                     }
-                    else
+                </div>
+            </div>
+        }
+
+        <h2>نتائج القوائم الحزبية</h2>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                @if (partyListsWithSeats != null)
+                {
+                    foreach (var list in partyListsWithSeats)
                     {
-                        <div class="mb-3">
-                            <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
-                            <h6 class="text-danger-emphasis">لم ينجح احد</h6>
-                        </div>
+                        if (list.competitiveWinners.Any())
+                        {
+                            <div class="mb-3">
+                                <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
+                                <table class="table table-striped table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">اسم المرشح</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var i = 0;
+
+                                            foreach (var competitiveWinners in list.competitiveWinners)
+                                            {
+                                                {
+                                                    i++;
+                                                }
+                                                <tr>
+                                                    <th scope="row">@i</th>
+                                                    <td>@competitiveWinners.voter_user.name </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mb-3">
+                                <h4 class="text-primary">@list.list.name بعدد اصوات @list.list.vote_count</h4>
+                                <h6 class="text-danger-emphasis">لم ينجح احد</h6>
+                            </div>
+                        }
                     }
                 }
             </div>
         </div>
-    </div>
-}
+    }
+    else
+    {
+        <h3>ستظهر النتائج الانتخابية في هذه الصفحة فور حين موعدها</h3>
+        <section style="height: 80vh; align-content: center">
+            <div class="container">
+                <h3 style="font-family: cairo;" class="mb-4 animate__animated animate__fadeInUp">@ViewBag.TimerTitle</h3>
+                <div class="text-ltr align-text-start" dir="ltr">
+                    <div class="tick" data-did-init="handleTickInit">
+                        <div data-repeat="true" data-layout="horizontal fit" data-transform="preset(d, h, m, s) -> delay">
+                            <div class="tick-group">
+                                <div data-key="value" data-repeat="true" data-transform="pad(00) -> split -> delay">
+                                    <span data-view="flip"></span>
+                                </div>
+                                <span data-key="label" data-view="text" class="tick-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+      function handleTickInit(tick) {
+        var counter = Tick.count.down("@ViewBag.Date");
+        counter.onupdate = function (value) {
+          tick.value = value;
+        };
+        counter.onended = function () {
+              //location.reload();
+        };
+      }
+      new WOW().init();
+        </script>
+    }
+
+</div>
+@*Count down script*@

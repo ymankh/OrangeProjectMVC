@@ -131,9 +131,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\advController.cs" />
+    <Compile Include="Controllers\candidatesController.cs" />
     <Compile Include="Controllers\candidate_requestController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\DatesController.cs" />
     <Compile Include="Controllers\debatesController.cs" />
+    <Compile Include="Controllers\election_listController.cs" />
     <Compile Include="Controllers\election_list_requestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -200,6 +203,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="addsImgs\1.jpg" />
+    <Content Include="addsImgs\2.jpg" />
+    <Content Include="addsImgs\3.jpg" />
+    <Content Include="addsImgs\4.jpg" />
+    <Content Include="addsImgs\5.jpg" />
+    <Content Include="addsImgs\6.jpg" />
+    <Content Include="addsImgs\7.jpg" />
+    <Content Include="addsImgs\8.jpg" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\customStyle.css" />
     <Content Include="assets\css\images\layers-2x.html" />
@@ -212,9 +223,12 @@
     <Content Include="assets\css\routing-icon.png" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\css\swiper-bundle.min.css" />
+    <Content Include="assets\flip\flip.js" />
+    <Content Include="assets\flip\flip.min.css" />
     <Content Include="assets\images\about-image-2.jpg" />
     <Content Include="assets\images\about-image-3.jpg" />
     <Content Include="assets\images\Amman2.jpg" />
+    <Content Include="assets\images\annotationRequest.png" />
     <Content Include="assets\images\banner-1.jpg" />
     <Content Include="assets\images\campaign-1.jpg" />
     <Content Include="assets\images\campaign-3.jpg" />
@@ -222,6 +236,7 @@
     <Content Include="assets\images\campaign-6.jpg" />
     <Content Include="assets\images\campaign-7.jpg" />
     <Content Include="assets\images\contact-image-2.jpg" />
+    <Content Include="assets\images\debatePic.jpg" />
     <Content Include="assets\images\event-2.jpg" />
     <Content Include="assets\images\event-3.jpg" />
     <Content Include="assets\images\fav-icon\favicon.ico" />
@@ -261,7 +276,6 @@
     <Content Include="assets\images\video-image.jpg" />
     <Content Include="assets\images\vmh-pattern-rtl.png" />
     <Content Include="assets\images\vmh-pattern.png" />
-    <Content Include="assets\images\volunteer-image-2.png" />
     <Content Include="assets\images\volunteer-image.jpg" />
     <Content Include="assets\images\volunterr-bg.jpg" />
     <Content Include="assets\js\animate.js" />
@@ -297,15 +311,20 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\img\141683_0_1618560092 %281%29.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\jarash1.jpg" />
+    <Content Include="img\Petraa.jpg" />
     <Content Include="img\undraw_posting_photo.svg" />
     <Content Include="img\undraw_profile.svg" />
     <Content Include="img\undraw_profile_1.svg" />
     <Content Include="img\undraw_profile_2.svg" />
     <Content Include="img\undraw_profile_3.svg" />
     <Content Include="img\undraw_rocket.svg" />
+    <Content Include="assets\images\volunteer-image-2.png" />
+    <Content Include="img\votenow.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -345,6 +364,8 @@
     <Content Include="Scripts\js\demo\datatables-demo.js" />
     <Content Include="Scripts\js\sb-admin-2.js" />
     <Content Include="Scripts\js\sb-admin-2.min.js" />
+    <Content Include="Scripts\map\countrymap.js" />
+    <Content Include="Scripts\map\mapdata.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -2027,7 +2048,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
@@ -2199,10 +2219,6 @@
     <Content Include="Views\Adv\Delete.cshtml" />
     <Content Include="Views\Adv\Edit.cshtml" />
     <Content Include="Views\Adv\index.cshtml" />
-    <Content Include="Views\candidate_request\Delete.cshtml" />
-    <Content Include="Views\candidate_request\Details.cshtml" />
-    <Content Include="Views\candidate_request\Edit.cshtml" />
-    <Content Include="Views\candidate_request\Index.cshtml" />
     <Content Include="Views\ContactUs\contactus.cshtml" />
     <Content Include="Views\ContactUs\Delete.cshtml" />
     <Content Include="Views\ContactUs\Edit.cshtml" />
@@ -2212,10 +2228,6 @@
     <Content Include="Views\debates\Details.cshtml" />
     <Content Include="Views\debates\Edit.cshtml" />
     <Content Include="Views\debates\Index.cshtml" />
-    <Content Include="Views\election_list_request\Delete.cshtml" />
-    <Content Include="Views\election_list_request\Details.cshtml" />
-    <Content Include="Views\election_list_request\Edit.cshtml" />
-    <Content Include="Views\election_list_request\Index.cshtml" />
     <Content Include="Views\Payment\Error.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\PaymentSuccess.cshtml" />
@@ -2236,9 +2248,33 @@
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\User\SingleList.cshtml" />
     <Content Include="Views\User\VerifyCode.cshtml" />
+    <Content Include="Views\debates\ShowDebates.cshtml" />
+    <Content Include="Views\Dates\Edit.cshtml" />
+    <Content Include="Views\candidate_request\Index.cshtml" />
+    <Content Include="Views\candidate_request\Details.cshtml" />
+    <Content Include="Views\candidate_request\Create.cshtml" />
+    <Content Include="Views\candidate_request\Delete.cshtml" />
+    <Content Include="Views\candidate_request\Edit.cshtml" />
+    <Content Include="Views\candidates\Index.cshtml" />
+    <Content Include="Views\candidates\Details.cshtml" />
+    <Content Include="Views\candidates\Create.cshtml" />
+    <Content Include="Views\candidates\Edit.cshtml" />
+    <Content Include="Views\candidates\Delete.cshtml" />
+    <Content Include="Views\election_list_request\Index.cshtml" />
+    <Content Include="Views\election_list_request\Details.cshtml" />
+    <Content Include="Views\election_list_request\Edit.cshtml" />
+    <Content Include="Views\election_list_request\Delete.cshtml" />
+    <Content Include="Views\election_list\Index.cshtml" />
+    <Content Include="Views\election_list\Edit.cshtml" />
+    <Content Include="Views\election_list\Delete.cshtml" />
+    <Content Include="Views\election_list\Details.cshtml" />
+    <Content Include="Views\Adv\ChoosePackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Candidates\" />
+    <Folder Include="Images\ElectionLists\" />
+    <Folder Include="Images\PartyLists\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

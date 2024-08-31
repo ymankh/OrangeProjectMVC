@@ -14,13 +14,13 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
 
-        bool notAdmin()
+        private bool NotAdmin()
         {
             if (Session["adminId"] == null)
                 return true;
             else
             {
-                int id = Convert.ToInt32(Session["adminId"]);
+                var id = Convert.ToInt32(Session["adminId"]);
                 var xAdmin = db.Admins.FirstOrDefault(user => user.id == id);
                 if (xAdmin == null)
                     return true;
@@ -30,33 +30,40 @@ namespace OrangeProjectMVC.Controllers
 
         public ActionResult Index()
         {
-            if (notAdmin())
+            if (NotAdmin())
+            {
                 return RedirectToAction("Index", "UserCycle");
-            ViewBag.irbidFirstVoteCount = findDistrectVotersCount(1);
-            ViewBag.irbidSecondVoteCount = findDistrectVotersCount(2);
-            ViewBag.ajlonVoteCount = findDistrectVotersCount(3);
+            }
 
-            long local_vote_count = db.election_list.Where(list => list.type == "L").Sum(list => list.vote_count);
-            long party_vote_count = db.election_list.Where(list => list.type == "P").Sum(list => list.vote_count);
-            long number_of_voters = db.voter_user.Count();
+            ViewBag.irbidFirstVoteCount = FindDistrectVotersCount(1);
+            ViewBag.irbidSecondVoteCount = FindDistrectVotersCount(2);
+            ViewBag.ajlonVoteCount = FindDistrectVotersCount(3);
 
-            ViewBag.distrect_voter_count = local_vote_count;
-            ViewBag.party_voter_count = party_vote_count;
+            long localVoteCount = db.voter_user.Count(voter => voter.has_locally_voted);
+            long partyVoteCount = db.voter_user.Count(voter => voter.has_party_voted);
+            long numberOfVoters = db.voter_user.Count();
+
+
+
+            ViewBag.distrect_voter_count = localVoteCount;
+            ViewBag.party_voter_count = partyVoteCount;
             ViewBag.number_of_lists = db.election_list.Count();
-            @ViewBag.voting_ratio = Math.Floor((Math.Max(local_vote_count, party_vote_count) / (double)number_of_voters) * 100);
+            ViewBag.voting_ratio = Math.Floor((Math.Max(localVoteCount, partyVoteCount) / (double)numberOfVoters) * 100);
+
+            ViewBag.womenVoters = db.voter_user.
+                Count(voter => voter.gender == "F" && (voter.has_party_voted || voter.has_locally_voted));
+            ViewBag.menVoters = db.voter_user.Count(voter => voter.gender == "M" && (voter.has_party_voted || voter.has_locally_voted));
 
             return View();
         }
 
-        private long findDistrectVotersCount(int distrectId)
+        private long FindDistrectVotersCount(int distrectId)
         {
             long localVotes = db.voter_user.
-                Where(voter => voter.district_id == distrectId && voter.has_locally_voted).
-                Count();
+                Count(voter => voter.district_id == distrectId && voter.has_locally_voted);
 
             long partyVotes = db.voter_user.
-                Where(voter => voter.district_id == 3 && voter.has_party_voted).
-                Count();
+                Count(voter => voter.district_id == distrectId && voter.has_party_voted);
             return Math.Max(localVotes, partyVotes);
         }
 

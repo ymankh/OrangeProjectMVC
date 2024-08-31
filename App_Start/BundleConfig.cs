@@ -38,9 +38,7 @@ namespace OrangeProjectMVC
                 "~/Scripts/vendor/bootstrap/js/bootstrap.bundle.min.js",
                 "~/Scripts/vendor/jquery-easing/jquery.easing.min.js",
                 "~/Scripts/js/sb-admin-2.min.js",
-                "~/Scripts/vendor/chart.js/Chart.min.js",
-                "~/Scripts/js/demo/chart-area-demo.js",
-                "~/Scripts/js/demo/chart-pie-demo.js"));
+                "~/Scripts/vendor/chart.js/Chart.min.js"));
 
 
 
@@ -55,6 +53,15 @@ namespace OrangeProjectMVC
             "~/assets/css/swiper-bundle.min.css",
             "~/assets/css/customStyle.css"
             ));
+
+            bundles.Add(new StyleBundle("~/flip/css").Include(
+                "~/assets/flip/flip.min.css"
+            ));
+
+            bundles.Add(new Bundle("~/flip/js").Include(
+                "~/assets/flip/flip.js"
+            ));
+
 
             bundles.Add(new Bundle("~/bundles/userCycle").Include(
                 "~/assets/js/animate.js",

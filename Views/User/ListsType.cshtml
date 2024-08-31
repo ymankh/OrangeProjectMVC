@@ -1,40 +1,71 @@
 ﻿@{
-    ViewBag.Title = "ListsType";
+    ViewBag.Title = "انواع القوائم";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
+<style>
+    body {
+        background-color: #f1f1f1 !important;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-<div class="container mt-5">
-    <h1 style="text-align: center; font-family: cairo; margin-bottom:1em;">الرجاء اختيار نوع القائمة</h1>
-    <div class="row justify-content-center" style="margin-bottom: 2em">
-        <!-- Card 1 -->
-        <div class="col-md-4 my-2">
-            <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                <img src="~/img/LocalList.jpg" class="card-img-top" alt="Card image 1">
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-family: cairo;">القوائم المحلية</h5>
-                    <p class="card-text" style="font-family: cairo;">اضغط لاظهار القوائم المحلية لدائرتك</p>
-                    <div class="form-group" style="margin: 0 auto; display: @Html.Raw(ViewBag.display1)">
-                        @Html.ActionLink("صوت", "ListsNames", "User", new { area = "" }, new { @class = "btn btn-primary btn-block" })
+
+@if (ViewBag.LocallyVoted != null && ViewBag.PartyVoted != null && (bool)ViewBag.LocallyVoted && (bool)ViewBag.PartyVoted)
+{
+    <script>
+    Swal.fire({
+        title: 'لقد اتممت عملية التصويت بنجاح',
+        text: 'لقد قمت بالتصويت على القوائم المحلية والحزبية ',
+        icon: 'success',  // Use 'info' for a generic icon
+        confirmButtonText: 'استمر',
+          // Use an emoji as the icon
+        customClass: {
+            icon: 'no-border'  // Optional: to remove the border around the emoji
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '@Url.Action("Logout", "User")';
+        }
+    });
+    </script>
+}
+else
+{
+    <div class="container mt-5 mb-1">
+        <h3 style="text-align: center; font-family: cairo; margin-bottom:0.8em;">الرجاء اختيار نوع القائمة</h3>
+        <div class="row justify-content-center" style="margin-bottom: 1em">
+            <!-- Card 1 -->
+            <div class="col-md-4 my-2">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <img src="~/img/votenow.jpg" class="card-img-top" alt="Card image 1" style="height:500px">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" style="font-family: cairo;">القوائم المحلية</h5>
+                        <p class="card-text" style="font-family: cairo;">اضغط لاظهار القوائم المحلية لدائرتك</p>
+                        <div class="form-group" style="margin: 0 auto; display: @Html.Raw(ViewBag.display1)">
+                            @Html.ActionLink("صوت", "ListsNames", "User", new { area = "" }, new { @class = "btn btn-primary btn-block" })
+                        </div>
+                        <h5 style="font-family: cairo;">@ViewBag.voted1</h5>
                     </div>
-                    <h5 style="font-family: cairo;">@ViewBag.voted1</h5>
                 </div>
             </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="col-md-4 my-2">
-            <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                <img src="~/img/PartyList.jpg" class="card-img-top" alt="Card image 2"/>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-family: cairo;">القوائم الحزبية</h5>
-                    <p class="card-text" style="font-family: cairo;">اضغط لاظهار القوائم الحزبية</p>
-                    <div class="form-group" style="margin: 0 auto; display: @Html.Raw(ViewBag.display2)">
-                        @Html.ActionLink("صوت", "PartyListsNames", "User", new { area = "" }, new { @class = "btn btn-primary btn-block" })
+            <!-- Card 2 -->
+            <div class="col-md-4 my-2">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <img src="~/img/votenow.jpg" class="card-img-top" alt="Card image 2" style="height:500px" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title" style="font-family: cairo;">القوائم الحزبية</h5>
+                        <p class="card-text" style="font-family: cairo;">اضغط لاظهار القوائم الحزبية لدائرتك</p>
+                        <div class="form-group" style="margin: 0 auto; display: @Html.Raw(ViewBag.display2)">
+                            @Html.ActionLink("صوت", "PartyListsNames", "User", new { area = "" }, new { @class = "btn btn-primary btn-block" })
+                        </div>
+                        <h5 style="font-family: cairo;">@ViewBag.voted2</h5>
                     </div>
-                    <h5 style="font-family: cairo;">@ViewBag.voted2</h5>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+}

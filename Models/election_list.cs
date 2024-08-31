@@ -27,6 +27,7 @@ namespace OrangeProjectMVC.Models
         public Nullable<int> district_id { get; set; }
         public string type { get; set; }
         public int vote_count { get; set; }
+        public string image_url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<candidate> candidates { get; set; }

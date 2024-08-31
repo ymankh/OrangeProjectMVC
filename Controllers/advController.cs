@@ -1,7 +1,9 @@
 ﻿using OrangeProjectMVC.Models;
+using System;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-
 namespace OrangeProjectMVC.Controllers
 {
     public class AdvController : Controller
@@ -9,32 +11,60 @@ namespace OrangeProjectMVC.Controllers
         private electionEntities db = new electionEntities();
 
         // GET: Ads/Create
-        public ActionResult Create()
+
+
+        public ActionResult ChoosePackage()
         {
             return View();
         }
+        public ActionResult Create(decimal price)
+        {
+            ViewBag.Price = price;
+            return View();
+        }
+
+
 
         // POST: Ads/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Ad model)
+        public ActionResult Create(Ad model, HttpPostedFileBase ImageFile, decimal price)
         {
             if (ModelState.IsValid)
             {
-                Ad ad = new Ad
+                if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    description = model.description,
-                    img_url = model.img_url,
-                    status = "Active"
-                };
+                    // Generate a unique filename and save the image
+                    var fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                    var extension = Path.GetExtension(ImageFile.FileName);
+                    fileName = fileName + "_" + Guid.NewGuid().ToString() + extension;
 
-                db.Ads.Add(ad);
+                    // Define the path to save the uploaded file
+                    var directoryPath = Server.MapPath("~/uploads/ads/");
+
+                    // Ensure the directory exists
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+
+                    // Save the file
+                    var path = Path.Combine(directoryPath, fileName);
+                    ImageFile.SaveAs(path);
+
+                    // Save the file path in the database
+                    model.img_url = "~/uploads/ads/" + fileName;
+                }
+
+                model.status = "pending";
+                db.Ads.Add(model);
                 db.SaveChanges();
-                return RedirectToAction("Create"); // Redirect to an appropriate page
+                return RedirectToAction("Checkout", "Payment", new { price = price });
             }
 
             return View(model);
         }
+
 
         // GET: Ads
         public ActionResult Index()
@@ -91,3 +121,6 @@ namespace OrangeProjectMVC.Controllers
         }
     }
 }
+
+
+

@@ -23,7 +23,7 @@ namespace OrangeProjectMVC.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Checkout()
+        public async Task<ActionResult> Checkout(decimal price)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace OrangeProjectMVC.Controllers
                         {
                             amount = new
                             {
-                                total = "100",
+                                total = price.ToString("F2"),
                                 currency = "USD"
                             },
                             description = "Payment description"
@@ -167,7 +167,7 @@ namespace OrangeProjectMVC.Controllers
                             // Save transaction to database
                             using (var db = new electionEntities())
                             {
-                                var transaction = new Transaction
+                                var transaction = new Transaction()
                                 {
                                     status = executedPayment.state,
                                     amount = Convert.ToDecimal(executedPayment.transactions[0].amount.total),
@@ -212,5 +212,3 @@ namespace OrangeProjectMVC.Controllers
         }
     }
 }
-
-

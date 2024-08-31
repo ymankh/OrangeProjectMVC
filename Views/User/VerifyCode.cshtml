@@ -1,26 +1,49 @@
 ﻿@{
-    ViewBag.Title = "Verify Code";
+    ViewBag.Title = "تاكيد الرمز";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-<section class="vh-100" style="background-color: white;">
+<style>
+       body {
+       height: 160vh !important;
+       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('@Url.Content("~/img/Petraa.jpg")');
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-position: center;
+       margin-bottom: 2em !important;
+   }
+    .resendCode {
+        text-decoration:none;
+        font-family:cario;
+        font-size: 16px;
+        display: inline-block;
+    }
+
+        .resendCode:hover {
+
+        }
+</style>
+
+<section class="vh-100" >
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
 
-                        <h3 class="mb-5">Verify Code</h3>
+                        <h3 style="font-family:cairo" class="mb-5">رمز التحقق</h3>
 
                         @using (Html.BeginForm("VerifyCode", "User", FormMethod.Post))
                         {
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="verificationCode">Verification Code</label>
+                                <label class="form-label" for="verificationCode">ادخل رمز التحقق</label>
                                 <input type="text" id="verificationCode" name="verificationCode" class="form-control form-control-lg" />
                             </div>
 
-                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">Verify</button>
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" type="submit">تحقق</button>
                         }
+
+                        @Html.ActionLink("اعادة ارسال رمز التحقق", "Login", "User", new { isResend = true }, new { @class = "btn btn-link resendCode" })
 
                     </div>
                 </div>
@@ -28,3 +51,19 @@
         </div>
     </div>
 </section>
+
+@if (ViewBag.Msg != null)
+{
+    <script>
+        Toastify({
+            text: "@ViewBag.Msg",
+            duration: 3000, // Duration in milliseconds (3 seconds)
+            close: true, // Show close button
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            backgroundColor: "#FF0000", // Warning background color (orange)
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            onClick: function () { } // Callback after click
+        }).showToast();
+    </script>
+}

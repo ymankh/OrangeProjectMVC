@@ -13,8 +13,8 @@ namespace OrangeProjectMVC.Controllers
         // GET: candidate_request
         public ActionResult Index()
         {
-            var candidate_request = db.candidate_request.Include(c => c.election_list_request).Include(c => c.voter_user);
-            return View(candidate_request.ToList());
+            var candidateRequest = db.candidate_request.Include(c => c.election_list_request).Include(c => c.voter_user).ToList();
+            return View(candidateRequest);
         }
 
         // GET: candidate_request/Details/5
@@ -24,12 +24,12 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            candidate_request candidate_request = db.candidate_request.Find(id);
-            if (candidate_request == null)
+            var candidateRequest = db.candidate_request.Find(id);
+            if (candidateRequest == null)
             {
                 return HttpNotFound();
             }
-            return View(candidate_request);
+            return View(candidateRequest);
         }
 
         // GET: candidate_request/Create
@@ -41,7 +41,7 @@ namespace OrangeProjectMVC.Controllers
         }
 
         // POST: candidate_request/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overpowering attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,14 +66,14 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            candidate_request candidate_request = db.candidate_request.Find(id);
-            if (candidate_request == null)
+            var candidateRequest = db.candidate_request.Find(id);
+            if (candidateRequest == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.election_list_request_id = new SelectList(db.election_list_request, "id", "name", candidate_request.election_list_request_id);
-            ViewBag.user_id = new SelectList(db.voter_user, "id", "national_id", candidate_request.user_id);
-            return View(candidate_request);
+            ViewBag.election_list_request_id = new SelectList(db.election_list_request, "id", "name", candidateRequest.election_list_request_id);
+            ViewBag.user_id = new SelectList(db.voter_user, "id", "national_id", candidateRequest.user_id);
+            return View(candidateRequest);
         }
 
         // POST: candidate_request/Edit/5
@@ -101,7 +101,7 @@ namespace OrangeProjectMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            candidate_request candidate_request = db.candidate_request.Find(id);
+            var candidate_request = db.candidate_request.Find(id);
             if (candidate_request == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace OrangeProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            candidate_request candidate_request = db.candidate_request.Find(id);
+            var candidate_request = db.candidate_request.Find(id);
             db.candidate_request.Remove(candidate_request);
             db.SaveChanges();
             return RedirectToAction("Index");

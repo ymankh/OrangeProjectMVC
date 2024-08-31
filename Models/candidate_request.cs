@@ -18,6 +18,8 @@ namespace OrangeProjectMVC.Models
         public int election_list_request_id { get; set; }
         public string type_of_chair { get; set; }
         public int user_id { get; set; }
+        public bool is_representative { get; set; }
+        public string img_url { get; set; }
     
         public virtual election_list_request election_list_request { get; set; }
         public virtual voter_user voter_user { get; set; }

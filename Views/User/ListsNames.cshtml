@@ -1,34 +1,45 @@
 ﻿@model IEnumerable<OrangeProjectMVC.Models.election_list>
 @{
-    ViewBag.Title = "ListsNames";
+    ViewBag.Title = "اسماء القوائم";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var imgs = ViewBag.Images as string[];
 }
 
-<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">ListsNames</h2>
+<style>
+    body {
+        background-color: #f1f1f1 !important;
+    }
+</style>
 
-<div class="container mt-5">
-    <h1 style="text-align: center; font-family: cairo;">الرجاء اختيار القائمة المراد التصويت لها</h1>
+<h2 style="text-align: center; font-family: cairo; margin-top: 1em;">التصويت القوائم المحلية</h2>
 
-    @using (Html.BeginForm("SingleList", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div class="container mt-5" style="margin-bottom:2em">
+    <h3 style="text-align: center; font-family: cairo;">الرجاء اختيار القائمة المراد التصويت لها</h3>
+
+    @using (Html.BeginForm("SingleList", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "VoteForm" }))
     {
-        <div class="row justify-content-center">
+        <div class="row">
+            @{ var i = -1; }
             @foreach (var lists in Model)
             {
-                <div class="col-md-3 my-2">
-                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                        <img src="~/img/petra.png" class="card-img-top" alt="Card image for @Html.DisplayFor(model => lists.name)">
+                { i += 1; }
+                <div class="col-sm-12 col-md-6 col-lg-3 my-2 image-item">
+                    <div class="card shadow-2-strong h-100">
+                        <div style="height:200px; overflow:hidden">
+                            <img src="@Url.Content(imgs[i % imgs.Length])" style="height:100%" class="card-img-top" alt="Card image for @Html.DisplayFor(model => lists.name)">
+                        </div>
                         <div class="card-body text-center">
-                            <h5 class="card-title" style="font-family: cairo;">@Html.DisplayFor(model => lists.name)</h5>
-                            <p class="card-text" style="font-family: cairo;">Description for @Html.DisplayFor(model => lists.name).</p>
-                            <ul class="list-unstyled" style="font-family: cairo;">
+                            <h5 class="card-title" style="font-family: cairo;">قائمة @Html.DisplayFor(model => lists.name)</h5>
+                            @*<p class="card-text" style="font-family: cairo;">@Html.DisplayFor(model => lists.name).</p>*@
+                            <ul class="list-group list-group-flush" style="font-family: cairo; padding:0;">
                                 @foreach (var c in lists.candidates)
                                 {
-                                    <li>@c.voter_user.name</li>
+                                    <li class="list-group-item">@c.voter_user.name</li>
                                 }
                             </ul>
-                            <div style="text-align: center;">
-                                <input class="custom-radio" type="radio" name="election_list_id" value="@lists.id" style="transform: scale(1.5); margin-top: 0.5em;" />
-                            </div>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                            <input class="custom-radio" type="radio" name="election_list_id" value="@lists.id" style="transform: scale(1.5); margin-top: 0.5em;" />
                         </div>
                     </div>
                 </div>
@@ -36,7 +47,35 @@
         </div>
         <div class="text-center mt-4">
             <button type="submit" class="btn" style="background-color: red; margin-left:0.5em; color: white;">صوت الان</button>
-            @Html.ActionLink("رجوع", "Index", "Home", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
+            @Html.ActionLink("رجوع", "ListsType", "User", new { area = "" }, new { @class = "btn", style = "background-color: black; color: white;" })
         </div>
     }
 </div>
+
+@section Scripts {
+    <script>
+        let form = document.getElementById("VoteForm");
+        form.addEventListener("submit", (form) => {
+            let formData = new FormData(form.target)
+            if (formData.get("election_list_id"))
+                return;
+            form.preventDefault();
+            Swal.fire({
+                title: "التصويت",
+                text: "لم تقم باختيار اي قائمة وبذلك سوف يسجل صوتك كورقة بيضاء! هل تريد الاستمرار؟",
+                icon: "question",
+                iconHtml: "؟",
+                confirmButtonText: "استمر",
+                cancelButtonText: "عودة الى القائمة",
+                showCancelButton: true,
+                showCloseButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) form.target.submit();
+            });
+        });
+    </script>
+}
+
+
+
+

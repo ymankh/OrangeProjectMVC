@@ -1,12 +1,25 @@
 ﻿@model OrangeProjectMVC.Models.voter_user
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "تسجيل الدخول";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 
 
 }
-<<section class="vh-100" style="background-color: white;">
+<style>
+        body {
+            height: 160vh !important;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('@Url.Content("~/img/Petraa.jpg")');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 2em !important;
+        }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section class="vh-100" >
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -24,7 +37,7 @@
 
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="font-size:small;font-family:cairo;" type="submit">دخول</button>
 
-                            <span>@ViewBag.msg</span>
+
                         }
 
                     </div>
@@ -33,3 +46,45 @@
         </div>
     </div>
 </section>
+
+
+
+@if (ViewBag.Msg != null)
+{
+
+
+    <script>
+        Toastify({
+            text: "@ViewBag.Msg",
+            duration: 3000, // Duration in milliseconds (3 seconds)
+            close: true, // Show close button
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            backgroundColor: "#FF0000", // Warning background color (orange)
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            onClick: function () { } // Callback after click
+        }).showToast();
+    </script>
+}
+
+
+@if (ViewBag.VerfyCode != null)
+{
+    <script>
+    Swal.fire({
+        title: 'تحقق من بريدك الالكتروني',
+        text: '@ViewBag.VerfyCode',
+        icon: 'info',  // Use 'info' for a generic icon
+        confirmButtonText: 'استمر',
+        iconHtml: '📧',  // Use an emoji as the icon
+        customClass: {
+            icon: 'no-border'  // Optional: to remove the border around the emoji
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '@Url.Action("VerifyCode", "User")';
+        }
+    });
+    </script>
+
+}

@@ -27,7 +27,7 @@ namespace OrangeProjectMVC.App_Start
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             if (debate == null)
             {
                 return HttpNotFound();
@@ -60,7 +60,8 @@ namespace OrangeProjectMVC.App_Start
                 debate.status = "Pending";
                 db.debates.Add(debate);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Session["SwalMessage"] = "شكرا لقد تم استلام طلبك بنجاح";
+                return RedirectToAction("Index", "UserCycle");
             }
 
             ViewBag.first_list = new SelectList(db.election_list, "id", "name", debate.first_list);
@@ -76,7 +77,7 @@ namespace OrangeProjectMVC.App_Start
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             if (debate == null)
             {
                 return HttpNotFound();
@@ -119,7 +120,7 @@ namespace OrangeProjectMVC.App_Start
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             if (debate == null)
             {
                 return HttpNotFound();
@@ -132,10 +133,43 @@ namespace OrangeProjectMVC.App_Start
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            debate debate = db.debates.Find(id);
+            var debate = db.debates.Find(id);
             db.debates.Remove(debate);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        //show debate in home page
+        // GET: debates/ShowDebates
+        public ActionResult ShowDebates()
+        {
+            // Fetch debates with the status 'approved' and include related election lists
+            var approvedDebates = db.debates
+                .Where(d => d.status == "Accept")
+                .Include(d => d.election_list)
+                .Include(d => d.election_list1)
+                .ToList();
+
+            return View(approvedDebates);
+        }
+
+        // POST: debates/ShowDebates
+        [HttpPost]
+        public ActionResult ShowDebates(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var debate = db.debates.Find(id);
+
+
+            if (debate == null || debate.status != "Accept")
+            {
+                return HttpNotFound();
+            }
+
+            return View(debate);
         }
 
         protected override void Dispose(bool disposing)
