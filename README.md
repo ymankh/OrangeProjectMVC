@@ -24,7 +24,7 @@ This project is developed by a team of five members from Orange Coding Academy: 
 ## Installation
 1. Clone the repository to your local machine.
    ```bash
-   git clone [repository link]
+   git clone https://github.com/ymankh/OrangeProjectMVC.git
    ```
 2. Open the project in Visual Studio.
 3. Restore the NuGet packages.
